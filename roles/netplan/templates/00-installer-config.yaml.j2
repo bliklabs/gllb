@@ -1,0 +1,20 @@
+# ansible
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+{% for interface in network_interfaces %}
+    {{ interface.name }}:
+{% if interface.dhcp %}
+      dhcp4: true
+{% else %}
+      addresses: [{{ interface.ip_address }}/{{ interface.cidr }}]
+{% if interface.gateway is defined %}
+      gateway4: {{ interface.gateway }}
+{% endif %}
+{% if interface.nameservers is defined %}
+      nameservers:
+        addresses: {{ interface.nameservers }}
+{% endif %}
+{% endif %}
+{% endfor %}

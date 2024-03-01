@@ -1,0 +1,45 @@
+---
+- name: Update and Upgrade Ubuntu Packages Non-interactively
+  hosts: all
+  become: yes
+  serial: 1
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+    - name: Perform non-interactive apt upgrade
+      apt:
+        upgrade: yes
+        autoremove: yes
+        autoclean: yes
+        force_apt_get: yes
+        dpkg_options: 'force-confnew'
+        install_recommends: no
+        update_cache: yes
+        allow_unauthenticated: yes
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+
+    - name: Install needrestart package
+      apt:
+        name: needrestart
+        state: present
+
+    - name: Check if a reboot is required
+      shell: needs-restarting -r
+      register: reboot_required
+      ignore_errors: yes
+
+    - name: Print reboot required message
+      debug:
+        msg: "Attention: Reboot is required due to the following reasons:\n{{ reboot_required.stdout }}"
+      when: reboot_required.rc == 0 and reboot_required.stdout != ""
+
+    - name: Run the reboot playbook if required
+      import_playbook: reboot_playbook.yml
+      when: reboot_required.rc == 0 and reboot_required.stdout != ""
+
+    - name: Run the reboot playbook if required
+      import_playbook: install_packages.yml
+      when: reboot_required.rc == 0 and reboot_required.stdout != ""

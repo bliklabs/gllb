@@ -1,0 +1,24 @@
+[Unit]
+Description=Geth
+
+[Service]
+Type=simple
+User=srv_geth
+Restart=always
+ExecStart=/usr/bin/geth \
+    --datadir /opt/validator/data \
+    --syncmode "full" \
+    --port 30304 \ 
+    --http \ 
+    --http.addr 192.168.196.102 \
+    --http.port 8552 \
+    --http.api "personal,eth,net,web3,txpool,miner,admin" \
+    --http.corsdomain="*" \
+    --networkid 1337 \
+    --allow-insecure-unlock \ 
+    --authrpc.addr 192.168.196.102 \
+    --authrpc.port 8553 \
+    --nat=extip:192.168.196.102 \
+
+[Install]
+WantedBy=default.target

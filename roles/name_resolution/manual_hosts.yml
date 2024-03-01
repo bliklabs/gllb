@@ -1,0 +1,21 @@
+---
+- name: Append key-value pairs to /etc/hosts
+  hosts: all
+  tasks:
+    - name: Append key-value pairs to /etc/hosts
+      ansible.builtin.lineinfile:
+        dest: /etc/hosts
+        line: "{{ item.key }} {{ item.value }}"
+        insertafter: EOF
+      loop: "{{ hosts }}"
+      become: yes
+
+- name: Save key-value pairs as group variable
+  hosts: localhost
+  tasks:
+    - name: Set group variable
+      ansible.builtin.set_fact:
+        group_hosts: "{{ hosts }}"
+      when: "'testnet' in group_names"
+...
+    

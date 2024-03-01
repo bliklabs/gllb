@@ -1,0 +1,76 @@
+---
+- name: Find meta.json files and extract public_address values
+  hosts: "{{ groups['testnet'] | first }}"
+  serial: 1
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Find meta.json files
+      find:
+        paths: /opt/validator/privs
+        patterns: "meta.json"
+      register: meta_files
+      run_once: true
+
+    - name: Extract public_address values
+      set_fact:
+        public_addresses: "{{ public_addresses | default([]) + item | json_query('json.*.public_address') }}"
+      loop: "{{ meta_files.files }}"
+      when: item.stat.exists
+      run_once: true
+
+    - name: Remove "0x" prefix and concatenate values
+      set_fact:
+        public_addresses: "{{ public_addresses | map('regex_replace', '^0x', '') }}"
+        concatenated_string: "{{ public_addresses | map('regex_replace', '^0x', '') | join('') }}"
+      when: public_addresses | length > 0
+      run_once: true
+
+- name: Place genesis file for the first host in the testnet group
+  hosts: testnet
+  become: yes
+  tasks:
+    - name: Copy genesis file from template
+      template:
+        src: genesis.json.j2
+        dest: /opt/validator/genesis/genesis.json
+      vars:
+        public_addresses: "{{ public_addresses }}"
+        concatenate_string: "{{ concatenated_string }}"
+
+- name: Copy keystore directory from testnet[0] to other hosts in testnet group
+  hosts: "{{ groups['testnet'] | difference([groups['testnet'] | first]) }}"
+  become: yes
+  tasks:
+    - name: Synchronize keystore directory
+      synchronize:
+        src: /opt/validator/data/keystore
+        dest: /opt/validator/data/
+        mode: pull
+
+- name: Initialize geth genesis on all nodes
+  hosts: testnet
+  become: yes
+  tasks:
+    - name: Run geth command
+      command: "geth --datadir /opt/validator/data init /opt/validator/genesis/genesis.json"
+
+- name: Place geth.service template on each host in testnet group
+  hosts: testnet
+  become: yes
+  tasks:
+    - name: Copy geth.service template
+      template:
+        src: geth.service.j2
+        dest: /lib/systemd/system/geth.service
+
+- name: Enable and start geth.service on all hosts in testnet group
+  hosts: testnet
+  become: yes
+  tasks:
+    - name: Enable geth.service
+      systemd:
+        name: geth
+        enabled: yes
+        state: started
+...

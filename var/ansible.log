@@ -1,0 +1,9 @@
+2024-02-28 16:32:45,800 p=7471 u=b n=ansible | ERROR! vars file host_vars/hcv1.yml was not found
+Could not find file on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option
+2024-02-28 16:33:10,437 p=7489 u=b n=ansible | ERROR! vars file host_vars/hcv1.yml was not found
+Could not find file on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option
+2024-02-28 16:34:13,688 p=7567 u=b n=ansible | ERROR! vars file host_vars/hcv1.yml was not found
+Could not find file on the Ansible Controller.
+If you are using a module and expect the file to exist on the remote, see the remote_src option
