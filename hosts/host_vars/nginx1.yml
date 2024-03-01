@@ -1,8 +1,6 @@
 ---
 network_interfaces:
   - name: enp0s3
-    dhcp: true
-  - name: enp0s8
     dhcp: false
     ip_address: 192.168.0.101
     cidr: 24
