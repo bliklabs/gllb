@@ -1,1 +1,23 @@
-#TODO
+---
+
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}/{{ ansible_distribution_version }}.yml"
+    - "{{ ansible_distribution }}/default.yml"
+    - "default.yml"
+
+- name: Include Ubuntu apt update tasks
+  import_tasks: linux/ubuntu/update.yml 
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Include Ubuntu package install
+  import_tasks: linux/ubuntu/install_packages.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Include common package install
+  import_tasks: linux/common/install_packages.yml
+
+- name: Include reboot install if needed
+  import_tasks: linux/common/wait_on_needrestart.yml
+
+...

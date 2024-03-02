@@ -1,0 +1,24 @@
+---
+
+- name: Download web3 installer
+  get_url:
+    url: "https://raw.githubusercontent.com/gochain/web3/master/install.sh"
+    dest: "/tmp/install.sh"
+
+- name: Ensure permissions on the downloaded script
+  file:
+    path: "/tmp/install.sh"
+    mode: "u+x"
+
+- name: Run web3 installer
+  become: yes
+  become_user: root
+  command: "/tmp/install.sh"
+  ignore_errors: yes
+
+- name: Remove runner.sh file
+  file:
+    path: "/tmp/install.sh"
+    state: absent
+
+...

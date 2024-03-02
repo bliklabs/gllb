@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PATH='/home/b/.local/bin:/usr/bin:/usr/sbin'
-
 PROJECT_OWNER="$(whoami)"
 PROJECT_PATH="${PWD}"
 PROJECT_END_STATE="${PROJECT_PATH}/hosts"
@@ -13,6 +11,8 @@ ANSIBLE_GALAXY_CACHE_DIR="${PROJECT_PATH}/var"
 ANSIBLE_LOG_PATH="${PROJECT_PATH}/var/ansible.log"
 ANSIBLE_PYTHON_INTERPRETER='/usr/bin/python3'
 ANSIBLE_PLAYBOOK_DIR="${PROJECT_PATH}/playbooks"
+
+#PATH='/home/b/.local/bin:/usr/bin:/usr/sbin'
 
 eval $(ssh-agent -s)
 ssh-add "${ANSIBLE_PRIVATE_KEY_FILE}"
