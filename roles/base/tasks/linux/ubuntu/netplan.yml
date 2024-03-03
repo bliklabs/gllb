@@ -12,14 +12,5 @@
   become: yes
   check_mode: no
 
-- name: Read file contents
-  ansible.builtin.slurp:
-    src: /etc/netplan/00-installer-config.yaml
-  register: file_contents
-
-- name: Debug file contents
-  ansible.builtin.debug:
-    var: file_contents.content | b64decode
-
 ...
 
