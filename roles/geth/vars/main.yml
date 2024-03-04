@@ -1,2 +1,37 @@
 ---
-# vars file for geth
+
+genesis:
+  enabled: false
+  bootstrap.wallets: false
+  sync_wallets: false
+  alloc:
+    enabled: true
+    balance: "0x200000000000000000000000000000000000000000000000000000000000000"
+  authrpc.port: "8553"
+  byzantiumBlock: "4"
+  chainId: "1337"
+  clique:
+    enabled: true
+    epoch: "30000"
+    period: "15"
+  coinbase: "0x0000000000000000000000000000000000000000"
+  difficulty: "0x1"
+  eip150Block: "2"
+  eip150Hash: "0x0000000000000000000000000000000000000000000000000000000000000000"
+  eip155Block: "3"
+  eip158Block: "3"
+  gasLimit: "0x8000000"
+  gasUsed: "0x0"
+  homesteadBlock: "1"
+  http.port: "8552"
+  mixHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
+  nonce: "0x0"
+  number: "0x0"
+  parentHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
+  port: "30304"
+  timestamp: "0x0"
+geth_version: "1.13.14-2bd6bd01"
+root_dir: "/opt/validator"
+web3_version: "0.2.101"
+
+...

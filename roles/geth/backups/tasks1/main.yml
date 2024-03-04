@@ -1,0 +1,20 @@
+---
+
+- include_vars: "{{ item }}"
+  loop:
+    - default.yml
+    - "{{ ansible_distribution }}/default.yml"
+    - "{{ ansible_distribution }}/{{ ansible_distribution_version }}.yml"
+
+- name: Include binary installs
+  import_tasks: linux/ubuntu/install_packages.yml
+  when: ansible_distribution == 'Ubuntu' and vars['install_packages']
+
+- name: Include reboot if needed
+  import_tasks: linux/common/wait_on_needrestart.yml
+
+- name: Include netplan configurations
+  import_tasks: linux/ubuntu/netplan.yml
+  when: ansible_distribution == 'Ubuntu' and (hostvars['netplan_config'] | default(false))
+
+...

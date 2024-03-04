@@ -1,8 +1,0 @@
----
-
-- name: Run web3 installer script
-  become: yes
-  become_user: root
-  shell: curl https://raw.githubusercontent.com/gochain/web3/master/install.sh | sh
-
-...

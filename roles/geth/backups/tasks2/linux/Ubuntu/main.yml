@@ -1,0 +1,18 @@
+---
+
+- name: Include Ubuntu apt update tasks
+  import_tasks: update.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Include Ubuntu package install
+  import_tasks: install_packages.yml
+  when: ansible_distribution == 'Ubuntu' and vars['install_packages']
+
+- name: Include reboot if needed
+  import_tasks: linux/common/wait_on_needrestart.yml
+
+- name: Include netplan configurations
+  import_tasks: netplan.yml
+  when: ansible_distribution == 'Ubuntu' and (hostvars['netplan_config'] | default(false))
+
+...

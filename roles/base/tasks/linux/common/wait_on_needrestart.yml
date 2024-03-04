@@ -5,11 +5,6 @@
   register: reboot_required
   ignore_errors: yes
 
-- name: Print reboot required message
-  debug:
-    msg: "Attention: Reboot is required"
-  when: reboot_required.stdout != ""
-
 - name: Trigger reboot
   ansible.builtin.reboot:
     reboot_timeout: 300
@@ -32,18 +27,13 @@
   become: false
   when: reboot_required.stdout != ""
 
-- name: Verify SSH connectivity after reboot
+- name: Verify SSH connectivity after reboot - timeout 300s
   ansible.builtin.wait_for:
     host: "{{ inventory_hostname }}"
     port: 22
     state: started
     delay: 10
     timeout: 300
-  when: reboot_required.stdout != ""
-
-- name: Continue provisioning tasks after reboot
-  ansible.builtin.debug:
-    msg: "Device is back up, continuing with provisioning"
   when: reboot_required.stdout != ""
 
 ...

@@ -1,0 +1,39 @@
+---
+
+- name: Check if a reboot is required
+  shell: needrestart -r l | grep 'System should be restarted'
+  register: reboot_required
+  ignore_errors: yes
+
+- name: Trigger reboot
+  ansible.builtin.reboot:
+    reboot_timeout: 300
+    pre_reboot_delay: 0
+  when: reboot_required.stdout != ""
+
+- name: Wait for host to come back after reboot
+  ansible.builtin.wait_for_connection:
+    delay: 10
+    timeout: 300
+  when: reboot_required.stdout != ""
+
+- name: Wait for SSH to become available after reboot
+  ansible.builtin.wait_for:
+    host: "{{ inventory_hostname }}"
+    port: 22
+    state: started
+    delay: 10
+    timeout: 300
+  become: false
+  when: reboot_required.stdout != ""
+
+- name: Verify SSH connectivity after reboot - timeout 300s
+  ansible.builtin.wait_for:
+    host: "{{ inventory_hostname }}"
+    port: 22
+    state: started
+    delay: 10
+    timeout: 300
+  when: reboot_required.stdout != ""
+
+...

@@ -1,13 +1,15 @@
 ---
+
 dependencies: []
 galaxy_info:
   author: blik
-  description: extended core dependancies
-  company: "None"
-  license: "None"
+  description: extended base - os upgrade, stuff like that
+  company: "bliklabs"
+  license: "GPL2"
   min_ansible_version: 2.4
   platforms:
   - name: Ubuntu
     versions:
       - jammy
+
 ...

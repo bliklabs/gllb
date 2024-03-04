@@ -1,46 +1,51 @@
 ---
-- name: Create directories for validator
-  hosts: localhost
-  become: yes
-  tasks:
-    - name: Create data directory
-      file:
-        path: /opt/validator/data
-        state: directory
-        owner: srv_get
-        group: root
-        mode: '0660'
 
-    - name: Create genesis directory
-      file:
-        path: /opt/validator/genesis
-        state: directory
-        owner: srv_get
-        group: root
-        mode: '0660'
+- name: Create root directory
+  file:
+    path: "{{ root_dir | default('root_dir') }}"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: '0770'
 
+- name: Create data directory
+  file:
+    path: "{{ root_dir | default('root_dir') }}/data"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: '0770'
 
-    - name: Create src directory
-      file:
-        path: /opt/validator/src
-        state: directory
-        owner: srv_get
-        group: root
-        mode: '0660'
+- name: Create genesis directory
+  file:
+    path: "{{ root_dir | default('root_dir') }}/genesis"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: '0770'
 
-    - name: Create tooling directory
-      file:
-        path: /opt/validator/tooling
-        state: directory
-        owner: srv_get
-        group: root
-        mode: '0660'
+- name: Create src directory
+  file:
+    path: "{{ root_dir | default('root_dir') }}/src"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: '0770'
 
-    - name: Create privs directory
-      file:
-        path: /opt/validator/privs
-        state: directory
-        owner: srv_get
-        group: root
-        mode: '0660'
+- name: Create tooling directory
+  file:
+    path: "{{ root_dir | default('root_dir') }}/tooling"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: '0770'
+
+- name: Create privs directory
+  file:
+    path: "{{ root_dir | default('root_dir') }}/privs"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: '0770'
+
 ...

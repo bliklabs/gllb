@@ -1,0 +1,36 @@
+---
+
+- name: Ensure netplan directory exists
+  ansible.builtin.file:
+    path: /etc/netplan
+    state: directory
+
+- name: Generate Netplan configuration file
+  template:
+    src: 01-netcfg.yml.j2
+    dest: /etc/netplan/01-netcfg.yaml
+  become: yes
+  check_mode: no
+
+- name: Set ownership and permissions for the Netplan configuration file
+  ansible.builtin.file:
+    path: /etc/netplan/01-netcfg.yaml
+    owner: root
+    group: root
+    mode: "0600"
+
+- name: Apply netplan configuration
+  ansible.builtin.shell:
+    cmd: netplan apply
+  ignore_errors: yes
+
+- name: Wait for SSH to be available again
+  ansible.builtin.wait_for:
+    host: "{{ ansible_host }}"
+    port: "{{ ansible_ssh_port | default(22) }}"
+    state: started
+    delay: 10
+    timeout: 300
+
+...
+

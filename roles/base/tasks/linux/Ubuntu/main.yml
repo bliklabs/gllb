@@ -1,0 +1,17 @@
+---
+
+- name: Include Ubuntu apt update tasks
+  import_tasks: update.yml
+
+- name: Include Ubuntu package install
+  import_tasks: install_packages.yml
+  when: vars['install_packages']
+
+- name: Include reboot if needed
+  import_tasks: linux/common/wait_on_needrestart.yml
+
+- name: Include netplan configurations
+  import_tasks: netplan.yml
+  when: hostvars['netplan_config'] | default(false)
+
+...

@@ -1,25 +1,26 @@
 ---
 
-- include_vars: "{{ ansible_distribution }}/default.yml"
-- include_vars: "{{ ansible_distribution }}/{{ ansible_distribution_version }}.yml"
+- name: Check if file exists and include vars stat
+  stat:
+    path: "{{ item }}"
+  register: file_stat
+  loop:
+    - "../default/main.yml"
+    - "default.yml"
+    - "{{ ansible_distribution }}/default.yml"
+    - "{{ ansible_distribution }}/{{ ansible_distribution_version }}.yml"
 
-#- name: Include Ubuntu apt update tasks
-#  import_tasks: linux/ubuntu/update.yml
-#  when: ansible_distribution == 'Ubuntu'
+- include_vars: "{{ item.item }}"
+  loop: "{{ file_stat.results }}"
+  when: item.stat.exists
 
-#- name: Include Ubuntu package install
-#  import_tasks: linux/ubuntu/install_packages.yml
-#  when: ansible_distribution == 'Ubuntu' and install_packages|default(false)|bool
-
-#- name: Include common package install
-#  import_tasks: linux/common/install_packages.yml
-#  when: install_packages|default(false)|bool
-
-#- name: Include reboot install if needed
-#  import_tasks: linux/common/wait_on_needrestart.yml
-
-- name: Include netplan configuration if defined in hostvars
-  import_tasks: linux/ubuntu/netplan.yml
+- name: Check if the OS is Ubuntu
+  set_fact:
+    is_ubuntu: "{{ ansible_distribution == 'Ubuntu' }}"
   when: ansible_distribution == 'Ubuntu'
+
+- name: Check if the OS is Linux and include tasks
+  include_tasks: "linux/Ubuntu/main.yml"
+  when: is_ubuntu
 
 ...

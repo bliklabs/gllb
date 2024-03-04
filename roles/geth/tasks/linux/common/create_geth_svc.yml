@@ -1,0 +1,14 @@
+---
+
+- name: Copy geth.service template
+  template:
+    src: geth.service.j2
+    dest: /lib/systemd/system/geth.service
+
+- name: Enable geth.service
+  systemd:
+    name: geth
+    enabled: yes
+    state: started
+
+...

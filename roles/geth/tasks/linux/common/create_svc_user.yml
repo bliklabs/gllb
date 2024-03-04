@@ -1,12 +1,11 @@
 ---
-- name: Create service user with nologin shell
-  hosts: geth_clients
-  become: yes
-  tasks:
-    - name: Create service user
-      user:
-        name: srv_geth
-        shell: /usr/sbin/nologin
-        createhome: yes
-        home: /home/srv_geth
+
+- name: Create service user
+  user:
+    name: svc_geth
+    shell: /usr/sbin/nologin
+    createhome: yes
+    home: /home/svc_geth
+  ignore_errors: true
+
 ...
