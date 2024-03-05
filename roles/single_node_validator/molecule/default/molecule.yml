@@ -1,0 +1,18 @@
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu-22.04
+    image: ubuntu:22.04
+
+verifier:
+  name: ansible
+  options:
+    idempotence: false
+
+scenario:
+  test_sequence:
+    - destroy
+    - create
+    - converge
+    - verify

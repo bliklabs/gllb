@@ -1,0 +1,16 @@
+---
+
+- name: Run generate wallets
+  command: "/usr/bin/env python3 {{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet_sync.py {{ genesis_options.num_wallet | default(genesis_options.num_wallet) }} {{ genesis_options.num_signers | default(genesis_options.num_signers) }} {{ root_dir | default(root_dir) }} {{ sync_dir | default(sync_dir) }}"
+  become: yes
+  register: gen_wallets_output
+
+- name: Set gen_wallets fact
+  set_fact:
+    gen_wallets: "{{ gen_wallets_output.stdout | from_json }}"
+
+- name: Debug gen_wallets
+  debug:
+    var: gen_wallets
+
+...

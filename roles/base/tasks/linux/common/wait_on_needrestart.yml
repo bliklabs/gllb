@@ -1,7 +1,7 @@
 ---
 
 - name: Check if a reboot is required
-  shell: needrestart -r l | grep 'System should be restarted'
+  shell: needrestart -r l | grep "System should be restarted"
   register: reboot_required
   ignore_errors: yes
 

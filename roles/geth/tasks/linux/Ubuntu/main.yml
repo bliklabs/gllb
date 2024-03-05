@@ -1,12 +1,6 @@
 ---
 
-- name: Include create service user svc_geth
-  import_tasks: linux/common/create_svc_user.yml
-
-- name: Include create directory structure under root_dir
-  import_tasks: linux/common/create_directory_structure.yml
-
-- name: Include geth / web3 binary installs
-  import_tasks: install_binaries.yml
+- name: Include geth binary install
+  import_tasks: install_binary.yml
 
 ...

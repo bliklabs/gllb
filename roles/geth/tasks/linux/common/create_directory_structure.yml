@@ -6,7 +6,7 @@
     state: directory
     owner: svc_geth
     group: root
-    mode: '0770'
+    mode: "770"
 
 - name: Create data directory
   file:
@@ -14,7 +14,7 @@
     state: directory
     owner: svc_geth
     group: root
-    mode: '0770'
+    mode: "770"
 
 - name: Create genesis directory
   file:
@@ -22,7 +22,7 @@
     state: directory
     owner: svc_geth
     group: root
-    mode: '0770'
+    mode: "770"
 
 - name: Create src directory
   file:
@@ -30,22 +30,30 @@
     state: directory
     owner: svc_geth
     group: root
-    mode: '0770'
+    mode: "770"
 
 - name: Create tooling directory
   file:
     path: "{{ root_dir | default('root_dir') }}/tooling"
     state: directory
-    owner: svc_geth
+    owner: root
     group: root
-    mode: '0770'
+    mode: "700"
+
+- name: Create sync directory
+  file:
+    path: "/home/svc_geth/sync"
+    state: directory
+    owner: root
+    group: root
+    mode: "600"
 
 - name: Create privs directory
   file:
     path: "{{ root_dir | default('root_dir') }}/privs"
     state: directory
-    owner: svc_geth
+    owner: root
     group: root
-    mode: '0770'
+    mode: "600"
 
 ...

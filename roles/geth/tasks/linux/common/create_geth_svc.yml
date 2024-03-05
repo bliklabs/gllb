@@ -4,6 +4,7 @@
   template:
     src: geth.service.j2
     dest: /lib/systemd/system/geth.service
+  remote_src: no
 
 - name: Enable geth.service
   systemd:

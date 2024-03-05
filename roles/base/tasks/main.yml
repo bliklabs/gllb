@@ -1,25 +1,20 @@
 ---
 
-- name: Check if file exists and include vars stat
-  stat:
-    path: "{{ item }}"
-  register: file_stat
-  loop:
-    - "../default/main.yml"
-    - "default.yml"
-    - "{{ ansible_distribution }}/default.yml"
-    - "{{ ansible_distribution }}/{{ ansible_distribution_version }}.yml"
-
-- include_vars: "{{ item.item }}"
-  loop: "{{ file_stat.results }}"
-  when: item.stat.exists
+- name: Include vars if file exists
+  include_vars:
+    file: "{{ item }}"
+  with_items:
+    - "linux/default.yml"
+    - "linux/{{ ansible_distribution }}/default.yml"
+    - "linux/{{ ansible_distribution }}/{{ ansible_distribution_version }}.yml"
+  ignore_errors: yes
 
 - name: Check if the OS is Ubuntu
   set_fact:
     is_ubuntu: "{{ ansible_distribution == 'Ubuntu' }}"
   when: ansible_distribution == 'Ubuntu'
 
-- name: Check if the OS is Linux and include tasks
+- name: Include Ubuntu tasks
   include_tasks: "linux/Ubuntu/main.yml"
   when: is_ubuntu
 

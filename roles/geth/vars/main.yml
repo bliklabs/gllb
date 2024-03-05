@@ -1,9 +1,6 @@
 ---
 
-genesis:
-  enabled: false
-  bootstrap.wallets: false
-  sync_wallets: false
+genesis_config:
   alloc:
     enabled: true
     balance: "0x200000000000000000000000000000000000000000000000000000000000000"
@@ -30,8 +27,11 @@ genesis:
   parentHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
   port: "30304"
   timestamp: "0x0"
+genesis_options:
+  num_wallet: 5
+  num_signers: 3
 geth_version: "1.13.14-2bd6bd01"
 root_dir: "/opt/validator"
-web3_version: "0.2.101"
+sync_dir: "/home/svc_geth/sync"
 
 ...

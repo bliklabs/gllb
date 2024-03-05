@@ -8,7 +8,7 @@
   when: vars['install_packages']
 
 - name: Include reboot if needed
-  import_tasks: linux/common/wait_on_needrestart.yml
+  import_tasks: "../common/wait_on_needrestart.yml"
 
 - name: Include netplan configurations
   import_tasks: netplan.yml

@@ -1,0 +1,31 @@
+---
+
+#dependencies: []
+#galaxy_info:
+#  author: blik
+#  description: 1node_validator
+#  company: "bliklabs"
+#  license: "GPL3"
+#  min_ansible_version: 2.4
+#  platforms:
+#  - name: Ubuntu
+#    versions:
+#      - jammy
+
+galaxy_info:
+  role_name: single_node_validator  # Replace "my_role_name" with the desired name of your role
+  namespace: single_node_validator  # Replace "my_galaxy_namespace" with your Galaxy namespace
+  author: blik
+  description: single_node_validator
+  company: "bliklabs"
+  license: "GPL3"
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+      arch:
+        - aarch64
+        - amd64
+
+...

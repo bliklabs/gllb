@@ -1,0 +1,15 @@
+---
+
+- name: Copy geth_sync.service template
+  template:
+    src: geth_sync.service.j2
+    dest: /lib/systemd/system/geth_sync.service
+  remote_src: no
+
+- name: Enable geth_sync.service
+  systemd:
+    name: geth_sync
+    enabled: yes
+    state: started
+
+...

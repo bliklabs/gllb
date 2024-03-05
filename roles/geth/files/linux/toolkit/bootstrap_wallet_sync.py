@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 import subprocess
 import json
 import random
@@ -30,7 +31,7 @@ def create_accounts(num_accounts, num_signers, data_directory):
     accounts = []
     for i in range(num_accounts):
         password = generate_random_password()
-        account = subprocess.run(['geth', '--datadir', data_directory, 'account', 'new'], input=f'{password}\n{password}\n', capture_output=True, text=True)
+        account = subprocess.run(['/usr/local/bin/geth', '--datadir', data_directory, 'account', 'new'], input=f'{password}\n{password}\n', capture_output=True, text=True)
         # parse the output from geth account creation
         if account.returncode == 0:
             output = account.stdout.splitlines()
