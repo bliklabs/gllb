@@ -27,4 +27,4 @@ TODO
 TODO
 
 
-# We dont need no water, that that motherfucker burn.
+# We dont need no water, let that motherfucker burn.
