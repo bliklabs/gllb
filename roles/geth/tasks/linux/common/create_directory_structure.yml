@@ -40,14 +40,6 @@
     group: root
     mode: "700"
 
-- name: Create sync directory
-  file:
-    path: "/home/svc_geth/sync"
-    state: directory
-    owner: root
-    group: root
-    mode: "600"
-
 - name: Create privs directory
   file:
     path: "{{ root_dir | default('root_dir') }}/privs"
@@ -55,5 +47,13 @@
     owner: root
     group: root
     mode: "600"
+
+- name: Create sync directory
+  file:
+    path: "{{ sync_dir }}"
+    state: directory
+    owner: nobody
+    group: nobody
+    mode: "777"
 
 ...

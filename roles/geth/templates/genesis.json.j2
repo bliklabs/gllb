@@ -1,32 +1,20 @@
 {
-  "config": {
-    "chainId": 1337,
-    "homesteadBlock": 1,
-    "eip150Block": 2,
-    "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-    "eip155Block": 3,
-    "eip158Block": 3,
-    "byzantiumBlock": 4,
-    "clique": {
-      "period": 15,
-      "epoch": 30000
-    }
-  },
-  "nonce": "0x0",
-  "timestamp": "0x0",
+  "config": {{ json.config | to_json }},
+  "nonce": "{{ json.nonce }}",
+  "timestamp": "{{ json.timestamp }}",
   "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000{{ concatenate_string }}0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-  "gasLimit": "0x8000000",
-  "difficulty": "0x1",
-  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "coinbase": "0x0000000000000000000000000000000000000000",
+  "difficulty": "{{ json.difficulty }}",
+  "mixHash": "{{ json.mixHash }}",
+  "coinbase": "{{ json.coinbase }}",
   "alloc": {
-{% for address in public_addresses %}
-    "{{ address }}": {
-      "balance": "0x200000000000000000000000000000000000000000000000000000000000000"
-    }{%- if not loop.last %},{% endif -%}
-{% endfor %}
+{%- for wallet in gen_wallets %}
+    "{{ wallet.address }}": {
+      "balance": "{{ wallets.balance | default(wallet.balance) }}"
+    }{% if not loop.last %},{% endif %}
+{%- endfor %}
   },
-  "number": "0x0",
-  "gasUsed": "0x0",
-  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+  "number": "{{ json.number }}",
+  "gasLimit": "{{ json.gasLimit }}",
+  "gasUsed": "{{ json.gasUsed }}",
+  "parentHash": "{{ json.parentHash }}"
 }

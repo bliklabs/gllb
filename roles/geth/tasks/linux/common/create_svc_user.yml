@@ -4,8 +4,12 @@
   user:
     name: svc_geth
     shell: /usr/sbin/nologin
-    createhome: yes
-    home: /home/svc_geth
+    createhome: no
   ignore_errors: true
+
+- name: Ensure nobody group exists
+  group:
+    name: nobody
+    state: present
 
 ...

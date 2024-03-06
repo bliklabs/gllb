@@ -1,9 +1,5 @@
 ---
 
-#- name: Include base role
-#  import_role:
-#    name: base
-
 - name: Include create service user svc_geth
   import_tasks: "linux/common/create_svc_user.yml"
 

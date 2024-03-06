@@ -1,8 +1,6 @@
 ---
 
-dependencies:
-  - role: base
-
+dependencies: []
 galaxy_info:
   author: blik
   description: geth genesis role

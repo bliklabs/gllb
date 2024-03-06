@@ -107,8 +107,8 @@ def main():
     # update perms
     change_permissions(data_directory, "svc_geth", "root", "770")
     change_permissions(data_priv_dir, "root", "root", "0600")
-    change_permissions(sync_directory, "svc_geth", "root", "770")
-    change_permissions(sync_priv_dir, "root", "root", "0600")
+    change_permissions(sync_directory, "nobody", "nobody", "777")
+    change_permissions(sync_priv_dir, "root", "root", "600")
 
 
 if __name__ == "__main__":
