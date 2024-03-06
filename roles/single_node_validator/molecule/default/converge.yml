@@ -1,14 +1,19 @@
 ---
 
-- name: Converge
+- name: Converge all geth install
   hosts: all
   tasks:
     - name: Install geth dependancies
       include_role:
         name: geth
-    - name: Bootstrap geth genesis and wallets
+
+- name: Converge first node geth bootstrap
+  hosts: single_node_validator
+  tasks:
+    - name: Install geth dependencies
       include_role:
         name: geth
         tasks_from: linux/common/bootstrap.yml
+      run_once: true
 
 ...

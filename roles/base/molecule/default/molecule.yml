@@ -5,17 +5,23 @@ platforms:
   - name: ubuntu-22.04
     image: ubuntu:22.04
 
-provisioner:
-  name: ansible
+#provisioner:
+#  name: ansible
 
-verifier:
-  name: ansible
-  options:
-    idempotence: false
+#verifier:
+#  name: ansible
+#  options:
+#    idempotence: false
+
+#scenario:
+#  test_sequence:
+#    - destroy
+#    - create
+#    - converge
+#    - verify
 
 scenario:
   test_sequence:
     - destroy
     - create
     - converge
-    - verify

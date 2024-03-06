@@ -1,0 +1,24 @@
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu-22.04-01
+    image: ubuntu:22.04
+    groups:
+      - multi_node_validator
+  - name: ubuntu-22.04-02
+    image: ubuntu:22.04
+    groups:
+      - multi_node_validator
+
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_CACHE_PLUGIN: jsonfile
+    ANSIBLE_CACHE_PLUGIN_CONNECTION: "cache/"
+
+scenario:
+  test_sequence:
+    - destroy
+    - create
+    - converge

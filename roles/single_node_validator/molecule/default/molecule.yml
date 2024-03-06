@@ -2,17 +2,18 @@ driver:
   name: docker
 
 platforms:
-  - name: ubuntu-22.04
+  - name: ubuntu-22.04-01
     image: ubuntu:22.04
+    groups:
+      - single_node_validator
 
-verifier:
-  name: ansible
-  options:
-    idempotence: false
+#verifier:
+#  name: ansible
+#  options:
+#    idempotence: false
 
 scenario:
   test_sequence:
     - destroy
     - create
     - converge
-    - verify

@@ -19,6 +19,7 @@ TODO
 
 ## Configuration
 TODO
+ansible-galaxy collection install community.general
 
 ## Tests
 TODO

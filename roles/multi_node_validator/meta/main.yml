@@ -2,10 +2,10 @@
 
 dependencies: []
 galaxy_info:
-  role_name: single_node_validator
-  namespace: single_node_validator
+  role_name: multi_node_validator
+  namespace: multi_node_validator
   author: blik
-  description: single_node_validator
+  description: multi_node_validator
   company: "bliklabs"
   license: "GPL3"
   min_ansible_version: 2.4
@@ -16,5 +16,6 @@ galaxy_info:
       arch:
         - aarch64
         - amd64
+        - x86_64
 
 ...
