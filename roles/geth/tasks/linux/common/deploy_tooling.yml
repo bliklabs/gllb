@@ -3,8 +3,8 @@
 - name: Copy wallet genesis tool
   become: yes
   copy:
-    src: files/linux/toolkit/bootstrap_wallet_sync.py
-    dest: "{{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet_sync.py"
+    src: files/linux/toolkit/bootstrap_wallet.py
+    dest: "{{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py"
     owner: root
     group: root
     mode: "700"

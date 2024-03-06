@@ -1,0 +1,31 @@
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+  buildargs:
+    DOCKERFILE_PATH: "{{ role_directory }}/files/Dockerfile"
+
+platforms:
+  - name: ubuntu-22.04-01
+    image: ubuntu-systemd:22.04
+    privileged: true
+    groups:
+      - multi_node_validator
+  - name: ubuntu-22.04-01
+    image: ubuntu-systemd:22.04
+    privileged: true
+    groups:
+      - multi_node_validator
+
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_CACHE_PLUGIN: jsonfile
+    ANSIBLE_CACHE_PLUGIN_CONNECTION: "cache/"
+
+scenario:
+  test_sequence:
+    - destroy
+    - create
+    - converge

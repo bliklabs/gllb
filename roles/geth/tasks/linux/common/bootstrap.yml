@@ -1,13 +1,18 @@
 ---
 
 - name: Run generate wallets
-  command: "/usr/bin/env python3 {{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet_sync.py {{ wallets.num_total | default(wallets.num_total) }} {{ wallets.num_signers | default(wallets.num_signers) }} {{ root_dir | default(root_dir) }}/data {{ sync_dir | default(sync_dir) }}"
+  command: "/usr/bin/env python3 {{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py {{ wallets.num_total | default(wallets.num_total) }} {{ wallets.num_signers | default(wallets.num_signers) }} {{ root_dir | default(root_dir) }}"
   become: yes
-  register: gen_wallets_output
+
+- name: Read wallet json file
+  slurp:
+    src: "{{ root_dir }}/privs/accounts.json"
+  register: gen_wallets_content
+  become: yes
 
 - name: Set gen_wallets fact
   set_fact:
-    gen_wallets: "{{ gen_wallets_output.stdout | from_json }}"
+    gen_wallets: "{{ gen_wallets_content.content | b64decode }}"
     concatenate_string: ""
     cacheable: true
 

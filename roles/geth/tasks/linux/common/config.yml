@@ -1,0 +1,39 @@
+---
+
+- name: Write genesis configuration to JSON file
+  become: yes
+  copy:
+    content: "{{ genesis_config | to_json }}"
+    dest: "{{ root_dir }}/genesis/genesis.json"
+    owner: svc_geth
+    group: root
+    mode: 0660
+
+- name: Iterate over keystore variable and write keyfile content
+  include_tasks: linux/common/write_keyfile.yml
+  vars:
+    keystore_item: "{{ item }}"
+  loop: "{{ keystore | dict2items }}"
+  loop_control:
+    loop_var: item
+
+- name: Change keystore ownership
+  become: yes
+  command: "chown -R svc_geth:root {{ root_dir }}/data/keystore"
+    
+- name: Change permissions
+  become: yes
+  command: "chmod -R 770 {{ root_dir }}/data/keystore"
+
+- name: Display contents of genesis.json with newlines
+  shell: "cat /opt/validator/genesis/genesis.json"
+  register: genesis_content
+
+- debug:
+    msg: "{{ genesis_content.stdout | replace('\n', '\\n') }}"
+
+- name: Initialize genesis block
+  become: yes
+  command: "geth --datadir {{ root_dir }}/data init {{ root_dir }}/genesis/genesis.json"
+
+...

@@ -46,14 +46,6 @@
     state: directory
     owner: root
     group: root
-    mode: "600"
-
-- name: Create sync directory
-  file:
-    path: "{{ sync_dir }}"
-    state: directory
-    owner: nobody
-    group: nobody
-    mode: "777"
+    mode: "700"
 
 ...

@@ -1,0 +1,21 @@
+---
+
+dependencies: []
+galaxy_info:
+  role_name: multi_node_validator
+  namespace: multi_node_validator
+  author: blik
+  description: multi_node_validator
+  company: "bliklabs"
+  license: "GPL3"
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+      arch:
+        - aarch64
+        - amd64
+        - x86_64
+
+...

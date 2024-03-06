@@ -4,9 +4,14 @@
   template:
     src: geth.service.j2
     dest: /lib/systemd/system/geth.service
-  remote_src: no
+
+- name: Reload daemon
+  become: true
+  systemd:
+    daemon_reload: true
 
 - name: Enable geth.service
+  become: yes
   systemd:
     name: geth
     enabled: yes

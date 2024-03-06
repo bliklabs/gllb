@@ -7,9 +7,4 @@
     createhome: no
   ignore_errors: true
 
-- name: Ensure nobody group exists
-  group:
-    name: nobody
-    state: present
-
 ...
