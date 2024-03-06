@@ -11,8 +11,8 @@ ANSIBLE_GALAXY_CACHE_DIR="${PROJECT_PATH}/var"
 ANSIBLE_LOG_PATH="${PROJECT_PATH}/var/ansible.log"
 ANSIBLE_PYTHON_INTERPRETER='/usr/bin/python3'
 ANSIBLE_PLAYBOOK_DIR="${PROJECT_PATH}/playbooks"
-
-#PATH='/home/b/.local/bin:/usr/bin:/usr/sbin'
+ANSIBLE_CACHE_PLUGIN="jsonfile"
+ANSIBLE_CACHE_PLUGIN_CONNECTION="cache/"
 
 eval $(ssh-agent -s)
 ssh-add "${ANSIBLE_PRIVATE_KEY_FILE}"
