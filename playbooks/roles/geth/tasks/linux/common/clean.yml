@@ -1,0 +1,24 @@
+---
+
+- name: Stop geth daemon
+  systemd:
+    name: geth
+    state: stopped
+    force: yes
+  ignore_errors: yes
+
+- name: Stop add_remote_peers daemon
+  systemd:
+    name: add_remote_peers
+    state: stopped
+    force: yes
+  ignore_errors: yes
+
+- name: Delete /opt/validator directory
+  file:
+    path: /opt/validator
+    state: absent
+  become: true
+  ignore_errors: yes
+
+...

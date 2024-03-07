@@ -1,0 +1,18 @@
+---
+
+- name: Include create service user svc_geth
+  import_tasks: "linux/common/create_svc_user.yml"
+
+- name: Include create directory structure under root_dir
+  import_tasks: "linux/common/create_directory_structure.yml"
+
+- name: Check if the OS is Ubuntu
+  set_fact:
+    is_ubuntu_geth: "{{ ansible_distribution == 'Ubuntu' }}"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Include Ubuntu tasks
+  include_tasks: "linux/Ubuntu/main.yml"
+  when: is_ubuntu_geth
+
+...

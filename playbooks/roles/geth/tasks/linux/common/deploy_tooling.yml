@@ -1,0 +1,20 @@
+---
+
+- name: Copy wallet genesis tool
+  become: yes
+  copy:
+    src: files/linux/toolkit/bootstrap_wallet.py
+    dest: "{{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py"
+    owner: root
+    group: root
+    mode: "700"
+    remote_src: no
+
+
+- name: Copy add_remote_peers.service template
+  become: yes
+  template:
+    src: add_remote_peers.py.j2
+    dest: "{{ root_dir | default('root_dir') }}/tooling/add_remote_peers.py"
+
+...

@@ -1,0 +1,21 @@
+[Unit]
+Description=Geth
+
+[Service]
+Type=simple
+User=svc_geth
+Restart=always
+ExecStart=/usr/bin/geth \
+    --datadir /opt/validator/data \
+    --syncmode full \
+    --port {{ port.port | default(port.port) }} \
+    --http \
+    --http.addr {{ ansible_default_ipv4.address }} \
+    --http.port {{ port.http | default(port.http) }} \
+    --http.api "personal,eth,net,web3,txpool,miner,admin" \
+    --http.corsdomain="*" \
+    --networkid 1337 \
+    --allow-insecure-unlock \
+    --authrpc.addr {{ ansible_default_ipv4.address }} \
+    --authrpc.port {{ port.authrpc | default(port.authrpc) }} \
+    --nat=extip:{{ ansible_default_ipv4.address }}

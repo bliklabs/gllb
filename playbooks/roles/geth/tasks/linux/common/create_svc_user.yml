@@ -1,0 +1,11 @@
+---
+
+- name: Create service user
+  become: yes
+  user:
+    name: svc_geth
+    shell: /usr/sbin/nologin
+    createhome: no
+  ignore_errors: true
+
+...

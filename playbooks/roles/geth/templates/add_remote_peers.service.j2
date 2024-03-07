@@ -1,0 +1,13 @@
+[Unit]
+Description=Add Remote Peers Service
+Requires=geth.service
+After=geth.service
+
+[Service]
+User=root
+WorkingDirectory={{ root_dir | default(root_dir) }}/tooling
+ExecStart=/usr/bin/python3 {{ root_dir | default(root_dir) }}/tooling/add_remote_peers.py --seconds {{ peer_interval_check | default(peer_interval_check) }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

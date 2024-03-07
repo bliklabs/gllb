@@ -1,0 +1,71 @@
+---
+
+- name: Copy wallet genesis tool
+  become: yes
+  copy:
+    src: files/linux/toolkit/bootstrap_wallet.py
+    dest: "{{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py"
+    owner: root
+    group: root
+    mode: "700"
+    remote_src: no
+
+- name: Run generate wallets
+  command: "/usr/bin/env python3 {{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py {{ wallets.num_total | default(wallets.num_total) }} {{ wallets.num_signers | default(wallets.num_signers) }} {{ root_dir | default(root_dir) }}"
+  become: yes
+
+- name: Read wallet json file
+  become: yes
+  slurp:
+    src: "{{ root_dir }}/privs/accounts.json"
+  register: gen_wallets_content
+
+- name: Set gen_wallets fact
+  set_fact:
+    gen_wallets: "{{ gen_wallets_content.content | b64decode }}"
+    concatenate_string: ""
+    cacheable: true
+
+- name: Read keyfile and store contents as fact
+  become: yes
+  slurp:
+    src: "{{ item.keyfile_path }}"
+  register: keyfile_contents
+  loop: "{{ gen_wallets }}"
+
+- name: Set fact for each keyfile content
+  set_fact:
+    keystore:
+      "{{ keystore | default({}) | combine({item.item.address: item.content | b64decode | string}) }}"
+    cacheable: true
+  loop: "{{ keyfile_contents.results }}"
+  loop_control:
+    loop_var: item
+
+- name: Extract signer addresses and concatenate
+  set_fact:
+    concatenate_string: "{{ concatenate_string }}{{ item.address }}"
+    cacheable: true
+  loop: "{{ gen_wallets }}"
+  when: item.type == 'signer'
+
+- name: Generate genesis JSON
+  become: yes
+  template:
+    src: genesis.json.j2
+    dest: "{{ root_dir }}/genesis/genesis.json"
+  vars:
+    concatenate_string: ""
+
+- name: Read genesis JSON file
+  become: yes
+  slurp:
+    src: "{{ root_dir }}/genesis/genesis.json"
+  register: genesis_json_content
+
+- name: Set genesis_config fact
+  set_fact:
+    genesis_config: "{{ genesis_json_content.content | b64decode }}"
+    cacheable: true
+
+...

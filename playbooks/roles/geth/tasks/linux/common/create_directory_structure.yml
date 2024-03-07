@@ -1,0 +1,57 @@
+---
+
+- name: Create root directory
+  become: yes
+  file:
+    path: "{{ root_dir | default('root_dir') }}"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: "770"
+
+- name: Create data directory
+  become: yes
+  file:
+    path: "{{ root_dir | default('root_dir') }}/data"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: "770"
+
+- name: Create genesis directory
+  become: yes
+  file:
+    path: "{{ root_dir | default('root_dir') }}/genesis"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: "770"
+
+- name: Create src directory
+  become: yes
+  file:
+    path: "{{ root_dir | default('root_dir') }}/src"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: "770"
+
+- name: Create tooling directory
+  become: yes
+  file:
+    path: "{{ root_dir | default('root_dir') }}/tooling"
+    state: directory
+    owner: root
+    group: root
+    mode: "700"
+
+- name: Create privs directory
+  become: yes
+  file:
+    path: "{{ root_dir | default('root_dir') }}/privs"
+    state: directory
+    owner: root
+    group: root
+    mode: "700"
+
+...

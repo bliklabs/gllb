@@ -1,0 +1,59 @@
+---
+
+- name: Converge clean all
+  hosts: all
+  tasks:
+
+    - name: Bootstrap clean
+      include_role:
+        name: geth
+        tasks_from: linux/common/clean.yml
+
+- name: Converge all geth install
+  hosts: all
+  tasks:
+
+    - name: Install geth dependancies
+      include_role:
+        name: geth
+
+- name: Converge bootstrap
+  hosts: "{{ groups['all'][0] }}"
+  tasks:
+
+    - name: Bootstrap wallet
+      include_role:
+        name: geth
+        tasks_from: linux/common/bootstrap.yml
+
+- name: Converge sync
+  hosts: testnet
+  gather_facts: yes
+  tasks:
+
+    - name: Sync facts
+      include_role:
+        name: geth
+        tasks_from: linux/common/sync.yml
+      vars:
+        bootstrap_node: "{{ groups['all'][0] }}"
+
+- name: Converge config
+  hosts: all
+  tasks:
+
+    - name: Config genesis
+      include_role:
+        name: geth
+        tasks_from: linux/common/config.yml
+
+- name: Converge svc
+  hosts: all
+  tasks:
+
+    - name: Enable genesis
+      include_role:
+        name: geth
+        tasks_from: linux/common/create_geth_svc.yml
+
+...

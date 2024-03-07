@@ -1,0 +1,33 @@
+---
+
+- name: Copy geth.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.copy:
+    src: "files/linux/{{ ansible_architecture }}/Ubuntu/{{ ansible_distribution_version }}/geth-{{ geth_version | default('geth_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src/"
+    remote_src: false
+
+- name: Extract geth.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.unarchive:
+    src: "{{ root_dir | default('root_dir') }}/src/geth-{{ geth_version | default('geth_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src"
+    remote_src: yes
+    creates: "{{ root_dir | default('root_dir') }}/src/geth"
+
+- name: Set file ownership and permissions for root_dir/src/geth
+  become: yes
+  ansible.builtin.file:
+    path: "{{ root_dir | default('root_dir') }}/src/geth"
+    owner: svc_geth
+    group: root
+    mode: "0750"
+
+- name: Create symlink /usr/local/bin/geth
+  become: yes
+  ansible.builtin.file:
+    src: "{{ root_dir | default('root_dir') }}/src/geth"
+    dest: /usr/local/bin/geth
+    state: link
+
+...

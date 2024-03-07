@@ -1,0 +1,31 @@
+---
+
+- name: Set gen_wallets fact
+  set_fact:
+    gen_wallets: "{{ hostvars[bootstrap_node]['gen_wallets'] }}"
+    cacheable: true
+  when: "'gen_wallets' not in hostvars[inventory_hostname]"
+
+- name: Set genesis_config fact
+  set_fact:
+    genesis_config: "{{ hostvars[bootstrap_node]['genesis_config'] }}"
+    cacheable: true
+  when: "'genesis_config' not in hostvars[inventory_hostname]"
+
+- name: Set keystore fact
+  set_fact:
+    keystore: "{{ hostvars[bootstrap_node]['keystore']}}"
+    cacheable: true
+  when: "'keystore' not in hostvars[inventory_hostname]"
+
+- name: Debug ansible_default_ipv4
+  debug:
+    var: 'ansible_default_ipv4'
+
+- name: Set group default route ip fact
+  set_fact:
+    all_default_route_ips: "{{ all_default_route_ips | default([]) + [hostvars[item]['ansible_default_ipv4']['address']] }}"
+    cacheable: yes
+  loop: "{{ ansible_play_hosts }}"
+
+...

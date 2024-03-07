@@ -1,0 +1,40 @@
+---
+
+- name: Copy geth.service template
+  become: yes
+  template:
+    src: geth.service.j2
+    dest: /lib/systemd/system/geth.service
+
+- name: Copy add_remote_peers.py template
+  become: yes
+  template:
+    src: add_remote_peers.py.j2
+    dest: "{{ root_dir | default('root_dir') }}/tooling/add_remote_peers.py"
+
+- name: Copy add_remote_peers.service template
+  become: yes
+  template:
+    src: add_remote_peers.service.j2
+    dest: /lib/systemd/system/add_remote_peers.service
+
+- name: Reload daemon
+  become: true
+  systemd:
+    daemon_reload: true
+
+- name: Enable geth.service
+  become: yes
+  systemd:
+    name: geth
+    enabled: yes
+    state: started
+
+- name: Enable add_remote_peers.service
+  become: yes
+  systemd:
+    name: add_remote_peers
+    enabled: yes
+    state: started
+
+...
