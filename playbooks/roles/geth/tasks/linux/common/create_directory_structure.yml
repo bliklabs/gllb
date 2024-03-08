@@ -9,14 +9,15 @@
     group: root
     mode: "770"
 
-- name: Create data directory
+- name: Create etherum data directory
   become: yes
   file:
-    path: "{{ root_dir | default('root_dir') }}/data"
+    path: "{{ root_dir | default('root_dir') }}/ethereum"
     state: directory
     owner: svc_geth
     group: root
     mode: "770"
+    recurse: yes
 
 - name: Create genesis directory
   become: yes

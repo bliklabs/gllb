@@ -1,0 +1,20 @@
+[Unit]
+Description=Lighthouse beacon
+
+[Service]
+Type=simple
+User=root
+Restart=always
+ExecStart=/usr/local/bin/lighthouse beacon \
+    --datadir {{ root_dir | default(root_dir) }}/ethereum/lighthouse \
+    --testnet-dir {{ root_dir | default(root_dir) }}/ethereum/lighthouse/testnet \
+    --port {{ port.port | default(port.port) }} \
+    --http \
+    --http-port {{ port.http | default(port.http) }} \
+    --http-address {{ ansible_default_ipv4.address }} \
+    --execution-endpoints http://{{ ansible_default_ipv4.address }}:{{ port.gethrpc | default(port.gethrpc) }} \
+    --execution-jwt {{ root_dir }}/ethereum/geth/jwtsecret \
+    --allow-insecure-genesis-sync \
+    --disable-packet-filter \
+    --http-allow-sync-stalled \
+    --staking

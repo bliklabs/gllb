@@ -6,17 +6,12 @@
     src: geth.service.j2
     dest: /lib/systemd/system/geth.service
 
-- name: Copy add_remote_peers.py template
-  become: yes
-  template:
-    src: add_remote_peers.py.j2
-    dest: "{{ root_dir | default('root_dir') }}/tooling/add_remote_peers.py"
-
 - name: Copy add_remote_peers.service template
   become: yes
   template:
     src: add_remote_peers.service.j2
     dest: /lib/systemd/system/add_remote_peers.service
+  when: all_default_route_ips is defined
 
 - name: Reload daemon
   become: true
@@ -36,5 +31,6 @@
     name: add_remote_peers
     enabled: yes
     state: started
+  when: all_default_route_ips is defined
 
 ...

@@ -1,30 +1,23 @@
 ---
 
-- name: Copy wallet genesis tool
-  become: yes
-  copy:
-    src: files/linux/toolkit/bootstrap_wallet.py
-    dest: "{{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py"
-    owner: root
-    group: root
-    mode: "700"
-    remote_src: no
-
 - name: Run generate wallets
   command: "/usr/bin/env python3 {{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py {{ wallets.num_total | default(wallets.num_total) }} {{ wallets.num_signers | default(wallets.num_signers) }} {{ root_dir | default(root_dir) }}"
   become: yes
+  when: genesis_config is not defined
 
 - name: Read wallet json file
   become: yes
   slurp:
     src: "{{ root_dir }}/privs/accounts.json"
   register: gen_wallets_content
+  when: genesis_config is not defined
 
 - name: Set gen_wallets fact
   set_fact:
     gen_wallets: "{{ gen_wallets_content.content | b64decode }}"
     concatenate_string: ""
     cacheable: true
+  when: genesis_config is not defined
 
 - name: Read keyfile and store contents as fact
   become: yes
@@ -32,6 +25,7 @@
     src: "{{ item.keyfile_path }}"
   register: keyfile_contents
   loop: "{{ gen_wallets }}"
+  when: genesis_config is not defined
 
 - name: Set fact for each keyfile content
   set_fact:
@@ -41,13 +35,14 @@
   loop: "{{ keyfile_contents.results }}"
   loop_control:
     loop_var: item
+  when: genesis_config is not defined
 
 - name: Extract signer addresses and concatenate
   set_fact:
     concatenate_string: "{{ concatenate_string }}{{ item.address }}"
     cacheable: true
   loop: "{{ gen_wallets }}"
-  when: item.type == 'signer'
+  when: item.type == 'signer' and genesis_config is not defined
 
 - name: Generate genesis JSON
   become: yes
@@ -56,16 +51,19 @@
     dest: "{{ root_dir }}/genesis/genesis.json"
   vars:
     concatenate_string: ""
+  when: genesis_config is not defined
 
 - name: Read genesis JSON file
   become: yes
   slurp:
     src: "{{ root_dir }}/genesis/genesis.json"
   register: genesis_json_content
+  when: genesis_config is not defined
 
 - name: Set genesis_config fact
   set_fact:
     genesis_config: "{{ genesis_json_content.content | b64decode }}"
     cacheable: true
+  when: genesis_config is not defined
 
 ...

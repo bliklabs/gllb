@@ -6,7 +6,8 @@ Type=simple
 User=svc_geth
 Restart=always
 ExecStart=/usr/bin/geth \
-    --datadir /opt/validator/data \
+    --datadir {{ root_dir }}/ethereum \
+    --ipcdisable \
     --syncmode full \
     --port {{ port.port | default(port.port) }} \
     --http \
@@ -14,8 +15,8 @@ ExecStart=/usr/bin/geth \
     --http.port {{ port.http | default(port.http) }} \
     --http.api "personal,eth,net,web3,txpool,miner,admin" \
     --http.corsdomain="*" \
-    --networkid 1337 \
-    --allow-insecure-unlock \
     --authrpc.addr {{ ansible_default_ipv4.address }} \
     --authrpc.port {{ port.authrpc | default(port.authrpc) }} \
-    --nat=extip:{{ ansible_default_ipv4.address }}
+    --networkid {{ json.config.chainId | default(json.config.chainId) }} \
+    --nat=extip:{{ ansible_default_ipv4.address }} \
+    --allow-insecure-unlock

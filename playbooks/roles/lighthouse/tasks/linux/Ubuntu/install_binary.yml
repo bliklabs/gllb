@@ -1,0 +1,33 @@
+---
+
+- name: Copy lighthouse.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.copy:
+    src: "files/linux/{{ ansible_architecture }}/Ubuntu/{{ ansible_distribution_version }}/lighthouse-{{ lighthouse_version | default('lighthouse_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src/"
+    remote_src: false
+
+- name: Extract lighthouse.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.unarchive:
+    src: "{{ root_dir | default('root_dir') }}/src/lighthouse-{{ lighthouse_version | default('lighthouse_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src"
+    remote_src: yes
+    creates: "{{ root_dir | default('root_dir') }}/src/lighthouse"
+
+- name: Set file ownership and permissions for root_dir/src/lighthouse
+  become: yes
+  ansible.builtin.file:
+    path: "{{ root_dir | default('root_dir') }}/src/lighthouse"
+    owner: svc_geth
+    group: root
+    mode: "0750"
+
+- name: Create symlink /usr/local/bin/lighthouse
+  become: yes
+  ansible.builtin.file:
+    src: "{{ root_dir | default('root_dir') }}/src/lighthouse"
+    dest: /usr/local/bin/lighthouse
+    state: link
+
+...

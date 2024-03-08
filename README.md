@@ -84,6 +84,12 @@ To provision a VM cluster:
 
 ## Tests
 
+Molecule tests are provided for all roles.
+
+1. geth
+2. lighthouse
+3. multi_node_validator 
+
 To provision a cluster via molecule and docker:
 
 1. Navigate to role:
@@ -95,7 +101,6 @@ To provision a cluster via molecule and docker:
    ```
    molecule test
    ```
-
 
 ## Contributing
 

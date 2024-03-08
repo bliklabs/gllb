@@ -1,0 +1,3 @@
+{% for k, v in json_config.items() %}
+{{ k | upper }}: "{{ v }}"
+{% endfor %}

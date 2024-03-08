@@ -1,24 +1,52 @@
 ---
 
 - name: Stop geth daemon
+  become: yes
   systemd:
     name: geth
     state: stopped
     force: yes
   ignore_errors: yes
 
+- name: Disable geth service
+  become: yes
+  systemd:
+    name: geth
+    enabled: no
+  ignore_errors: yes
+
+- name: Kill all geth processes
+  become: yes
+  command: killall -9 geth
+  ignore_errors: yes
+
 - name: Stop add_remote_peers daemon
+  become: yes
   systemd:
     name: add_remote_peers
     state: stopped
     force: yes
   ignore_errors: yes
 
-- name: Delete /opt/validator directory
+- name: Delete rootdir/ethereum/geth directory
+  become: yes
   file:
-    path: /opt/validator
+    path: "{{ root_dir | default(root_dir) }}/ethereum/geth"
     state: absent
-  become: true
+  ignore_errors: yes
+
+- name: Delete rootdir/ethereum/keystore directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/keystore"
+    state: absent
+  ignore_errors: yes
+
+- name: Delete rootdir/genesis directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/genesis"
+    state: absent
   ignore_errors: yes
 
 ...

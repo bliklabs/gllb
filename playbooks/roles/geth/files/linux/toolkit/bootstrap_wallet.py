@@ -16,7 +16,7 @@ def generate_random_password(length=12):
 
 def setup_directories(directory):
     directory = os.path.abspath(directory)
-    data_dir = os.path.join(directory, "data")
+    data_dir = os.path.join(directory, "ethereum")
     keystore_dir = os.path.join(data_dir, "keystore")
     priv_dir = os.path.join(directory, "privs")
     genesis_dir = os.path.join(directory, "genesis")

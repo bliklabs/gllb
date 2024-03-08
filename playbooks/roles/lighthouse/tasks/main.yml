@@ -1,29 +1,21 @@
 ---
-# tasks file for lighthouse
-- name: Download and Install Precompiled Binary
-  hosts: lighthouse_clients
-  become: yes
-  tasks:
 
-    - name: Download tar.gz file
-      get_url:
-        url: "https://github.com/sigp/lighthouse/releases/download/v5.0.0/lighthouse-v5.0.0-x86_64-unknown-linux-gnu-portable.tar.gz"
-        dest: "/tmp/lighthouse-5.0.0.tar.gz"
+- name: Include create service user svc_geth
+  import_tasks: "linux/common/create_svc_user.yml"
 
-    - name: Extract tar.gz file
-      unarchive:
-        src: "/tmp/lighthouse-5.0.0.tar.gz"
-        dest: "/opt/lighthouse-5.0.0"
-        remote_src: yes
-        extra_opts: "--strip-components=1"
+- name: Include create directory structure under root_dir
+  import_tasks: "linux/common/create_directory_structure.yml"
 
-    - name: Ensure binary is executable
-      file:
-        path: "/opt/lighthouse-5.0.0/lighthouse"
-        mode: "u+x"
+- name: Check if the OS is Ubuntu
+  set_fact:
+    is_ubuntu: "{{ ansible_distribution == 'Ubuntu' }}"
+  when: ansible_distribution == 'Ubuntu'
 
-    - name: Add binary to system path
-      file:
-        src: "/opt/lighthouse-5.0.0/lighthouse"
-        dest: "/usr/local/bin/lighthouse"
-        state: link
+- name: Include Ubuntu tasks
+  include_tasks: "linux/Ubuntu/main.yml"
+  when: is_ubuntu
+
+- name: Include enable lighthouse beacon
+  import_tasks: "linux/common/create_lighthouse_svc.yml"
+
+...

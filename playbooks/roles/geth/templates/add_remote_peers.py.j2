@@ -23,6 +23,7 @@ def get_enode_url(ip, port):
     if response.status_code == 200:
         response_json = response.json()
         enode_url = response_json["result"]["enode"]
+        print(enode_url)
         return enode_url
     else:
         print("Error:", response.status_code)
@@ -39,6 +40,7 @@ def add_peer(peer_enode):
     }
     response = requests.post(geth_url, json=data)
     if response.status_code == 200:
+        print(response.status_code)
         return response.json()
     else:
         print("Error:", response.status_code)

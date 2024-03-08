@@ -1,0 +1,31 @@
+---
+
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu01
+    image: docker.io/geerlingguy/docker-ubuntu2204-ansible:latest
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    command: /usr/sbin/init
+    privileged: true
+    pre_build_image: true
+
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_CACHE_PLUGIN: jsonfile
+    ANSIBLE_CACHE_PLUGIN_CONNECTION: "cache/"
+
+scenario:
+  test_sequence:
+    - destroy
+    - create
+    - converge
+
+...

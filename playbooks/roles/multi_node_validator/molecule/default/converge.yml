@@ -1,25 +1,23 @@
 ---
 
-- name: Converge all geth install
+- name: Converge clean all
   hosts: all
   tasks:
 
-    - name: Install geth dependancies
+    - name: Bootstrap clean
       include_role:
         name: geth
+        tasks_from: linux/common/clean.yml
 
-- name: Converge bootstrap
+- name: Single node bootstrap
   hosts: "{{ groups['all'][0] }}"
   tasks:
-
-    - name: Bootstrap wallet
+    - name: Bootstrap node
       include_role:
         name: geth
-        tasks_from: linux/common/bootstrap.yml
 
-- name: Converge sync
+- name: Sync
   hosts: all
-  gather_facts: yes
   tasks:
 
     - name: Sync facts
@@ -29,22 +27,19 @@
       vars:
         bootstrap_node: "{{ groups['all'][0] }}"
 
-- name: Converge config
+- name: Generate geth cluster
   hosts: all
   tasks:
-
-    - name: Config genesis
+    - name: Generate geth cluster
       include_role:
         name: geth
-        tasks_from: linux/common/config.yml
 
-- name: Converge svc
+- name: Install and config lighthouse
   hosts: all
   tasks:
-
-    - name: Enable genesis
+    - name: Install and config lighthouse
       include_role:
-        name: geth
-        tasks_from: linux/common/create_geth_svc.yml
+        name: lighthouse
+
 
 ...

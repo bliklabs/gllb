@@ -1,9 +1,27 @@
 ---
 
-- name: Converge
+- name: Single node bootstrap
+  hosts: "{{ groups['all'][0] }}"
+  tasks:
+    - name: Bootstrap node
+      include_role:
+        name: geth
+
+- name: Sync
   hosts: all
   tasks:
-    - name: Include your role
+
+    - name: Sync facts
+      include_role:
+        name: geth
+        tasks_from: linux/common/sync.yml
+      vars:
+        bootstrap_node: "{{ groups['all'][0] }}"
+
+- name: Generate cluster
+  hosts: all
+  tasks:
+    - name: Generate cluster
       include_role:
         name: geth
 

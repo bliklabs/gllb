@@ -5,7 +5,7 @@ root_dir: "/opt/validator"
 peer_interval_check: 10
 port:
   port: 30304
-  authrpc: 8553
+  authrpc: 8551
   http: 8552
 wallets:
   num_total: 5
@@ -14,23 +14,29 @@ wallets:
 json:
   config:
     chainId: 1337
-    homesteadBlock: 1
-    eip150Block: 2
-    eip150Hash: "0x0000000000000000000000000000000000000000000000000000000000000000"
-    eip155Block: 3
-    eip158Block: 3
-    byzantiumBlock: 4
-    clique:
-      epoch: 30000
-      period: 15
-  nonce: "0x0"
-  timestamp: "0x0"
-  difficulty: "0x1"
-  mixHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
+    homesteadBlock: 0
+    eip150Block: 0
+    eip155Block: 0
+    eip158Block: 0
+    byzantiumBlock: 0
+    constantinopleBlock: 0
+    petersburgBlock: 0
+    istanbulBlock: 0
+    berlinBlock: 0
+    londonBlock: 0
+    mergeNetsplitBlock: 0
+    shanghaiTime: 0
+    cancunTime: 0
+    terminalTotalDifficulty: 0
+    terminalTotalDifficultyPassed: true
   coinbase: "0x0000000000000000000000000000000000000000"
-  number: "0x0"
-  gasLimit: "0x8000000"
-  gasUsed: "0x0"
+  difficulty: "0x01"
+  gasLimit: "0x400000"
+  nonce: "0x1234"
+  mixhash: "0x0000000000000000000000000000000000000000000000000000000000000000"
   parentHash: "0x0000000000000000000000000000000000000000000000000000000000000000"
+  timestamp: "1662465600"
+  number: "0x0"
+  gasUsed: "0x0"
 
 ...

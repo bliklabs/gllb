@@ -1,0 +1,6 @@
+---
+
+- name: Include lighthouse binary install
+  import_tasks: install_binary.yml
+
+...

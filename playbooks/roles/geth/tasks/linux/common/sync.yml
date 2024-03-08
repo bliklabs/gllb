@@ -18,10 +18,6 @@
     cacheable: true
   when: "'keystore' not in hostvars[inventory_hostname]"
 
-- name: Debug ansible_default_ipv4
-  debug:
-    var: 'ansible_default_ipv4'
-
 - name: Set group default route ip fact
   set_fact:
     all_default_route_ips: "{{ all_default_route_ips | default([]) + [hostvars[item]['ansible_default_ipv4']['address']] }}"

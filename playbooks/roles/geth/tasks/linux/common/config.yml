@@ -19,20 +19,21 @@
 
 - name: Change keystore ownership
   become: yes
-  command: "chown -R svc_geth:root {{ root_dir }}/data/keystore"
+  command: "chown -R svc_geth:root {{ root_dir }}/ethereum/keystore"
     
 - name: Change permissions
   become: yes
-  command: "chmod -R 770 {{ root_dir }}/data/keystore"
+  command: "chmod -R 770 {{ root_dir }}/ethereum/keystore"
 
 - name: Initialize genesis block
   become: yes
-  command: "geth --datadir {{ root_dir }}/data init {{ root_dir }}/genesis/genesis.json"
+  command: "geth --datadir {{ root_dir }}/ethereum init {{ root_dir }}/genesis/genesis.json"
+  ignore_errors: yes
 
 - name: Change ownership and permissions of a directory recursively
   become: yes
   file:
-    path: "{{ root_dir }}/data"
+    path: "{{ root_dir }}/ethereum"
     recurse: yes
     owner: svc_geth
     group: root

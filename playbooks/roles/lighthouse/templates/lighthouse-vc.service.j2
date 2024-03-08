@@ -1,0 +1,12 @@
+[Unit]
+Description=Lighthouse validator
+
+[Service]
+Type=simple
+User=root
+Restart=always
+ExecStart=/usr/local/bin/lighthouse validator_client \
+    --datadir {{ root_dir | default(root_dir) }}/ethereum/lighthouse \
+    --testnet-dir {{ root_dir | default(root_dir) }}/ethereum/lighthouse/testnet \
+    --beacon-nodes http://{{ ansible_default_ipv4.address | default(ansible_default_ipv4.address) }}:{{ port.beaconhttp | default(port.beaconhttp) }} \
+    --init-slashing-protection

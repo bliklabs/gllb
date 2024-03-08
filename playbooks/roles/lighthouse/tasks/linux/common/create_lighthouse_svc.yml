@@ -1,0 +1,54 @@
+---
+
+- name: Copy deploy_block.txt
+  become: yes
+  template:
+    src: deploy_block.txt.j2
+    dest: "{{ root_dir | default(root_dir) }}/ethereum/lighthouse/testnet/deploy_block.txt"
+    owner: svc_geth
+    group: root
+    mode: 0660
+
+- name: Copy config.yaml
+  become: yes
+  template:
+    src: config.yaml.j2
+    dest: "{{ root_dir | default(root_dir) }}/ethereum/lighthouse/testnet/config.yaml"
+    owner: svc_geth
+    group: root
+    mode: 0660
+  vars:
+    json_config: "{{ json.config }}"
+
+- name: Copy lighthouse.service template
+  become: yes
+  template:
+    src: lighthouse.service.j2
+    dest: /lib/systemd/system/lighthouse.service
+
+- name: Copy lighthouse.service template
+  become: yes
+  template:
+    src: lighthouse-vc.service.j2
+    dest: /lib/systemd/system/lighthouse-vc.service
+
+- name: Reload daemon
+  become: true
+  systemd:
+    daemon_reload: true
+
+- name: Enable lighthouse.service
+  become: yes
+  systemd:
+    name: lighthouse
+    enabled: yes
+    state: started
+
+#- name: Enable lighthouse-vc.service
+#  become: yes
+#  systemd:
+#    name: lighthouse-vc
+#    enabled: yes
+#    state: started
+
+...

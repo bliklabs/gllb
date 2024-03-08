@@ -6,6 +6,9 @@
 - name: Include create directory structure under root_dir
   import_tasks: "linux/common/create_directory_structure.yml"
 
+- name: Include create directory structure under root_dir
+  import_tasks: "linux/common/deploy_tooling.yml"
+
 - name: Check if the OS is Ubuntu
   set_fact:
     is_ubuntu_geth: "{{ ansible_distribution == 'Ubuntu' }}"
@@ -14,5 +17,14 @@
 - name: Include Ubuntu tasks
   include_tasks: "linux/Ubuntu/main.yml"
   when: is_ubuntu_geth
+
+- name: Include bootstrap with genesis_config fact is undefined
+  include_tasks: "linux/common/bootstrap.yml"
+
+- name: Include config services
+  include_tasks: "linux/common/config.yml"
+
+- name: Include start geth
+  include_tasks: "linux/common/create_geth_svc.yml"
 
 ...
