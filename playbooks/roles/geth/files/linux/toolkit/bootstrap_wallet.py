@@ -21,7 +21,11 @@ def setup_directories(directory):
     priv_dir = os.path.join(directory, "privs")
     genesis_dir = os.path.join(directory, "genesis")
     os.makedirs(directory, exist_ok=True)
-    shutil.rmtree(data_dir)
+    try:
+        shutil.rmtree(keystore_dir)
+        shutil.rmtree(os.path.join(data_dir, "geth"))
+    except FileNotFoundError:
+        print(f"Directory '{directory}' does not exist.")
     os.makedirs(keystore_dir, exist_ok=True)
     os.makedirs(genesis_dir, exist_ok=True)
     os.makedirs(priv_dir, exist_ok=True)

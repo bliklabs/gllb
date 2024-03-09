@@ -1,0 +1,1509 @@
+ ___________________________
+< PLAY [Converge clean all] >
+ ---------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ________________________
+< TASK [Gathering Facts] >
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+ok: [vm01]
+ ________________________
+< TASK [Bootstrap clean] >
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ________________________________
+< TASK [geth : Stop geth daemon] >
+ --------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+ok: [vm01]
+ ____________________________________
+< TASK [geth : Disable geth service] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+changed: [vm02]
+ _______________________________________
+< TASK [geth : Kill all geth processes] >
+ ---------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+fatal: [vm02]: FAILED! => {"changed": true, "cmd": ["killall", "-9", "geth"], "delta": "0:00:00.005172", "end": "2024-03-09 06:59:36.857148", "msg": "non-zero return code", "rc": 1, "start": "2024-03-09 06:59:36.851976", "stderr": "geth: no process found", "stderr_lines": ["geth: no process found"], "stdout": "", "stdout_lines": []}
+...ignoring
+fatal: [vm01]: FAILED! => {"changed": true, "cmd": ["killall", "-9", "geth"], "delta": "0:00:00.005416", "end": "2024-03-09 06:59:36.886589", "msg": "non-zero return code", "rc": 1, "start": "2024-03-09 06:59:36.881173", "stderr": "geth: no process found", "stderr_lines": ["geth: no process found"], "stdout": "", "stdout_lines": []}
+...ignoring
+ ____________________________________________
+< TASK [geth : Stop add_remote_peers daemon] >
+ --------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+ok: [vm01]
+ ______________________________________________________
+< TASK [geth : Delete rootdir/ethereum/geth directory] >
+ ------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+ok: [vm01]
+ __________________________________________________________
+< TASK [geth : Delete rootdir/ethereum/keystore directory] >
+ ----------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+changed: [vm01]
+ _____________________________________________________
+/ TASK [geth : Delete rootdir/ethereum/validator_keys \
+\ directory]                                          /
+ -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm02]
+changed: [vm01]
+ ________________________________________________
+< TASK [geth : Delete rootdir/genesis directory] >
+ ------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+changed: [vm02]
+ ______________________________
+< PLAY [Single node bootstrap] >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ________________________
+< TASK [Gathering Facts] >
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _______________________
+< TASK [Bootstrap node] >
+ -----------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ___________________________________
+< TASK [geth : Create service user] >
+ -----------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _____________________________________
+< TASK [geth : Create root directory] >
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _____________________________________________
+< TASK [geth : Create etherum data directory] >
+ ---------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ________________________________________
+< TASK [geth : Create genesis directory] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ ____________________________________
+< TASK [geth : Create src directory] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ________________________________________
+< TASK [geth : Create tooling directory] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ______________________________________
+< TASK [geth : Create privs directory] >
+ --------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ________________________________________
+< TASK [geth : Copy wallet genesis tool] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ______________________________________________________
+< TASK [geth : Copy add_remote_peers.service template] >
+ ------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+ _________________________________________
+< TASK [geth : Check if the OS is Ubuntu] >
+ -----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ____________________________________
+< TASK [geth : Include Ubuntu tasks] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/b/validator_testnet/playbooks/roles/geth/tasks/linux/Ubuntu/main.yml for vm01
+ ______________________________________________
+< TASK [geth : Copy geth.tgz to root_dir/src/] >
+ ----------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _________________________________________________
+< TASK [geth : Extract geth.tgz to root_dir/src/] >
+ -------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+ _____________________________________________________
+/ TASK [geth : Set file ownership and permissions for \
+\ root_dir/src/geth]                                  /
+ -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ __________________________________________________
+< TASK [geth : Create symlink /usr/local/bin/geth] >
+ --------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _____________________________________________________________
+< TASK [geth : Copy staking_deposit_cli.tgz to root_dir/src/] >
+ -------------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _________________________________________________
+/ TASK [geth : Extract staking_deposit_cli.tgz to \
+\ root_dir/src/]                                  /
+ -------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+ _____________________________________________________
+/ TASK [geth : Set file ownership and permissions for \
+\ root_dir/src/deposit]                               /
+ -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _____________________________________________________
+< TASK [geth : Create symlink /usr/local/bin/deposit] >
+ -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ____________________________________________________________
+/ TASK [geth : Include bootstrap with genesis_config fact is \
+\ undefined]                                                 /
+ ------------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/b/validator_testnet/playbooks/roles/geth/tasks/linux/common/bootstrap.yml for vm01
+ ____________________________________
+< TASK [geth : Run generate wallets] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ ___________________________________
+< TASK [geth : Run deposit command] >
+ -----------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ ____________________________________________________
+/ TASK [geth : Change ownership and permissions of a \
+\ directory recursively]                             /
+ ----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ _____________________________________________
+< TASK [geth : Find validator keystore files] >
+ ---------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _____________________________________________________________
+< TASK [geth : Read the contents of validator keystore files] >
+ -------------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_8_0_0-1709967606.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530791, 'dev': 64768, 'nlink': 1, 'atime': 1709967615.2955468, 'mtime': 1709967606.2908247, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_5_0_0-1709967604.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530788, 'dev': 64768, 'nlink': 1, 'atime': 1709967613.575409, 'mtime': 1709967602.2985046, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_3_0_0-1709967602.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530786, 'dev': 64768, 'nlink': 1, 'atime': 1709967612.319308, 'mtime': 1709967602.2985046, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_9_0_0-1709967607.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530792, 'dev': 64768, 'nlink': 1, 'atime': 1709967616.2956269, 'mtime': 1709967606.2908247, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_1_0_0-1709967601.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530784, 'dev': 64768, 'nlink': 1, 'atime': 1709967611.295226, 'mtime': 1709967601.294424, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/deposit_data-1709967611.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 7060, 'inode': 530794, 'dev': 64768, 'nlink': 1, 'atime': 1709967618.539807, 'mtime': 1709967611.295226, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_4_0_0-1709967603.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530787, 'dev': 64768, 'nlink': 1, 'atime': 1709967613.33939, 'mtime': 1709967602.2985046, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_10_0_0-1709967608.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 711, 'inode': 530793, 'dev': 64768, 'nlink': 1, 'atime': 1709967617.5757296, 'mtime': 1709967607.290905, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_2_0_0-1709967602.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530785, 'dev': 64768, 'nlink': 1, 'atime': 1709967611.295226, 'mtime': 1709967601.294424, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_6_0_0-1709967605.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530789, 'dev': 64768, 'nlink': 1, 'atime': 1709967614.3194685, 'mtime': 1709967604.2906644, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ok: [vm01] => (item={'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_7_0_0-1709967605.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530790, 'dev': 64768, 'nlink': 1, 'atime': 1709967615.2955468, 'mtime': 1709967605.4107542, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False})
+ ___________________________________________________________
+< TASK [geth : Set fact for each validator keyfile content] >
+ -----------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiZjVmYjJhZDk3ZDAxZWIyYzcwMTNmMGRhZThlMDc0NTA3MGZjNDlhNWFiNDI2YWIxNzQ0NDUzMmQ2YTZkNzkwOSJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjAyYTg3NDI3YTZhZmRlNzgxMzZmMWZiMDMzOTY4YWE2ZTE0OTJkNWQ4ZDUwYmEwNTBmYzg5NTVlMGE1MmFiMmEifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogImFiN2M4ZmRlMzczMzMwZjY4MDIxNmY3N2VhMThjZTg0NjlmZWVhMjY1ZmEzMjk0ZDhmN2JhZDI3NGNkOTlhMTZjZjRlNWVhYWE1YTVjYmIxZjRlZWU0N2U0ODA3YTQzNCIsICJwYXRoIjogIm0vMTIzODEvMzYwMC84LzAvMCIsICJ1dWlkIjogImM3ZmZiYzVmLWYyN2EtNGY0Yi1hODBiLTkxODg4OThiOTE2OCIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_8_0_0-1709967606.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_8_0_0-1709967606.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_8_0_0-1709967606.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530791, 'dev': 64768, 'nlink': 1, 'atime': 1709967615.2955468, 'mtime': 1709967606.2908247, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiNmE3MjY3MzMyZmY3MDM3ZDhkOTc1MzBhZGMzZmU3NWQ4NmFjMWEzMDI1Zjk0ODcwNTJhM2E2ZWY0NDdiOGQwZiJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjE4ZjdkODA4ZDFiNGJmZTU0ZDBjNjYxMWJlNTQ0Y2I4ZDU3ZTI4ZmZkMGM5NjI5MjAxNGRmMTE4MzY2MTAxNjEifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogImEzYzE4ZDQ5ZWM4NjFiNDRkYWY3NzAwNTA4ZDQ5M2YwZGY5YTBmYmMwMjIxODAxMDg0Y2VkNjNlMTA0MjQ4ZTBiYzI1NTBlZmE2YTFkZmJkZDJjNGY2MzdkNTMxNDdjNCIsICJwYXRoIjogIm0vMTIzODEvMzYwMC81LzAvMCIsICJ1dWlkIjogImQ4OWY3NGQ2LTc2YTAtNDEzNS1iMmRkLTEzYTYyMzY3ZjlmNSIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_5_0_0-1709967604.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_5_0_0-1709967604.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_5_0_0-1709967604.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530788, 'dev': 64768, 'nlink': 1, 'atime': 1709967613.575409, 'mtime': 1709967602.2985046, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiYTQ3YjBkMzJlNjRkNDgwNGI2NGQyNjRhMjlmNjhlOTcyODg2OGY4MDM2MjNkNTVlOGU3Njk4ZmRkMDNlYmVjNCJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjM5OTAwZTExZmUzZGI5Y2QxMWE0Njg2OWViODEwYzY0ZTZlZjU0MmQxZDQ5N2Y3MmNhZGQwNWFlODY4ZDQ4ZTIifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogIjk5NDhlYTM4NjJiODg4OTYzNmMzY2FlYWExYjk4NzdhMTJjZmZjYTliZjZhMWVmMjI2NGZhN2U2OTYwNGQ1NWM1NmI0ZjUxOTA2MmU2Nzg1ZDIxZDNjOTU5M2MyYWRjZCIsICJwYXRoIjogIm0vMTIzODEvMzYwMC8zLzAvMCIsICJ1dWlkIjogImM2OTBiMjdlLTgwMmMtNDM1Ny1iZmYyLThmOTk0MDc2NDJiOSIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_3_0_0-1709967602.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_3_0_0-1709967602.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_3_0_0-1709967602.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530786, 'dev': 64768, 'nlink': 1, 'atime': 1709967612.319308, 'mtime': 1709967602.2985046, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiMmQ2ZGNkNGY2MDE0YzdiZjg1YjJhNGEzMmQ1YmVmZTllYTBiNmU0MzNmMTU2NWNhMWE4NjAyNTVhYTRlZWI0YyJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjc1YjdmNWUwZmMyMDE2NzI5NTU4OTQ1Mjc3YzYzOTFkN2NmNzAyNWFjYmYwOGMyZmU1NDFjMzQ5ZDcxNjEwN2EifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogIjhmMTIwMzRiZmIwZGZlNmQ0NDcxNGIyZjc3NmJmMzZmYjIzNmRlNzU5NDBlODY3ZDQyMzg5MTIxYzQ0YTg2Y2EwNGM0MzYzYTdhNmIyYmRhNzI0MjQ5NWU3YjcwZWQ3ZCIsICJwYXRoIjogIm0vMTIzODEvMzYwMC85LzAvMCIsICJ1dWlkIjogIjFmMGQxYzM2LTFmNTItNDllZi1hMTczLWVhNTUxMjcxZTJiMyIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_9_0_0-1709967607.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_9_0_0-1709967607.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_9_0_0-1709967607.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530792, 'dev': 64768, 'nlink': 1, 'atime': 1709967616.2956269, 'mtime': 1709967606.2908247, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiNGJmOWU5MDA4MzQ3MDkyMTBkNTA5ZDY0NWVjZjZmYjE3OWY0NDhjYzkxOGIyYzZjNzRhMzhjYjI3NjFkYjI2MyJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjA2MTEzMTgzM2ExNGE4N2YxM2ZkYmU1ZGM3N2Q0NWEzMjczOTQ3ZWQzOTMxMmNhOTRhNDNlNjNmNDZhZTdmNzQifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogImFlYjM5OWJmNTY0OGIwZTk5ODBjMTczMTgyNGMyNjk2MzFhNDEzMjBjM2Q3ZjczMGM0MDU4N2UxYTM3YTVlMWM4YjU3NTVmZDkwMDgwYTdiM2ZiOTBkM2ZkNDE5YzBhNyIsICJwYXRoIjogIm0vMTIzODEvMzYwMC8xLzAvMCIsICJ1dWlkIjogIjk3ODRiZTUxLWRiNGYtNGU1Ni1hNzdkLTNkNzA3MzdkZmM4YyIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_1_0_0-1709967601.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_1_0_0-1709967601.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_1_0_0-1709967601.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530784, 'dev': 64768, 'nlink': 1, 'atime': 1709967611.295226, 'mtime': 1709967601.294424, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'W3sicHVia2V5IjogImFlYjM5OWJmNTY0OGIwZTk5ODBjMTczMTgyNGMyNjk2MzFhNDEzMjBjM2Q3ZjczMGM0MDU4N2UxYTM3YTVlMWM4YjU3NTVmZDkwMDgwYTdiM2ZiOTBkM2ZkNDE5YzBhNyIsICJ3aXRoZHJhd2FsX2NyZWRlbnRpYWxzIjogIjAwNDc3MzM1ZDk1Mzc2MTU1ZThmNDZiMmZjMWYyMjczMzVmZWQyMWM3MDJjOWI0NTczMDZjNjhiMTQ3MzMzZDIiLCAiYW1vdW50IjogMzIwMDAwMDAwMDAsICJzaWduYXR1cmUiOiAiYTliMGZmNzcyOTU5ZTEyYTNiY2U3M2UyNTViMWIxODQ1YzJiYmUxYTIxZTViMDRmMmM5YWI2NzU5NDU2MGZmYTNlZDc4MTQwYzRlZjQ0NjI0YjAxZDg2ZWQ3MmQ2MjI5MGU5NzQ1NWY1NDcyNTE2NjYxYWY3ZWI5MmNhODczZjczODQ4ODdjMjYxZTk0ODEyNjg2MGNjZDFkMjk5YzA2NjgxYjI4NTBiYzRmZmY3MDIyZDBlZmE5Y2FmMTY4OTczIiwgImRlcG9zaXRfbWVzc2FnZV9yb290IjogIjhjYmM2ZjY3YWM4ODJkYmYxNGYzYzk4Mzc1MTI5NDQ4YTNlZGQzNTlhZjA0NThlYTQ2Y2JhMWVhN2U1ZmM2MjciLCAiZGVwb3NpdF9kYXRhX3Jvb3QiOiAiYmQzZTc1Y2Y5ZjMwYWUxMmZlZWZkNGZmYzAwMzhmZmY2MmQ2MjhiMzVmZTQyNmExZWVhZDBmNGQ3MzZlYjhkMCIsICJmb3JrX3ZlcnNpb24iOiAiMDAwMDAwMDAiLCAibmV0d29ya19uYW1lIjogIm1haW5uZXQiLCAiZGVwb3NpdF9jbGlfdmVyc2lvbiI6ICIyLjcuMCJ9LCB7InB1YmtleSI6ICI5MmY0NmIwZGNjN2RiMjRmNDk0NmI1NzczYjU1MjVlZmEwYmJiMDgxMDA4ODU4ODMyM2Q5ZGU4NGYwZTQyZjIyZGY5NmNiYjk3MDY1YjQ5YTIwMDZjNjUzZWM4MDYwZjQiLCAid2l0aGRyYXdhbF9jcmVkZW50aWFscyI6ICIwMDU3ZmVkOWIzYjYzNDA2MDAyOTk3YmVkNTcwODdhYTFjYzFhODZlZDJmZjczYWQ0ZDMzMTIzMmJiMzJlYzUzIiwgImFtb3VudCI6IDMyMDAwMDAwMDAwLCAic2lnbmF0dXJlIjogIjhiZTMyNDRjYzRjNTI3MzcyOWQ0YjI4MmZjNTUzNjU0YjIyOGVmNjEwZGY0ZDg4ZjdkZTMyYjYzZWFiNGZkNmJjZThmYWI1YTgzYmE5YmJjYzE2MjhjZDZhOWZiYTIwMzA2ZjQxNTJjM2NlNjhmMzYyNjYyYmQ3MDAxMmQ0NDZmM2IyOWQzZjNmZDQxYzM5YTYwOWI3YWE1ZGMzOWI4NDZjZmIyMWRhY2UyNDg2NDE2MTdlMWI0YWNjODhkM2RkNiIsICJkZXBvc2l0X21lc3NhZ2Vfcm9vdCI6ICJmNDg0NjAyNjU4ZDcyMmRhMjdlMjEzNTAxMjliNGEzN2IzMGI5YjRjNjVlZjNkOTY1NTFkNTAwNjlkYjJiMzUwIiwgImRlcG9zaXRfZGF0YV9yb290IjogIjFhMzU4NjAwZjI1NmU2NWFjNjQxZmI3OGQ2YTNkYTk3ZWJhMjNjNjIzYmU5OTIyODRhNjRlNDg1NGM5ZjVjMjkiLCAiZm9ya192ZXJzaW9uIjogIjAwMDAwMDAwIiwgIm5ldHdvcmtfbmFtZSI6ICJtYWlubmV0IiwgImRlcG9zaXRfY2xpX3ZlcnNpb24iOiAiMi43LjAifSwgeyJwdWJrZXkiOiAiOTk0OGVhMzg2MmI4ODg5NjM2YzNjYWVhYTFiOTg3N2ExMmNmZmNhOWJmNmExZWYyMjY0ZmE3ZTY5NjA0ZDU1YzU2YjRmNTE5MDYyZTY3ODVkMjFkM2M5NTkzYzJhZGNkIiwgIndpdGhkcmF3YWxfY3JlZGVudGlhbHMiOiAiMDBkOTJjODkwYWZmNzJjZWY2MTA1Yjc3OGE4ZjUzMWQ5YzQyN2VjYjVjYWExOWJhMjFhZWJjOGYzMzZhM2M4ZSIsICJhbW91bnQiOiAzMjAwMDAwMDAwMCwgInNpZ25hdHVyZSI6ICI4NmZhNDk3Nzg0NWUyNmYzYjMxNDFiODVjNjQzMmQwMTZlMDgzYzMxMjE2Y2IzYmFlMTI3ZGRjNjgwZDc2YzcyMjE4NjZkZTg3MDU1NWM3ZjcyMGU0MzQwYTU0YjVmNGYxOTY4ZDcwY2YxYWM2NDEzZjVhNmRhNzFmNjNmYzI1NDcwNzNiMmYwZGJkNDMzYzRjZTA0N2M0NjA1YmNkNmRjMzUwNjZkMzc5MzRlOWRkYTVkMDYzOTFhZWY3NDVkMjIiLCAiZGVwb3NpdF9tZXNzYWdlX3Jvb3QiOiAiOTkyNzBkMDcyYzI5MzAyMDQwMTU5MjM1NmJiOTBmYTA4M2NmMmQ4MzllNDcyNmZiN2Y2Y2QwNmRiMzM2OGY5ZiIsICJkZXBvc2l0X2RhdGFfcm9vdCI6ICIwYTZhMWI0MGRhYWU5MWI0ZWVlM2FiNWI0YmMxZDJkYWY5ODAyZTE2NzdhOWQ0YzhkYmJkNzJiMzNiOTU5NDQxIiwgImZvcmtfdmVyc2lvbiI6ICIwMDAwMDAwMCIsICJuZXR3b3JrX25hbWUiOiAibWFpbm5ldCIsICJkZXBvc2l0X2NsaV92ZXJzaW9uIjogIjIuNy4wIn0sIHsicHVia2V5IjogIjg0OWI0YmNkODY3MGY4MTkwOWJhYWQyN2M0ZDljOGQ5Yjk1NmIxOTE5MmYxMmFmOGZlNTdkMzA3MzFmYTExYTU1YTk3YTFhYjcyYmIxY2ZkNzZjMTQ2MWRjYWJhNzE0YSIsICJ3aXRoZHJhd2FsX2NyZWRlbnRpYWxzIjogIjAwYjZiYmQxYzRjN2NiYjg3MzYwNzA1ODI2NDliNmIxMzM3MTNkMzg4Y2RlZGE0MWYzZGI2NjE2ZGM2NzFkZWIiLCAiYW1vdW50IjogMzIwMDAwMDAwMDAsICJzaWduYXR1cmUiOiAiYjgxNjJiYjg1Y2NhNzMxMWUyY2E2MjBjZTk5YzQ5ZDVkZWU0NjdiM2IyZTg0YTYzMmY5YzY4ZGU3NWNlMWZjZTBlNDc3ZGFhYmZjMWE3M2MzNTVmMmRhMmEzZGU2M2IxMGMwYmJiOGYxNjRmNDIzMTU5MzhlMjFiZjYyNWQ4YmZhODM0M2M2NTE3ZGRlOTI3OWEyZDdlZjVlZDU3YzdmNmE3MDZjYmEyYzVhOWE5NTgxNmYyOGI2ZTVmZGQyY2FhIiwgImRlcG9zaXRfbWVzc2FnZV9yb290IjogIjEwMzQ5YzE4MTRjNzNjZDU0ODM4ODNmNGU2ZjViMDUxMWY2MjljY2JiNWEzN2RhNjExYmMwYmFkNTcyYjkzYzciLCAiZGVwb3NpdF9kYXRhX3Jvb3QiOiAiNjU5NzdhODNkZmNjNDYxYzJlNmVlOGNmNzRlMmRmOWM1ZDkwZTU0ZjYzMWM3YWEwYmMwOTExODRlNGYxY2QzYiIsICJmb3JrX3ZlcnNpb24iOiAiMDAwMDAwMDAiLCAibmV0d29ya19uYW1lIjogIm1haW5uZXQiLCAiZGVwb3NpdF9jbGlfdmVyc2lvbiI6ICIyLjcuMCJ9LCB7InB1YmtleSI6ICJhM2MxOGQ0OWVjODYxYjQ0ZGFmNzcwMDUwOGQ0OTNmMGRmOWEwZmJjMDIyMTgwMTA4NGNlZDYzZTEwNDI0OGUwYmMyNTUwZWZhNmExZGZiZGQyYzRmNjM3ZDUzMTQ3YzQiLCAid2l0aGRyYXdhbF9jcmVkZW50aWFscyI6ICIwMGM4NGRjZmUzOTI4ZDM0ZTI2OTRlYjAwMzU3MjQ0YWVlMzdjNDM2OGY3YTA5MzE3MDAyM2MwNjVhMTc0ZTdhIiwgImFtb3VudCI6IDMyMDAwMDAwMDAwLCAic2lnbmF0dXJlIjogImE4NDY2ZTY2N2UyNDRlNTVhNDhiYzExYzNiZDk3MGJkZWMzMjdlODVmZWE0YmE0NmQ3ZjNiMTE4OWJkMmNjYzZmMjI2MzJmNDRmMmQxMzdjOGQwODMxMjQ1N2U2OTFiZDAwZDc5OGU2MGQ3MzEzYzQwZmE2OWE3NWI2MTQwYjQ2NTZlM2Q2ZGM1ZTM1ZjY1YTM5NWIzNjFmZGU4YWVhNzhiZTljZDQ2MzU2MTI0MjEyMDQ0Y2NlYzQ5ZTgzNDljYSIsICJkZXBvc2l0X21lc3NhZ2Vfcm9vdCI6ICJhMjVhZDUwNTk0MmMyZTRkN2MyZmI0ZjljZDdkOGUwZDkzZjM1MzMyYjNlMTRiZDIzNDBmYTUzZWRmOTc1NGUxIiwgImRlcG9zaXRfZGF0YV9yb290IjogIjkyYTk5NWY5ZjNiYWU4MjE3NzRhMDA1NGJmNmJmNGQ0N2QyYjI1NzcxYjlmZjljYWUxNGU5NmJjNzczMjc1M2IiLCAiZm9ya192ZXJzaW9uIjogIjAwMDAwMDAwIiwgIm5ldHdvcmtfbmFtZSI6ICJtYWlubmV0IiwgImRlcG9zaXRfY2xpX3ZlcnNpb24iOiAiMi43LjAifSwgeyJwdWJrZXkiOiAiYjg0OGY3MDBjYjU2NTQyZGYyNjZkNWVmOTliZTMzOTZkYTNjMGUwODllMzcwNmQ1YjljY2U4ZGY4ZTQ0NjVkYTNmNWY1ZWEzMTkwZDIyODI1MWIxNjk0OGExZDhiNmExIiwgIndpdGhkcmF3YWxfY3JlZGVudGlhbHMiOiAiMDAyMGZiZTM5OTNiNTQyMzI1ZDQxNjQyMGFkODBkNmY2OTk2ZTU4Njk2YTc2ZjUwMjk4M2E3YzE0YTZiMTQ2NyIsICJhbW91bnQiOiAzMjAwMDAwMDAwMCwgInNpZ25hdHVyZSI6ICJiNzc1ODU1NWU1YzdjMmQ5MGJiYmVhYjhjMTQ5Y2NiN2UxMzAxNjI5ZDhiNzY0NmZjOTJhOTQyZDY2NTY1NDQ5YjBlZTQ5YWQxZjJjZTdkMTAwOTU3NTkzZDMxMDM4MWMxNmZhNGYzM2U5ZTYxOTkzMzI3MzY4MWI0MGVhOThjMDk5Mzg1YjQxZmQ3NzBmNWFhNmRlMWEzNWVhZDc1ZjRjODNkZGZkZGFkMmUyMGEwMmUxODkwYWViNDJhYTZkMTMiLCAiZGVwb3NpdF9tZXNzYWdlX3Jvb3QiOiAiNTc5MmI1NWY5NDY5NTNkOTZiZWM2Y2JhNGM1NjYzMTc3MTVhYzI1YzliMTBmOTRhMzMyZmQ5NGE5ODNkMjc4YyIsICJkZXBvc2l0X2RhdGFfcm9vdCI6ICI0MmQ4ZjEyMDE4NjkyNTlmY2E2YzJiMDdjOTBlMGRlM2U2NGJhMDhlZTRkNzRkZGM4MjRlMDYzYjY2MzZmMmI3IiwgImZvcmtfdmVyc2lvbiI6ICIwMDAwMDAwMCIsICJuZXR3b3JrX25hbWUiOiAibWFpbm5ldCIsICJkZXBvc2l0X2NsaV92ZXJzaW9uIjogIjIuNy4wIn0sIHsicHVia2V5IjogImE1Y2FhYWUzODdmYzBmMGIyNWIyYjIzZTdkY2QwZjgxMWIwMzU2NDhjNmExZTk5ODQ5YzY5MjAyYzYxYzc0NDRiOGU0OTcxOTk3YWYyNGEwM2ZkNWM0ZDRmNzYzNDI2ZSIsICJ3aXRoZHJhd2FsX2NyZWRlbnRpYWxzIjogIjAwMTMzMTIxMzFkYjZlODdmZmEzMzBkYmZjNmVhYjEzMzllNDA5MTE1MjQzYzE4NmZiODIwNzFkN2FkN2QyOWYiLCAiYW1vdW50IjogMzIwMDAwMDAwMDAsICJzaWduYXR1cmUiOiAiOTBiNWJkOGI4YjI0ZTNmMzYxZjNiOGUyNTI3ZGVlYTY2ZDkzMzYxYzhjZmI0MzFjNzdjNWY3MDQyNTY3OTJkODA2OGE0M2IwNjliNzJmNWVhMzkxMjAzOGMwYjU3NDc4MDNmNTJlMjAzNWYyYTY5NjdhOGFiMDY5NzBiOWRhODU5MDc5MTZlMjQ2MjBlOWY3MDM2MWYzMjM1ZTRhNDk5MDliN2YwYmMyZmMwMDljYjg1OGEyNjI5NWE4ZGZmNjdiIiwgImRlcG9zaXRfbWVzc2FnZV9yb290IjogIjgzMjExMTRlZDNlNzFlNzM5NDA5NjNhODBmOTJiNWJkMzRmNDU4MWY5OTllOWY4NjE4NjRkN2YzMmE1YjQ4MjIiLCAiZGVwb3NpdF9kYXRhX3Jvb3QiOiAiZmQzODg0NDJkNDFiYTg2ZDJmOTUxZGJmZmQwYWYxNjhjNjQxMTVhNjk0NzY4NGEwZWViNmU3ODA1NmRhY2RhNiIsICJmb3JrX3ZlcnNpb24iOiAiMDAwMDAwMDAiLCAibmV0d29ya19uYW1lIjogIm1haW5uZXQiLCAiZGVwb3NpdF9jbGlfdmVyc2lvbiI6ICIyLjcuMCJ9LCB7InB1YmtleSI6ICJhYjdjOGZkZTM3MzMzMGY2ODAyMTZmNzdlYTE4Y2U4NDY5ZmVlYTI2NWZhMzI5NGQ4ZjdiYWQyNzRjZDk5YTE2Y2Y0ZTVlYWFhNWE1Y2JiMWY0ZWVlNDdlNDgwN2E0MzQiLCAid2l0aGRyYXdhbF9jcmVkZW50aWFscyI6ICIwMGE1NTY0ZmQwYmNlNmY1OGQzODdmY2ZlZDM1N2FhMzdmZTBkZmNiODRmNDM1YWFjM2M5MjU4OWIyZDgxM2Q2IiwgImFtb3VudCI6IDMyMDAwMDAwMDAwLCAic2lnbmF0dXJlIjogImI1MGIzYjUyZDNmNjUyMGZiN2E1YjE0MDcxMGUwOWVkN2RlOWM5ZTRkZDJhMzQ3YTY2MzJmMjRiNjFkOTYxNmFlODBjZDk2NzFlZWMyMDUwMGJmNjg0YjcxMDc3ZWNkZjBiY2IyOTEwNzFhMDEzNjA1OWUzMjAzZGU0MWIwZDQ1ZDMzOGZiMjA1OWZiZWNhYTk5NmE4OGMwNzRlY2VkNWU3NjZlOTRkNmFiM2FjY2QzZDdmYjUzZjk3YTM0YWU4OSIsICJkZXBvc2l0X21lc3NhZ2Vfcm9vdCI6ICI5ZDEzYjBlYzNkNjNhMTcyMzE4MjdkZDBhMzg4Nzg3NGU5MGQwY2Y4ZGI0NWViODY0ZDlmM2U1OTdhMDQ0ZTRmIiwgImRlcG9zaXRfZGF0YV9yb290IjogIjcxZjFjYTMzZWQxYzA5NThkMjY0NTZmMWVmZGE5ZmQ2YzRiNTg0ZTBiOWYyOGExOTQ2ZDQzMGVmMzQyNGVlODYiLCAiZm9ya192ZXJzaW9uIjogIjAwMDAwMDAwIiwgIm5ldHdvcmtfbmFtZSI6ICJtYWlubmV0IiwgImRlcG9zaXRfY2xpX3ZlcnNpb24iOiAiMi43LjAifSwgeyJwdWJrZXkiOiAiOGYxMjAzNGJmYjBkZmU2ZDQ0NzE0YjJmNzc2YmYzNmZiMjM2ZGU3NTk0MGU4NjdkNDIzODkxMjFjNDRhODZjYTA0YzQzNjNhN2E2YjJiZGE3MjQyNDk1ZTdiNzBlZDdkIiwgIndpdGhkcmF3YWxfY3JlZGVudGlhbHMiOiAiMDA1MzgyNzU2ZDE3YTIxNDk3YjcwNDk3OWM1MDBhMTI0NTQ5YmQ5Nzg4OGVkNWY4YTgzYTRhMGIxYTY1NWNmOCIsICJhbW91bnQiOiAzMjAwMDAwMDAwMCwgInNpZ25hdHVyZSI6ICI4NjY4MTMzNWIwYTkyODJhNzJkMDU0YjcwNzdlNGZhMTUzY2JiYjBhY2I4NWZkZGU2NDM4ZmI0YzkwNDNiMTNmN2Q1OGEwYmE3MWUwODQ4ZjBmNjRlYzFhYjMwZTE1MjEwMTdjMzAyNGIwNDRhZGJkMjAyNjBmMjdiZTFkODc5ZGY5NTY4ZmVkZWVmNmMxZjkzYjYyMzk4ZGVkZmE2MjVjZDhkNDQwNzhkMDJjMmMyOTNiZmJiODEwYzZkMzZhNzUiLCAiZGVwb3NpdF9tZXNzYWdlX3Jvb3QiOiAiNDE0NzEwYjBmODMzYjE5ZmRiYTg1M2Q5N2YxYjhlYzNkMmUxY2I2NGEyMzQ1YWU1YmIwMTljYzI2MjZjN2NiMCIsICJkZXBvc2l0X2RhdGFfcm9vdCI6ICI1ZTIyYjdiZjI2MmY1MmJmNzkzOTQyZTg4NTA2YzBlZjZiMGE1NWQ4OGIwMGMzOWY4NjU1NWE2NjA5MTI3NjJmIiwgImZvcmtfdmVyc2lvbiI6ICIwMDAwMDAwMCIsICJuZXR3b3JrX25hbWUiOiAibWFpbm5ldCIsICJkZXBvc2l0X2NsaV92ZXJzaW9uIjogIjIuNy4wIn0sIHsicHVia2V5IjogIjk0Y2UzZTU4ZTM5ZmM4ODRmYWRhYmM4MmJjNzY3YzJjMmVkYzU1Yjc2NzczNjk2NTk1MWZjYjU2ZGExZGVlMTI1MWNiNWY1MzM2ZDg0M2YzMDU1NmJiNjg1M2M2MWYyOSIsICJ3aXRoZHJhd2FsX2NyZWRlbnRpYWxzIjogIjAwYTc2NTM5NDFjODA1NDhmZDdlNTJiZGEyNGM0YjIxODM5ZTIxOTI1ZjBkZWY3MGM2ZTM0MmJkMDc3Njc2MjEiLCAiYW1vdW50IjogMzIwMDAwMDAwMDAsICJzaWduYXR1cmUiOiAiYTFjMTRiZjcwMzExYzg1YzBjY2M1OTExOGNlMDhlNmQ5MjM2ODYzNzVjZmM2ZjY5MzhmMDg2MDk5MTVhOWI4YWE1YWNkOTgxNGMyNTUzYjlkYjJhNTg5NDhhNDdmZjMwMTI2MGNlYjNiOTkwNzE1MmJkNmRhZWU4MmZlNTQ0MzRmNzk0ZjUyMGFmMGE2NTM2MmMwMzYzMzQ4MTRjZmRhMjJjYzk1MGU2NTEyN2VlZDRmOWI4NmJlOWM5NzNjOGRiIiwgImRlcG9zaXRfbWVzc2FnZV9yb290IjogImQ4ZGZkZmU3YWE0YzZiYjM0NjIyYjAxNzYwYzNmYWUzMWM4Mjk2ZDE3ZmU0MjhhYmM3NDc1MmFkY2Q1NzNlNmIiLCAiZGVwb3NpdF9kYXRhX3Jvb3QiOiAiYzAxMTI2ZGFjYzNkOGRkYjYxYTE4YmM1ZTFhOTMxZTFjMmE4Zjg5ODQzMDJkYzJkYjgzOThkZDNiYzBlOTM4OSIsICJmb3JrX3ZlcnNpb24iOiAiMDAwMDAwMDAiLCAibmV0d29ya19uYW1lIjogIm1haW5uZXQiLCAiZGVwb3NpdF9jbGlfdmVyc2lvbiI6ICIyLjcuMCJ9XQ==', 'source': '/opt/validator/ethereum/validator_keys/deposit_data-1709967611.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/deposit_data-1709967611.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/deposit_data-1709967611.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 7060, 'inode': 530794, 'dev': 64768, 'nlink': 1, 'atime': 1709967618.539807, 'mtime': 1709967611.295226, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiMjg5MjNhMzZmYTk1NTI0OTcxYTZjOTY2NzZiMmVlNTZjOGJmYzdiMmUzNDZhZTVlNTkxZjJmZThmOGZjNzRlZiJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjViOWY0ZTkyZDFkOTc3OWFkZDUxNmJjNTBlNDAxN2RlNjY2N2RlMzA1YzJkMjY3MjNkMGUxMGU0ODRkYTE5ODAifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogIjg0OWI0YmNkODY3MGY4MTkwOWJhYWQyN2M0ZDljOGQ5Yjk1NmIxOTE5MmYxMmFmOGZlNTdkMzA3MzFmYTExYTU1YTk3YTFhYjcyYmIxY2ZkNzZjMTQ2MWRjYWJhNzE0YSIsICJwYXRoIjogIm0vMTIzODEvMzYwMC80LzAvMCIsICJ1dWlkIjogIjI1ZDc0OWNhLTg0YWQtNDZhMC1iYWMzLTAxMmE1MTg4NDQzOCIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_4_0_0-1709967603.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_4_0_0-1709967603.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_4_0_0-1709967603.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530787, 'dev': 64768, 'nlink': 1, 'atime': 1709967613.33939, 'mtime': 1709967602.2985046, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiZDFkMjRlNmVjY2E4ZjE3Y2E0NmUxNTQ1NDAxZTA3YjBiM2RkODkzODJmNGNhNmFkZTk3Yjc0NGQ5MzM2Zjg5YyJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjE1NDNhMzIxY2JkYmE2ZmE3NTY4Y2YwMDk0MmNiNmI4MjljMjcyOTdhMTk2ZGU0NzI5N2E1MmU1MTkxMzcwNmQifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogIjk0Y2UzZTU4ZTM5ZmM4ODRmYWRhYmM4MmJjNzY3YzJjMmVkYzU1Yjc2NzczNjk2NTk1MWZjYjU2ZGExZGVlMTI1MWNiNWY1MzM2ZDg0M2YzMDU1NmJiNjg1M2M2MWYyOSIsICJwYXRoIjogIm0vMTIzODEvMzYwMC8xMC8wLzAiLCAidXVpZCI6ICJkY2E1ZTYzZS0yYmRiLTQ0ZWYtOGRkNC1kYzc0NDFlM2VmOWEiLCAidmVyc2lvbiI6IDR9', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_10_0_0-1709967608.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_10_0_0-1709967608.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_10_0_0-1709967608.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 711, 'inode': 530793, 'dev': 64768, 'nlink': 1, 'atime': 1709967617.5757296, 'mtime': 1709967607.290905, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiN2UzNmM0MWVjZjcxYmJkM2RkYmNkMjQ4YTc3YTBmMzBhYjc3ZjhmZGU3ZWRiOWEyNTFjMDI2Y2Q1MTVkOTgwMiJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjA0OGEzZTQ1ZmIxNTdmYjY0OTA3YTZiNjRhMjc2ZWZjNDcyMDE4YTA5M2Q1Njk0YTc0ZWQ3OWU3MTA5NDZjN2QifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogIjkyZjQ2YjBkY2M3ZGIyNGY0OTQ2YjU3NzNiNTUyNWVmYTBiYmIwODEwMDg4NTg4MzIzZDlkZTg0ZjBlNDJmMjJkZjk2Y2JiOTcwNjViNDlhMjAwNmM2NTNlYzgwNjBmNCIsICJwYXRoIjogIm0vMTIzODEvMzYwMC8yLzAvMCIsICJ1dWlkIjogIjNhZWFkNTFkLTIyOTUtNGI3Zi1iNmIxLTJhOGFkZTUxZGYyNCIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_2_0_0-1709967602.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_2_0_0-1709967602.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_2_0_0-1709967602.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530785, 'dev': 64768, 'nlink': 1, 'atime': 1709967611.295226, 'mtime': 1709967601.294424, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiZTZhZGMwOWZhMmZlYzk4NDNkZjJmZTkxYTUxYjViNzNmZTFiOTMxMWZhMzE2MGIwYWRhZjgxMzNhOWQyMTllOCJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjIwZjc3MWFmNDZkY2M1NGMxYTVkMDJiYjE3MzFiY2JhZDYxYjQxNjAxNjQ5OTVlODgwZjlmOGYwN2I2OGQ5ZmEifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogImI4NDhmNzAwY2I1NjU0MmRmMjY2ZDVlZjk5YmUzMzk2ZGEzYzBlMDg5ZTM3MDZkNWI5Y2NlOGRmOGU0NDY1ZGEzZjVmNWVhMzE5MGQyMjgyNTFiMTY5NDhhMWQ4YjZhMSIsICJwYXRoIjogIm0vMTIzODEvMzYwMC82LzAvMCIsICJ1dWlkIjogIjkzNzZlYjVjLTIyNzgtNGI3OS04NjJjLTQzNjgzNmM4ODZjZSIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_6_0_0-1709967605.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_6_0_0-1709967605.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_6_0_0-1709967605.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530789, 'dev': 64768, 'nlink': 1, 'atime': 1709967614.3194685, 'mtime': 1709967604.2906644, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJjcnlwdG8iOiB7ImtkZiI6IHsiZnVuY3Rpb24iOiAic2NyeXB0IiwgInBhcmFtcyI6IHsiZGtsZW4iOiAzMiwgIm4iOiAyNjIxNDQsICJyIjogOCwgInAiOiAxLCAic2FsdCI6ICIyM2Q2YjM2NzgwZmI4NmI3M2Y0YWVkYjVmZWI3ZmQzMGZhYTkxNzJhN2VkY2ExMGZiNTkzMjY3OTZjYzgwNWExIn0sICJtZXNzYWdlIjogIiJ9LCAiY2hlY2tzdW0iOiB7ImZ1bmN0aW9uIjogInNoYTI1NiIsICJwYXJhbXMiOiB7fSwgIm1lc3NhZ2UiOiAiYmNkZGEwMDE3MGFhMjMyMzk2M2Y1MGJlNmVjZGQ4Mzk3MmEyNzRlNzRlMDQxMzU1ZDVkYTczYWU2ZDU4YWZkOSJ9LCAiY2lwaGVyIjogeyJmdW5jdGlvbiI6ICJhZXMtMTI4LWN0ciIsICJwYXJhbXMiOiB7Iml2IjogImU0YmU4NDU0MDIzM2U2MGUyNzg5NGNjZmE5MzI1MzA4In0sICJtZXNzYWdlIjogIjNlZGJjNmIxMTYyNjJkM2I3MTg5NmMwZjI1MTc3YjZmNzliMWYwMWUzZmUxNjNiYjQ0MTg0NDlkMDQ4MGYxZDEifX0sICJkZXNjcmlwdGlvbiI6ICIiLCAicHVia2V5IjogImE1Y2FhYWUzODdmYzBmMGIyNWIyYjIzZTdkY2QwZjgxMWIwMzU2NDhjNmExZTk5ODQ5YzY5MjAyYzYxYzc0NDRiOGU0OTcxOTk3YWYyNGEwM2ZkNWM0ZDRmNzYzNDI2ZSIsICJwYXRoIjogIm0vMTIzODEvMzYwMC83LzAvMCIsICJ1dWlkIjogIjQ1Zjk3NWU3LWY0YjItNDBiYS05M2FhLWJmZDU4MWM3YWMzZSIsICJ2ZXJzaW9uIjogNH0=', 'source': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_7_0_0-1709967605.json', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_7_0_0-1709967605.json'}}, 'failed': False, 'changed': False, 'item': {'path': '/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_7_0_0-1709967605.json', 'mode': '0770', 'isdir': False, 'ischr': False, 'isblk': False, 'isreg': True, 'isfifo': False, 'islnk': False, 'issock': False, 'uid': 1002, 'gid': 0, 'size': 710, 'inode': 530790, 'dev': 64768, 'nlink': 1, 'atime': 1709967615.2955468, 'mtime': 1709967605.4107542, 'ctime': 1709967625.2163424, 'gr_name': 'root', 'pw_name': 'svc_geth', 'wusr': True, 'rusr': True, 'xusr': True, 'wgrp': True, 'rgrp': True, 'xgrp': True, 'woth': False, 'roth': False, 'xoth': False, 'isuid': False, 'isgid': False}, 'ansible_loop_var': 'item'})
+ _____________________
+< TASK [geth : debug] >
+ ---------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01] => {
+    "validator_keystore": {
+        "/opt/validator/ethereum/validator_keys/deposit_data-1709967611.json": [
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "bd3e75cf9f30ae12feefd4ffc0038fff62d628b35fe426a1eead0f4d736eb8d0",
+                "deposit_message_root": "8cbc6f67ac882dbf14f3c98375129448a3edd359af0458ea46cba1ea7e5fc627",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "aeb399bf5648b0e9980c1731824c269631a41320c3d7f730c40587e1a37a5e1c8b5755fd90080a7b3fb90d3fd419c0a7",
+                "signature": "a9b0ff772959e12a3bce73e255b1b1845c2bbe1a21e5b04f2c9ab67594560ffa3ed78140c4ef44624b01d86ed72d62290e97455f5472516661af7eb92ca873f7384887c261e948126860ccd1d299c06681b2850bc4fff7022d0efa9caf168973",
+                "withdrawal_credentials": "00477335d95376155e8f46b2fc1f227335fed21c702c9b457306c68b147333d2"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "1a358600f256e65ac641fb78d6a3da97eba23c623be992284a64e4854c9f5c29",
+                "deposit_message_root": "f484602658d722da27e21350129b4a37b30b9b4c65ef3d96551d50069db2b350",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "92f46b0dcc7db24f4946b5773b5525efa0bbb0810088588323d9de84f0e42f22df96cbb97065b49a2006c653ec8060f4",
+                "signature": "8be3244cc4c5273729d4b282fc553654b228ef610df4d88f7de32b63eab4fd6bce8fab5a83ba9bbcc1628cd6a9fba20306f4152c3ce68f362662bd70012d446f3b29d3f3fd41c39a609b7aa5dc39b846cfb21dace248641617e1b4acc88d3dd6",
+                "withdrawal_credentials": "0057fed9b3b63406002997bed57087aa1cc1a86ed2ff73ad4d331232bb32ec53"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "0a6a1b40daae91b4eee3ab5b4bc1d2daf9802e1677a9d4c8dbbd72b33b959441",
+                "deposit_message_root": "99270d072c293020401592356bb90fa083cf2d839e4726fb7f6cd06db3368f9f",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "9948ea3862b8889636c3caeaa1b9877a12cffca9bf6a1ef2264fa7e69604d55c56b4f519062e6785d21d3c9593c2adcd",
+                "signature": "86fa4977845e26f3b3141b85c6432d016e083c31216cb3bae127ddc680d76c7221866de870555c7f720e4340a54b5f4f1968d70cf1ac6413f5a6da71f63fc2547073b2f0dbd433c4ce047c4605bcd6dc35066d37934e9dda5d06391aef745d22",
+                "withdrawal_credentials": "00d92c890aff72cef6105b778a8f531d9c427ecb5caa19ba21aebc8f336a3c8e"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "65977a83dfcc461c2e6ee8cf74e2df9c5d90e54f631c7aa0bc091184e4f1cd3b",
+                "deposit_message_root": "10349c1814c73cd5483883f4e6f5b0511f629ccbb5a37da611bc0bad572b93c7",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "849b4bcd8670f81909baad27c4d9c8d9b956b19192f12af8fe57d30731fa11a55a97a1ab72bb1cfd76c1461dcaba714a",
+                "signature": "b8162bb85cca7311e2ca620ce99c49d5dee467b3b2e84a632f9c68de75ce1fce0e477daabfc1a73c355f2da2a3de63b10c0bbb8f164f42315938e21bf625d8bfa8343c6517dde9279a2d7ef5ed57c7f6a706cba2c5a9a95816f28b6e5fdd2caa",
+                "withdrawal_credentials": "00b6bbd1c4c7cbb8736070582649b6b133713d388cdeda41f3db6616dc671deb"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "92a995f9f3bae821774a0054bf6bf4d47d2b25771b9ff9cae14e96bc7732753b",
+                "deposit_message_root": "a25ad505942c2e4d7c2fb4f9cd7d8e0d93f35332b3e14bd2340fa53edf9754e1",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "a3c18d49ec861b44daf7700508d493f0df9a0fbc0221801084ced63e104248e0bc2550efa6a1dfbdd2c4f637d53147c4",
+                "signature": "a8466e667e244e55a48bc11c3bd970bdec327e85fea4ba46d7f3b1189bd2ccc6f22632f44f2d137c8d08312457e691bd00d798e60d7313c40fa69a75b6140b4656e3d6dc5e35f65a395b361fde8aea78be9cd46356124212044ccec49e8349ca",
+                "withdrawal_credentials": "00c84dcfe3928d34e2694eb00357244aee37c4368f7a093170023c065a174e7a"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "42d8f1201869259fca6c2b07c90e0de3e64ba08ee4d74ddc824e063b6636f2b7",
+                "deposit_message_root": "5792b55f946953d96bec6cba4c566317715ac25c9b10f94a332fd94a983d278c",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "b848f700cb56542df266d5ef99be3396da3c0e089e3706d5b9cce8df8e4465da3f5f5ea3190d228251b16948a1d8b6a1",
+                "signature": "b7758555e5c7c2d90bbbeab8c149ccb7e1301629d8b7646fc92a942d66565449b0ee49ad1f2ce7d100957593d310381c16fa4f33e9e619933273681b40ea98c099385b41fd770f5aa6de1a35ead75f4c83ddfddad2e20a02e1890aeb42aa6d13",
+                "withdrawal_credentials": "0020fbe3993b542325d416420ad80d6f6996e58696a76f502983a7c14a6b1467"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "fd388442d41ba86d2f951dbffd0af168c64115a6947684a0eeb6e78056dacda6",
+                "deposit_message_root": "8321114ed3e71e73940963a80f92b5bd34f4581f999e9f861864d7f32a5b4822",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "a5caaae387fc0f0b25b2b23e7dcd0f811b035648c6a1e99849c69202c61c7444b8e4971997af24a03fd5c4d4f763426e",
+                "signature": "90b5bd8b8b24e3f361f3b8e2527deea66d93361c8cfb431c77c5f704256792d8068a43b069b72f5ea3912038c0b5747803f52e2035f2a6967a8ab06970b9da85907916e24620e9f70361f3235e4a49909b7f0bc2fc009cb858a26295a8dff67b",
+                "withdrawal_credentials": "0013312131db6e87ffa330dbfc6eab1339e409115243c186fb82071d7ad7d29f"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "71f1ca33ed1c0958d26456f1efda9fd6c4b584e0b9f28a1946d430ef3424ee86",
+                "deposit_message_root": "9d13b0ec3d63a17231827dd0a3887874e90d0cf8db45eb864d9f3e597a044e4f",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "ab7c8fde373330f680216f77ea18ce8469feea265fa3294d8f7bad274cd99a16cf4e5eaaa5a5cbb1f4eee47e4807a434",
+                "signature": "b50b3b52d3f6520fb7a5b140710e09ed7de9c9e4dd2a347a6632f24b61d9616ae80cd9671eec20500bf684b71077ecdf0bcb291071a0136059e3203de41b0d45d338fb2059fbecaa996a88c074eced5e766e94d6ab3accd3d7fb53f97a34ae89",
+                "withdrawal_credentials": "00a5564fd0bce6f58d387fcfed357aa37fe0dfcb84f435aac3c92589b2d813d6"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "5e22b7bf262f52bf793942e88506c0ef6b0a55d88b00c39f86555a660912762f",
+                "deposit_message_root": "414710b0f833b19fdba853d97f1b8ec3d2e1cb64a2345ae5bb019cc2626c7cb0",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "8f12034bfb0dfe6d44714b2f776bf36fb236de75940e867d42389121c44a86ca04c4363a7a6b2bda7242495e7b70ed7d",
+                "signature": "86681335b0a9282a72d054b7077e4fa153cbbb0acb85fdde6438fb4c9043b13f7d58a0ba71e0848f0f64ec1ab30e1521017c3024b044adbd20260f27be1d879df9568fedeef6c1f93b62398dedfa625cd8d44078d02c2c293bfbb810c6d36a75",
+                "withdrawal_credentials": "005382756d17a21497b704979c500a124549bd97888ed5f8a83a4a0b1a655cf8"
+            },
+            {
+                "amount": 32000000000,
+                "deposit_cli_version": "2.7.0",
+                "deposit_data_root": "c01126dacc3d8ddb61a18bc5e1a931e1c2a8f8984302dc2db8398dd3bc0e9389",
+                "deposit_message_root": "d8dfdfe7aa4c6bb34622b01760c3fae31c8296d17fe428abc74752adcd573e6b",
+                "fork_version": "00000000",
+                "network_name": "mainnet",
+                "pubkey": "94ce3e58e39fc884fadabc82bc767c2c2edc55b767736965951fcb56da1dee1251cb5f5336d843f30556bb6853c61f29",
+                "signature": "a1c14bf70311c85c0ccc59118ce08e6d923686375cfc6f6938f08609915a9b8aa5acd9814c2553b9db2a58948a47ff301260ceb3b9907152bd6daee82fe54434f794f520af0a65362c036334814cfda22cc950e65127eed4f9b86be9c973c8db",
+                "withdrawal_credentials": "00a7653941c80548fd7e52bda24c4b21839e21925f0def70c6e342bd07767621"
+            }
+        ],
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_10_0_0-1709967608.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "d1d24e6ecca8f17ca46e1545401e07b0b3dd89382f4ca6ade97b744d9336f89c",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "1543a321cbdba6fa7568cf00942cb6b829c27297a196de47297a52e51913706d",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/10/0/0",
+            "pubkey": "94ce3e58e39fc884fadabc82bc767c2c2edc55b767736965951fcb56da1dee1251cb5f5336d843f30556bb6853c61f29",
+            "uuid": "dca5e63e-2bdb-44ef-8dd4-dc7441e3ef9a",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_1_0_0-1709967601.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "4bf9e900834709210d509d645ecf6fb179f448cc918b2c6c74a38cb2761db263",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "061131833a14a87f13fdbe5dc77d45a3273947ed39312ca94a43e63f46ae7f74",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/1/0/0",
+            "pubkey": "aeb399bf5648b0e9980c1731824c269631a41320c3d7f730c40587e1a37a5e1c8b5755fd90080a7b3fb90d3fd419c0a7",
+            "uuid": "9784be51-db4f-4e56-a77d-3d70737dfc8c",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_2_0_0-1709967602.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "7e36c41ecf71bbd3ddbcd248a77a0f30ab77f8fde7edb9a251c026cd515d9802",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "048a3e45fb157fb64907a6b64a276efc472018a093d5694a74ed79e710946c7d",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/2/0/0",
+            "pubkey": "92f46b0dcc7db24f4946b5773b5525efa0bbb0810088588323d9de84f0e42f22df96cbb97065b49a2006c653ec8060f4",
+            "uuid": "3aead51d-2295-4b7f-b6b1-2a8ade51df24",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_3_0_0-1709967602.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "a47b0d32e64d4804b64d264a29f68e9728868f803623d55e8e7698fdd03ebec4",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "39900e11fe3db9cd11a46869eb810c64e6ef542d1d497f72cadd05ae868d48e2",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/3/0/0",
+            "pubkey": "9948ea3862b8889636c3caeaa1b9877a12cffca9bf6a1ef2264fa7e69604d55c56b4f519062e6785d21d3c9593c2adcd",
+            "uuid": "c690b27e-802c-4357-bff2-8f99407642b9",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_4_0_0-1709967603.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "28923a36fa95524971a6c96676b2ee56c8bfc7b2e346ae5e591f2fe8f8fc74ef",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "5b9f4e92d1d9779add516bc50e4017de6667de305c2d26723d0e10e484da1980",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/4/0/0",
+            "pubkey": "849b4bcd8670f81909baad27c4d9c8d9b956b19192f12af8fe57d30731fa11a55a97a1ab72bb1cfd76c1461dcaba714a",
+            "uuid": "25d749ca-84ad-46a0-bac3-012a51884438",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_5_0_0-1709967604.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "6a7267332ff7037d8d97530adc3fe75d86ac1a3025f9487052a3a6ef447b8d0f",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "18f7d808d1b4bfe54d0c6611be544cb8d57e28ffd0c96292014df11836610161",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/5/0/0",
+            "pubkey": "a3c18d49ec861b44daf7700508d493f0df9a0fbc0221801084ced63e104248e0bc2550efa6a1dfbdd2c4f637d53147c4",
+            "uuid": "d89f74d6-76a0-4135-b2dd-13a62367f9f5",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_6_0_0-1709967605.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "e6adc09fa2fec9843df2fe91a51b5b73fe1b9311fa3160b0adaf8133a9d219e8",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "20f771af46dcc54c1a5d02bb1731bcbad61b4160164995e880f9f8f07b68d9fa",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/6/0/0",
+            "pubkey": "b848f700cb56542df266d5ef99be3396da3c0e089e3706d5b9cce8df8e4465da3f5f5ea3190d228251b16948a1d8b6a1",
+            "uuid": "9376eb5c-2278-4b79-862c-436836c886ce",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_7_0_0-1709967605.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "bcdda00170aa2323963f50be6ecdd83972a274e74e041355d5da73ae6d58afd9",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "3edbc6b116262d3b71896c0f25177b6f79b1f01e3fe163bb4418449d0480f1d1",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/7/0/0",
+            "pubkey": "a5caaae387fc0f0b25b2b23e7dcd0f811b035648c6a1e99849c69202c61c7444b8e4971997af24a03fd5c4d4f763426e",
+            "uuid": "45f975e7-f4b2-40ba-93aa-bfd581c7ac3e",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_8_0_0-1709967606.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "f5fb2ad97d01eb2c7013f0dae8e0745070fc49a5ab426ab17444532d6a6d7909",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "02a87427a6afde78136f1fb033968aa6e1492d5d8d50ba050fc8955e0a52ab2a",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/8/0/0",
+            "pubkey": "ab7c8fde373330f680216f77ea18ce8469feea265fa3294d8f7bad274cd99a16cf4e5eaaa5a5cbb1f4eee47e4807a434",
+            "uuid": "c7ffbc5f-f27a-4f4b-a80b-9188898b9168",
+            "version": 4
+        },
+        "/opt/validator/ethereum/validator_keys/keystore-m_12381_3600_9_0_0-1709967607.json": {
+            "crypto": {
+                "checksum": {
+                    "function": "sha256",
+                    "message": "2d6dcd4f6014c7bf85b2a4a32d5befe9ea0b6e433f1565ca1a860255aa4eeb4c",
+                    "params": {}
+                },
+                "cipher": {
+                    "function": "aes-128-ctr",
+                    "message": "75b7f5e0fc2016729558945277c6391d7cf7025acbf08c2fe541c349d716107a",
+                    "params": {
+                        "iv": "e4be84540233e60e27894ccfa9325308"
+                    }
+                },
+                "kdf": {
+                    "function": "scrypt",
+                    "message": "",
+                    "params": {
+                        "dklen": 32,
+                        "n": 262144,
+                        "p": 1,
+                        "r": 8,
+                        "salt": "23d6b36780fb86b73f4aedb5feb7fd30faa9172a7edca10fb59326796cc805a1"
+                    }
+                }
+            },
+            "description": "",
+            "path": "m/12381/3600/9/0/0",
+            "pubkey": "8f12034bfb0dfe6d44714b2f776bf36fb236de75940e867d42389121c44a86ca04c4363a7a6b2bda7242495e7b70ed7d",
+            "uuid": "1f0d1c36-1f52-49ef-a173-ea551271e2b3",
+            "version": 4
+        }
+    }
+}
+ _____________________________________
+< TASK [geth : Read wallet json file] >
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ ____________________________________
+< TASK [geth : Set gen_wallets fact] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _______________________________________________________
+< TASK [geth : Read keyfile and store contents as fact] >
+ -------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01] => (item={'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'})
+ok: [vm01] => (item={'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'})
+ok: [vm01] => (item={'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'})
+ok: [vm01] => (item={'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'})
+ok: [vm01] => (item={'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'})
+ _________________________________________________
+< TASK [geth : Set fact for each keyfile content] >
+ -------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01] => (item={'content': 'eyJhZGRyZXNzIjoiNzBhNWY2ZDJmMzJmYjFiOTk0OTg2NDRhODM2N2EwZjFjNmJmZjliYyIsImNyeXB0byI6eyJjaXBoZXIiOiJhZXMtMTI4LWN0ciIsImNpcGhlcnRleHQiOiI5YWY4ZTc0ODA1MDNlZTc4MjIzMzIwZjMwMDU2YWU1OWQ4NDM0NzczYjdkZGYzMDM3NGY4NzU2MDczOTdjYzcxIiwiY2lwaGVycGFyYW1zIjp7Iml2IjoiNjlhODA0NDgxMjJmODNjMjQ2MjIzYmUzNTY3NTZiMmIifSwia2RmIjoic2NyeXB0Iiwia2RmcGFyYW1zIjp7ImRrbGVuIjozMiwibiI6MjYyMTQ0LCJwIjoxLCJyIjo4LCJzYWx0IjoiYTFkMTg3NzM2NjhlODMxZmRkYjY4ZjIwYzFkZjljMGEyMDQzYzgzY2JjYmEyZTI3NmQ2ZDAyMTE1OGViZDY2MCJ9LCJtYWMiOiI3ODM0ODg1NTEzMGU4YzNjMDVjN2VhZWIyMjAyNGZlYzhjMDBhOWU3NjQ4ZTQwM2E4MWFlMDk4YjFmNjI4N2M1In0sImlkIjoiNzI5YmRhYTctMzE2OS00NzVlLThlYWYtNjJjN2RmY2IwYzMyIiwidmVyc2lvbiI6M30=', 'source': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}}, 'failed': False, 'changed': False, 'item': {'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJhZGRyZXNzIjoiNjkwMzUyZDI0NzVlZGVkZGFiMjBjZWRhMDc4ZGMyYjE1ZTlmYTkzZCIsImNyeXB0byI6eyJjaXBoZXIiOiJhZXMtMTI4LWN0ciIsImNpcGhlcnRleHQiOiI2YjNjZTVjNWU0ZDJjNWYwMWQ0Y2NiNDU1MjZiMTk1ODNkOTA5MDNiOTI3ZWE5MzAyNDEzNTgyNjA2Zjk0ZWMwIiwiY2lwaGVycGFyYW1zIjp7Iml2IjoiMDg4YjU5ZTkzOGZkOTdlODMzZWMwNmM2ODEyYTlmMTYifSwia2RmIjoic2NyeXB0Iiwia2RmcGFyYW1zIjp7ImRrbGVuIjozMiwibiI6MjYyMTQ0LCJwIjoxLCJyIjo4LCJzYWx0IjoiN2Q2NTZlN2Q0OTE1NmE2MTViODRhNjE5NWMyMTQ2ZGY0YmI1OWFmOTk4NzQzMzI1MjA4NzY5Mjk2MzQ3YzY0NSJ9LCJtYWMiOiIyNGUxMzRmZGZjZjRiYzdhOGI0Njg1YTExYzkyZjlmNWUzMDk0NzJhMTgzM2JjMzUwNjU1ZDdiMDliMDI3Njg2In0sImlkIjoiMzRhNzkyM2EtOGNjMy00NmQ2LTkxZjctNjJiNDY3OTQyMGE0IiwidmVyc2lvbiI6M30=', 'source': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}}, 'failed': False, 'changed': False, 'item': {'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJhZGRyZXNzIjoiNjBlOWE1ZGI4OGE0YWFiNTJhYTI3YjliMDFiMzUxZDBmMTBhZTk2YSIsImNyeXB0byI6eyJjaXBoZXIiOiJhZXMtMTI4LWN0ciIsImNpcGhlcnRleHQiOiIxOTliZTU0YjQ0YzQzMjMyMWY3NDAyODRiOTA3NzQzNTk0NmI5YTAwNGMzNmVmNzQ2NGEyOTkxOGJkZmIxYTc2IiwiY2lwaGVycGFyYW1zIjp7Iml2IjoiNzkzMGM4MDVjOTI3OWU5ZTU1ODU2NmM2ZDNiODU5OGIifSwia2RmIjoic2NyeXB0Iiwia2RmcGFyYW1zIjp7ImRrbGVuIjozMiwibiI6MjYyMTQ0LCJwIjoxLCJyIjo4LCJzYWx0IjoiMTk5MTA1M2I5ZDYyZTA0MDBlNWU4YjgwYzQ1ODdlN2FkYjgwMWUwNmE5MWI2NTE4NzI0YTk5YmZiYTFhYmNmOCJ9LCJtYWMiOiIwNmI5ZmFkYzFjNDBkZjY1YTY1Y2YzMmZmYzJlYmQzMjlhZDZlY2JiODQ1ZTM3MzNiM2M2YzI5YTUwZTU5ZDU3In0sImlkIjoiZDMwZGMwZWUtNzE0NS00YjY1LTk3ZmQtNjA0ZDQxMWZiZmVmIiwidmVyc2lvbiI6M30=', 'source': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}}, 'failed': False, 'changed': False, 'item': {'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJhZGRyZXNzIjoiODkwNGM1NzMwYmE5YWM0MjBlMmFlMTU5ZGUyYTMzNmRmOTY1ZDBkZCIsImNyeXB0byI6eyJjaXBoZXIiOiJhZXMtMTI4LWN0ciIsImNpcGhlcnRleHQiOiIwMGMxZGViZWQyMGFmMzhlNDA3MmU3Njg3Y2Q1MTY3YWQzNzAyOTE3YTJmNmFiYzI4OTkwYWJlMWZlYTQ3YjkxIiwiY2lwaGVycGFyYW1zIjp7Iml2IjoiNzY2N2M1NWZkNDU2OTUyNGJhZWRjNGZmY2Q5OTEzMjYifSwia2RmIjoic2NyeXB0Iiwia2RmcGFyYW1zIjp7ImRrbGVuIjozMiwibiI6MjYyMTQ0LCJwIjoxLCJyIjo4LCJzYWx0IjoiN2E3OWFlYzhjYjNlYzdjNzNjNDU3OTgwNjliMmZlZDRlNzhiZDlmMGRjY2YzNzQ1YzExZjEyOTQ4ZTAwZTgwNiJ9LCJtYWMiOiJiNWZjMjgwOGVkODQ4ODZhNmRhMTlmNzVjOTE5YmI5Y2E4MTViZTRhYzhkZGFjNDlhNmQ5NmQ4MDY2ZGIxYzI5In0sImlkIjoiODU3OTJkYWMtYTQ3My00M2ZjLTk4ZDEtNjE4MzY4ZjhlOThmIiwidmVyc2lvbiI6M30=', 'source': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}}, 'failed': False, 'changed': False, 'item': {'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}, 'ansible_loop_var': 'item'})
+ok: [vm01] => (item={'content': 'eyJhZGRyZXNzIjoiMWJkNzI2OWEwMjcxZThmZDFlZGI2Mjk0OWVhMDU5OWNlMWFmMGExMiIsImNyeXB0byI6eyJjaXBoZXIiOiJhZXMtMTI4LWN0ciIsImNpcGhlcnRleHQiOiI3Y2QyZmZkZGU2ZGVmNDRmNjQ4Zjc4ZjE3M2JjNzY2MGVhZWRhYzRhMjllMTZlNmQ1YzZhNTM0ZjM0YzA0OTRjIiwiY2lwaGVycGFyYW1zIjp7Iml2IjoiODI0NzJmZDRiOWYzZTdhZTFkOGU2YTRlMDgyMzc3Y2EifSwia2RmIjoic2NyeXB0Iiwia2RmcGFyYW1zIjp7ImRrbGVuIjozMiwibiI6MjYyMTQ0LCJwIjoxLCJyIjo4LCJzYWx0IjoiZTJlYTEyNWI3ZDcyMzAzNTc2NGZjZjY1MWVlN2I1NGZjOTk1MGVjMmQ3ZDcxYWYyMmE2MWViZGY3OTQwN2Y5NCJ9LCJtYWMiOiI1MmY4MzliOWNiOTc2YTJjNWQ2YTM5Yzk4NTFhY2FkNzM0ODI0MGU1N2UzZGQzNDcyNmU1ODUxNTEyYTIyMjNmIn0sImlkIjoiMWU3ZGMwYzMtMjlkYS00ODkxLWFjYjctNDM5Yjk2ODZjNGM0IiwidmVyc2lvbiI6M30=', 'source': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12', 'encoding': 'base64', 'invocation': {'module_args': {'src': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}}, 'failed': False, 'changed': False, 'item': {'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}, 'ansible_loop_var': 'item'})
+ ________________________________________________________
+< TASK [geth : Extract signer addresses and concatenate] >
+ --------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01] => (item={'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'})
+ok: [vm01] => (item={'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'})
+ok: [vm01] => (item={'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'})
+skipping: [vm01] => (item={'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}) 
+skipping: [vm01] => (item={'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}) 
+ _____________________________________
+< TASK [geth : Generate genesis JSON] >
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ ______________________________________
+< TASK [geth : Read genesis JSON file] >
+ --------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _______________________________________
+< TASK [geth : Set genesis_config fact] >
+ ---------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ _____________
+< PLAY [Sync] >
+ -------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ________________________
+< TASK [Gathering Facts] >
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+ok: [vm01]
+ ___________________
+< TASK [Sync facts] >
+ -------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ___________________________________________
+< TASK [geth : Set validator_keystore fact] >
+ -------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+ok: [vm02]
+ ____________________________________
+< TASK [geth : Set gen_wallets fact] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+ok: [vm02]
+ _______________________________________
+< TASK [geth : Set genesis_config fact] >
+ ---------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+ok: [vm02]
+ _________________________________
+< TASK [geth : Set keystore fact] >
+ ---------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+ok: [vm02]
+ _______________________________________________
+< TASK [geth : Set group default route ip fact] >
+ -----------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01] => (item=vm01)
+ok: [vm01] => (item=vm02)
+ok: [vm02] => (item=vm01)
+ok: [vm02] => (item=vm02)
+ ______________________________
+< PLAY [Generate geth cluster] >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ________________________
+< TASK [Gathering Facts] >
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+ok: [vm01]
+ ______________________________
+< TASK [Generate geth cluster] >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ___________________________________
+< TASK [geth : Create service user] >
+ -----------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ _____________________________________
+< TASK [geth : Create root directory] >
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm02]
+ok: [vm01]
+ _____________________________________________
+< TASK [geth : Create etherum data directory] >
+ ---------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ ________________________________________
+< TASK [geth : Create genesis directory] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+changed: [vm02]
+ ____________________________________
+< TASK [geth : Create src directory] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ ________________________________________
+< TASK [geth : Create tooling directory] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ok: [vm02]
+ ______________________________________
+< TASK [geth : Create privs directory] >
+ --------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ok: [vm02]
+ ________________________________________
+< TASK [geth : Copy wallet genesis tool] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ok: [vm02]
+ ______________________________________________________
+< TASK [geth : Copy add_remote_peers.service template] >
+ ------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ok: [vm02]
+ _________________________________________
+< TASK [geth : Check if the OS is Ubuntu] >
+ -----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ ____________________________________
+< TASK [geth : Include Ubuntu tasks] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/b/validator_testnet/playbooks/roles/geth/tasks/linux/Ubuntu/main.yml for vm01, vm02
+ ______________________________________________
+< TASK [geth : Copy geth.tgz to root_dir/src/] >
+ ----------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ _________________________________________________
+< TASK [geth : Extract geth.tgz to root_dir/src/] >
+ -------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ _____________________________________________________
+/ TASK [geth : Set file ownership and permissions for \
+\ root_dir/src/geth]                                  /
+ -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ok: [vm02]
+ __________________________________________________
+< TASK [geth : Create symlink /usr/local/bin/geth] >
+ --------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ _____________________________________________________________
+< TASK [geth : Copy staking_deposit_cli.tgz to root_dir/src/] >
+ -------------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ _________________________________________________
+/ TASK [geth : Extract staking_deposit_cli.tgz to \
+\ root_dir/src/]                                  /
+ -------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ _____________________________________________________
+/ TASK [geth : Set file ownership and permissions for \
+\ root_dir/src/deposit]                               /
+ -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [vm01]
+ok: [vm02]
+ _____________________________________________________
+< TASK [geth : Create symlink /usr/local/bin/deposit] >
+ -----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+ok: [vm02]
+ ____________________________________________________________
+/ TASK [geth : Include bootstrap with genesis_config fact is \
+\ undefined]                                                 /
+ ------------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/b/validator_testnet/playbooks/roles/geth/tasks/linux/common/bootstrap.yml for vm01, vm02
+ ____________________________________
+< TASK [geth : Run generate wallets] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ ___________________________________
+< TASK [geth : Run deposit command] >
+ -----------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ ____________________________________________________
+/ TASK [geth : Change ownership and permissions of a \
+\ directory recursively]                             /
+ ----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [vm01]
+changed: [vm02]
+ _____________________________________________
+< TASK [geth : Find validator keystore files] >
+ ---------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ _____________________________________________________________
+< TASK [geth : Read the contents of validator keystore files] >
+ -------------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ ___________________________________________________________
+< TASK [geth : Set fact for each validator keyfile content] >
+ -----------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ _____________________
+< TASK [geth : debug] >
+ ---------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ _____________________________________
+< TASK [geth : Read wallet json file] >
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ ____________________________________
+< TASK [geth : Set gen_wallets fact] >
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ _______________________________________________________
+< TASK [geth : Read keyfile and store contents as fact] >
+ -------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01] => (item={'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}) 
+skipping: [vm01] => (item={'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}) 
+skipping: [vm01] => (item={'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}) 
+skipping: [vm01] => (item={'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}) 
+skipping: [vm01] => (item={'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}) 
+skipping: [vm02] => (item={'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}) 
+skipping: [vm02] => (item={'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}) 
+skipping: [vm02] => (item={'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}) 
+skipping: [vm02] => (item={'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}) 
+skipping: [vm02] => (item={'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}) 
+ _________________________________________________
+< TASK [geth : Set fact for each keyfile content] >
+ -------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm01] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm01] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm01] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm01] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm02] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm02] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm02] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm02] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}, 'ansible_loop_var': 'item'}) 
+skipping: [vm02] => (item={'changed': False, 'skipped': True, 'skip_reason': 'Conditional result was False', 'item': {'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}, 'ansible_loop_var': 'item'}) 
+ ________________________________________________________
+< TASK [geth : Extract signer addresses and concatenate] >
+ --------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01] => (item={'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}) 
+skipping: [vm01] => (item={'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}) 
+skipping: [vm01] => (item={'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}) 
+skipping: [vm01] => (item={'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}) 
+skipping: [vm01] => (item={'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}) 
+skipping: [vm02] => (item={'address': '70A5F6D2f32Fb1B99498644a8367a0f1C6Bff9bC', 'password': 'wutK3eJRLewK', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-47.503871108Z--70a5f6d2f32fb1b99498644a8367a0f1c6bff9bc'}) 
+skipping: [vm02] => (item={'address': '690352D2475EDEDdAb20cEDA078dC2b15e9Fa93d', 'password': 'ruQBzU9TKTlc', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-49.130647375Z--690352d2475ededdab20ceda078dc2b15e9fa93d'}) 
+skipping: [vm02] => (item={'address': '60e9a5db88A4AAb52Aa27b9b01b351d0f10Ae96a', 'password': 'OxD8cJo6YXL6', 'type': 'signer', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-51.041893527Z--60e9a5db88a4aab52aa27b9b01b351d0f10ae96a'}) 
+skipping: [vm02] => (item={'address': '8904c5730ba9AC420e2aE159DE2A336DF965D0Dd', 'password': 'PeH79peBiWVo', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-52.849812330Z--8904c5730ba9ac420e2ae159de2a336df965d0dd'}) 
+skipping: [vm02] => (item={'address': '1Bd7269a0271E8fd1edb62949ea0599ce1AF0a12', 'password': 'S6HOfmBbL7b7', 'type': 'private', 'keyfile_path': '/opt/validator/ethereum/keystore/UTC--2024-03-09T06-59-54.546911452Z--1bd7269a0271e8fd1edb62949ea0599ce1af0a12'}) 
+ _____________________________________
+< TASK [geth : Generate genesis JSON] >
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ ______________________________________
+< TASK [geth : Read genesis JSON file] >
+ --------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ _______________________________________
+< TASK [geth : Set genesis_config fact] >
+ ---------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [vm01]
+skipping: [vm02]
+ ____________
+< PLAY RECAP >
+ ------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+vm01                       : ok=64   changed=16   unreachable=0    failed=0    skipped=23   rescued=0    ignored=1   
+vm02                       : ok=35   changed=6    unreachable=0    failed=0    skipped=16   rescued=0    ignored=1   
+

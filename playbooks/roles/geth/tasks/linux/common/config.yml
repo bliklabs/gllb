@@ -9,6 +9,16 @@
     group: root
     mode: 0660
 
+- name: Write keystore files to disk
+  become: yes
+  copy:
+    content: "{{ item.value | to_nice_json }}"
+    dest: "{{ item.key }}"
+    owner: svc_geth
+    group: root
+    mode: "0660"
+  loop: "{{ validator_keystore | dict2items }}"
+
 - name: Iterate over keystore variable and write keyfile content
   include_tasks: linux/common/write_keyfile.yml
   vars:
@@ -29,6 +39,28 @@
   become: yes
   command: "geth --datadir {{ root_dir }}/ethereum init {{ root_dir }}/genesis/genesis.json"
   ignore_errors: yes
+
+- name: Create list of wallet passwords
+  set_fact:
+    passwords_list: "{{ gen_wallets | map(attribute='password') | list }}"
+
+- name: Delete passwords file for unlock
+  become: yes
+  file:
+    path: "{{ root_dir }}/ethereum/passwords.txt"
+    state: absent
+  ignore_errors: yes
+
+- name: Write wallet passwords to file
+  become: yes
+  lineinfile:
+    path: "{{ root_dir }}/ethereum/passwords.txt"
+    line: "{{ item }}"
+    create: yes
+    mode: "0660"
+    owner: svc_geth
+    group: root
+  loop: "{{ passwords_list }}"
 
 - name: Change ownership and permissions of a directory recursively
   become: yes

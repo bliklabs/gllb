@@ -7,7 +7,6 @@ User=svc_geth
 Restart=always
 ExecStart=/usr/bin/geth \
     --datadir {{ root_dir }}/ethereum \
-    --ipcdisable \
     --syncmode full \
     --port {{ port.port | default(port.port) }} \
     --http \
@@ -19,4 +18,6 @@ ExecStart=/usr/bin/geth \
     --authrpc.port {{ port.authrpc | default(port.authrpc) }} \
     --networkid {{ json.config.chainId | default(json.config.chainId) }} \
     --nat=extip:{{ ansible_default_ipv4.address }} \
+    --unlock "{% for wallet in gen_wallets %}0x{{ wallet.address }}{% if not loop.last %},{% endif %}{% endfor %}" \
+    --password {{ root_dir }}/ethereum/passwords.txt \
     --allow-insecure-unlock

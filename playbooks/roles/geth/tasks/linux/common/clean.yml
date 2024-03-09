@@ -42,6 +42,13 @@
     state: absent
   ignore_errors: yes
 
+- name: Delete rootdir/ethereum/validator_keys directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/validator_keys"
+    state: absent
+  ignore_errors: yes
+
 - name: Delete rootdir/genesis directory
   become: yes
   file:

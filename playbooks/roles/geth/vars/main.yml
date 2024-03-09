@@ -1,6 +1,7 @@
 ---
 
 geth_version: "1.13.14-2bd6bd01"
+staking_deposit_cli_version: "2.7.0"
 root_dir: "/opt/validator"
 peer_interval_check: 10
 port:

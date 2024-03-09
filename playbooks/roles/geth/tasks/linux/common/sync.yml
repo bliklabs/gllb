@@ -1,5 +1,11 @@
 ---
 
+- name: Set validator_keystore fact
+  set_fact:
+    validator_keystore: "{{ hostvars[bootstrap_node]['validator_keystore'] }}"
+    cacheable: true
+  when: "'validator_keystore' not in hostvars[inventory_hostname]"
+
 - name: Set gen_wallets fact
   set_fact:
     gen_wallets: "{{ hostvars[bootstrap_node]['gen_wallets'] }}"

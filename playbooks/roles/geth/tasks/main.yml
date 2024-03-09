@@ -6,7 +6,7 @@
 - name: Include create directory structure under root_dir
   import_tasks: "linux/common/create_directory_structure.yml"
 
-- name: Include create directory structure under root_dir
+- name: Include deploy tooling scripts
   import_tasks: "linux/common/deploy_tooling.yml"
 
 - name: Check if the OS is Ubuntu

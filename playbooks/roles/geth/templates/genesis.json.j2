@@ -1,20 +1,13 @@
 {
   "config": {{ json.config | to_json }},
-  "nonce": "{{ json.nonce }}",
-  "timestamp": "{{ json.timestamp }}",
   "extraData": "0x0000000000000000000000000000000000000000000000000000000000000000{{ concatenate_string }}0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "gasLimit": "{{ json.gasLimit }}",
   "difficulty": "{{ json.difficulty }}",
-  "mixhash": "{{ json.mixhash }}",
-  "coinbase": "{{ json.coinbase }}",
   "alloc": {
 {%- for wallet in gen_wallets %}
     "{{ wallet.address }}": {
       "balance": "{{ wallets.balance | default(wallet.balance) }}"
     }{% if not loop.last %},{% endif %}
 {%- endfor %}
-  },
-  "number": "{{ json.number }}",
-  "gasLimit": "{{ json.gasLimit }}",
-  "gasUsed": "{{ json.gasUsed }}",
-  "parentHash": "{{ json.parentHash }}"
+  }
 }

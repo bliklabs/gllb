@@ -1,6 +1,7 @@
 ---
 
 lighthouse_version: "5.0.0"
+staking_deposit_cli_version: "2.7.0"
 root_dir: "/opt/validator"
 geth_ipv4: "{{ ansible_default_ipv4.address }}"
 execution_jwt: "{{ root_dir }}/ethereum/geth/jwtsecret"
