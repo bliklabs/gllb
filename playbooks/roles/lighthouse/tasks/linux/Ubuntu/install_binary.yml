@@ -30,4 +30,34 @@
     dest: /usr/local/bin/lighthouse
     state: link
 
+- name: Copy lcli.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.copy:
+    src: "files/linux/{{ ansible_architecture }}/Ubuntu/{{ ansible_distribution_version }}/lcli-{{ lighthouse_version | default('lighthouse_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src/"
+    remote_src: false
+
+- name: Extract lcli.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.unarchive:
+    src: "{{ root_dir | default('root_dir') }}/src/lcli-{{ lighthouse_version | default('lighthouse_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src"
+    remote_src: yes
+    creates: "{{ root_dir | default('root_dir') }}/src/lcli"
+
+- name: Set file ownership and permissions for root_dir/src/lcli
+  become: yes
+  ansible.builtin.file:
+    path: "{{ root_dir | default('root_dir') }}/src/lcli"
+    owner: svc_geth
+    group: root
+    mode: "0750"
+
+- name: Create symlink /usr/local/bin/lcli
+  become: yes
+  ansible.builtin.file:
+    src: "{{ root_dir | default('root_dir') }}/src/lcli"
+    dest: /usr/local/bin/lcli
+    state: link
+
 ...

@@ -5,7 +5,7 @@ Description=Geth
 Type=simple
 User=svc_geth
 Restart=always
-ExecStart=/usr/bin/geth \
+ExecStart=/usr/local/bin/geth \
     --datadir {{ root_dir }}/ethereum \
     --syncmode full \
     --port {{ port.port | default(port.port) }} \

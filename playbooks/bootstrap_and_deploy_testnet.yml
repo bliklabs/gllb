@@ -34,11 +34,11 @@
       include_role:
         name: geth
 
-#- name: Install and config lighthouse
-#  hosts: all
-#  tasks:
-#    - name: Install and config lighthouse
-#      include_role:
-#        name: lighthouse
+- name: Install and config lighthouse
+  hosts: all
+  tasks:
+    - name: Install and config lighthouse
+      include_role:
+        name: lighthouse
 
 ...

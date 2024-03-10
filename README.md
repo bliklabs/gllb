@@ -51,7 +51,14 @@ To provision a VM cluster:
 
 ## Configuration
 
-1. Required - ansible-galaxy collection install community.general
+1. Required - 
+   ```
+   sudo apt install ansible docker.io python3-pip -y
+   sudo pip3 install molecule molecule-docker jmespath
+   sudo ansible-galaxy collection install community.general
+   sudo ansible-galaxy collection install community.docker
+   sudo ansible-galaxy collection install ansible.posix
+   ```
 
 2. Files:
    ```
