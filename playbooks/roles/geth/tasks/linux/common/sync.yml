@@ -6,18 +6,6 @@
     cacheable: true
   when: "'enode' not in hostvars[inventory_hostname]"
 
-- name: Set boot enr fact
-  set_fact:
-    enr: "{{ hostvars[bootstrap_node]['enr'] }}"
-    cacheable: true
-  when: "'enr' not in hostvars[inventory_hostname]"
-
-- name: Set boot enr_key fact
-  set_fact:
-    enr_key: "{{ hostvars[bootstrap_node]['enr_key'] }}"
-    cacheable: true
-  when: "'enr_key' not in hostvars[inventory_hostname]"
-
 - name: Set gen_wallets fact
   set_fact:
     gen_wallets: "{{ hostvars[bootstrap_node]['gen_wallets'] }}"

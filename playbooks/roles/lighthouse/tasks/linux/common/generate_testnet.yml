@@ -45,6 +45,7 @@
       --validator-count "{{ genesis_validator_count | default(genesis_validator_count) }}" \
       --interop-genesis-state \
       --force
+  ignore_errors: yes
 
 - name: Create validators
   become: yes
@@ -53,8 +54,9 @@
       --count "{{ genesis_validator_count | default(genesis_validator_count) }}" \
       --base-dir "{{ root_dir | default(root_dir) }}"/ethereum \
       --node-count 1
+  ignore_errors: yes
 
-- name: Create validators
+- name: Create boot enr
   become: yes
   shell: |
     /usr/local/bin/lcli \
@@ -66,6 +68,16 @@
         --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
   when: enr is not defined
 
+- name: Ensure directory exists
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
+    state: directory
+    owner: svc_geth
+    group: root
+    mode: "0660"
+  ignore_errors: yes
+
 - name: Read ENR file content
   become: yes
   slurp:
@@ -75,35 +87,37 @@
 
 - name: Set enr as fact
   set_fact:
-    enr: "- {{ enr_content['content'] | b64decode | string }}"
+    enr: "{{ enr_content['content'] | b64decode | string }}"
     cacheable: yes
   when: enr is not defined
+
+- name: Read key and encode
+  become: yes
+  shell: "cat {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key | base64"
+  register: binary_content
+  when: enr_key is not defined
+
+- name: Save key to fact
+  set_fact:
+    enr_key: "{{ binary_content.stdout }}"
+    cacheable: yes
+  when: enr_key is not defined
 
 - name: Create boot_enr.yaml file
   become: yes
   shell:
     cmd: |
-      echo "{{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml"
+      echo "- {{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml";
+      echo "{{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat";
   when: enr is defined
-
-- name: Read file into blob
-  become: yes
-  slurp:
-    src: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key"
-  register: key_blob
-  when: enr_key is not defined
-
-- name: Save blob as fact
-  set_fact:
-    enr_key: "{{ key_blob['content'] }}"
-    cacheable: yes
-  when: enr_key is not defined
-
-- name: Write blob to disk
-  become: yes
-  copy:
-    content: "{{ enr_key }}"
-    dest: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key"
   ignore_errors: yes
 
+- name: Write decoded binary data to a file
+  become: yes
+  copy:
+    content: "{{ enr_key | b64decode }}"
+    dest: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key"
+    mode: "0644"
+
 ...
+

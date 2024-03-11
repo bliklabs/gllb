@@ -18,8 +18,7 @@
         name: lighthouse
         tasks_from: linux/common/clean.yml
 
-
-- name: Single node bootstrap
+- name: Single node geth bootstrap
   hosts: "{{ groups['all'][0] }}"
   tasks:
     - name: Bootstrap node
@@ -43,6 +42,24 @@
     - name: Generate geth cluster
       include_role:
         name: geth
+
+- name: Single node lighthouse enr bootstrap
+  hosts: "{{ groups['all'][0] }}"
+  tasks:
+    - name: Bootstrap node
+      include_role:
+        name: lighthouse
+
+- name: Sync
+  hosts: all
+  tasks:
+
+    - name: Sync facts
+      include_role:
+        name: lighthouse
+        tasks_from: linux/common/sync.yml
+      vars:
+        bootstrap_node: "{{ groups['all'][0] }}"
 
 - name: Install and config lighthouse
   hosts: all

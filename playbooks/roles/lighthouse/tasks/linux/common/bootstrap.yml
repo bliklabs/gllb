@@ -1,0 +1,38 @@
+---
+
+- name: Create lighthouse boot node config
+  become: yes
+  shell: |
+    /usr/local/bin/lcli generate-bootnode-enr \
+        --ip {{ ansible_default_ipv4.address }} \
+        --udp-port {{ port.port | default(port.port) }} \
+        --tcp-port {{ port.port | default(port.port) }} \
+        --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
+        --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
+  ignore_errors: yes
+
+- name: Read ENR file content
+  become: yes
+  shell: "cat {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat | base64 "
+  register: enr_content
+  when: enr is not defined
+
+- name: Set ENR as fact
+  set_fact:
+    enr: "{{ enr_content.stdout }}"
+    cacheable: yes
+  when: enr is not defined
+
+- name: Read key and encode
+  become: yes
+  shell: "cat {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key | base64"
+  register: binary_content
+  when: enr_key is not defined
+
+- name: Save key to fact
+  set_fact:
+    enr_key: "{{ binary_content.stdout }}"
+    cacheable: yes
+  when: enr_key is not defined
+
+...
