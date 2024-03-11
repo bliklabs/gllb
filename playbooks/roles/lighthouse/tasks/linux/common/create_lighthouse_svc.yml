@@ -1,6 +1,6 @@
 ---
 
-- name: Copy lighthouse.service template
+- name: Copy lighthouse-boot.service template
   become: yes
   template:
     src: lighthouse-boot.service.j2
@@ -12,7 +12,7 @@
     src: lighthouse.service.j2
     dest: /lib/systemd/system/lighthouse.service
 
-- name: Copy lighthouse.service template
+- name: Copy lighthouse-vc.service template
   become: yes
   template:
     src: lighthouse-vc.service.j2
@@ -26,7 +26,7 @@
 - name: Recursively change ownership and mode of /opt/validator directory
   become: yes
   file:
-    path: "{{ root_dir | default(root_dir) }}/ethereum/bootnode"
+    path: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
     owner: svc_geth
     group: root
     mode: "0660"

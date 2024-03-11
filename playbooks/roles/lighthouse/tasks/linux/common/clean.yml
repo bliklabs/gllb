@@ -50,10 +50,10 @@
   command: killall -9 geth
   ignore_errors: yes
 
-- name: Delete rootdir/ethereum/bootnode directory
+- name: Delete rootdir/ethereum/bootstrap_enr directory
   become: yes
   file:
-    path: "{{ root_dir | default(root_dir) }}/ethereum/bootnode"
+    path: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
     state: absent
   ignore_errors: yes
 

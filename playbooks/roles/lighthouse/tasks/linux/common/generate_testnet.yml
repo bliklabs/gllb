@@ -1,5 +1,5 @@
 ---
- 
+
 - name: Make HTTP request
   uri:
     url: "http://{{ ansible_default_ipv4.address }}:8552"
@@ -16,29 +16,29 @@
 - shell: date +%s
   register: now_result
 
-- name: Set GENESIS_TIME variable 
+- name: Set GENESIS_TIME variable
   shell: expr "{{ now_result.stdout }}" + "{{ genesis_delay | default(genesis_delay) }}"
   register: genesis_time_result
 
 - name: Create testnet
   become: yes
   shell: |
-    /usr/local/bin/lcli new-testnet \ 
-      --spec "{{ spec_preset | default(spec_preset) }}" \ 
-      --deposit-contract-address "{{ deposit_contract_address | default(deposit_contract_address) }}" \ 
+    /usr/local/bin/lcli new-testnet \
+      --spec "{{ spec_preset | default(spec_preset) }}" \
+      --deposit-contract-address "{{ deposit_contract_address | default(deposit_contract_address) }}" \
       --testnet-dir "{{ testnet_dir | default(testnet_dir) }}" \
       --min-genesis-active-validator-count "{{ genesis_validator_count | default(genesis_validator_count) }}" \
       --min-genesis-time "{{ genesis_time_result.stdout }}" \
-      --genesis-delay "{{ genesis_delay | default(genesis_delay) }}" \ 
-      --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \ 
+      --genesis-delay "{{ genesis_delay | default(genesis_delay) }}" \
+      --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
       --altair-fork-epoch "{{ altair_fork_epoch | default(altair_fork_epoch) }}" \
-      --bellatrix-fork-epoch "{{ bellatrix_fork_epoch | default(bellatrix_fork_epoch) }}" \ 
+      --bellatrix-fork-epoch "{{ bellatrix_fork_epoch | default(bellatrix_fork_epoch) }}" \
       --capella-fork-epoch "{{ capella_fork_epoch | default(capella_fork_epoch) }}" \
       --deneb-fork-epoch "{{ deneb_fork_epoch | default(deneb_fork_epoch) }}" \
       --ttd "{{ ttd | default(ttd) }}" \
-      --eth1-block-hash "{{ block_hash_result }}" \ 
+      --eth1-block-hash "{{ block_hash_result }}" \
       --eth1-id "{{ chainid | default(chainid) }}" \
-      --eth1-follow-distance 128 \ 
+      --eth1-follow-distance 128 \
       --seconds-per-slot "{{ seconds_per_slot | default(seconds_per_slot) }}" \
       --seconds-per-eth1-block "{{ seconds_per_eth1_block | default(seconds_per_eth1_block) }}" \
       --proposer-score-boost "{{ proposer_score_boost | default(proposer_score_boost) }}" \
@@ -63,12 +63,47 @@
         --udp-port "{{ port.port | default(port.port) }}" \
         --tcp-port "{{ port.port | default(port.port) }}" \
         --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
-        --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootnode"
+        --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
+  when: enr is not defined
+
+- name: Read ENR file content
+  become: yes
+  slurp:
+    src: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat"
+  register: enr_content
+  when: enr is not defined
+
+- name: Set enr as fact
+  set_fact:
+    enr: "- {{ enr_content['content'] | b64decode | string }}"
+    cacheable: yes
+  when: enr is not defined
 
 - name: Create boot_enr.yaml file
   become: yes
-  shell: 
+  shell:
     cmd: |
-      echo "- $(cat {{ root_dir | default(root_dir) }}/ethereum/bootnode/enr.dat)" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml"
+      echo "{{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml"
+  when: enr is defined
+
+- name: Read file into blob
+  become: yes
+  slurp:
+    src: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key"
+  register: key_blob
+  when: enr_key is not defined
+
+- name: Save blob as fact
+  set_fact:
+    enr_key: "{{ key_blob['content'] }}"
+    cacheable: yes
+  when: enr_key is not defined
+
+- name: Write blob to disk
+  become: yes
+  copy:
+    content: "{{ enr_key }}"
+    dest: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key"
+  ignore_errors: yes
 
 ...

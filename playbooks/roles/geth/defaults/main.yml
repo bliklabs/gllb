@@ -1,13 +1,15 @@
 ---
 
 geth_version: "1.13.14-2bd6bd01"
-staking_deposit_cli_version: "2.7.0"
+lighthouse_version: "5.0.0"
 root_dir: "/opt/validator"
 peer_interval_check: 10
+genesis_fork_version: "0x42424242"
 port:
   port: 30304
   authrpc: 8551
   http: 8552
+  enr: 9000
 wallets:
   num_total: 7
   num_signers: 3

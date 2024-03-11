@@ -27,7 +27,7 @@
 - name: Enable geth-boot.service
   become: yes
   systemd:
-    name: geth
+    name: geth-boot
     enabled: yes
     state: started
 

@@ -30,34 +30,58 @@
     dest: /usr/local/bin/geth
     state: link
 
-#- name: Copy staking_deposit_cli.tgz to root_dir/src/
-#  become: yes
-#  ansible.builtin.copy:
-#    src: "files/linux/{{ ansible_architecture }}/Ubuntu/{{ ansible_distribution_version }}/staking_deposit_cli-{{ staking_deposit_cli_version | default('staking_deposit_cli_version') }}.tgz"
-#    dest: "{{ root_dir | default('root_dir') }}/src/"
-#    remote_src: false
+- name: Copy lcli.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.copy:
+    src: "files/linux/{{ ansible_architecture }}/Ubuntu/{{ ansible_distribution_version }}/lcli-{{ lighthouse_version | default('lighthouse_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src/"
+    remote_src: false
+  ignore_errors: yes
 
-#- name: Extract staking_deposit_cli.tgz to root_dir/src/
-#  become: yes
-#  ansible.builtin.unarchive:
-#    src: "{{ root_dir | default('root_dir') }}/src/staking_deposit_cli-{{ staking_deposit_cli_version | default('staking_deposit_cli_version') }}.tgz"
-#    dest: "{{ root_dir | default('root_dir') }}/src"
-#    remote_src: yes
-#    creates: "{{ root_dir | default('root_dir') }}/src/deposit"
+- name: Extract lcli.tgz to root_dir/src/
+  become: yes
+  ansible.builtin.unarchive:
+    src: "{{ root_dir | default('root_dir') }}/src/lcli-{{ lighthouse_version | default('lighthouse_version') }}.tgz"
+    dest: "{{ root_dir | default('root_dir') }}/src"
+    remote_src: yes
+    creates: "{{ root_dir | default('root_dir') }}/src/lcli"
+  ignore_errors: yes
 
-#- name: Set file ownership and permissions for root_dir/src/deposit
-#  become: yes
-#  ansible.builtin.file:
-#    path: "{{ root_dir | default('root_dir') }}/src/deposit"
-#    owner: svc_geth
-#    group: root
-#    mode: "0750"
+- name: Set file ownership and permissions for root_dir/src/lcli
+  become: yes
+  ansible.builtin.file:
+    path: "{{ root_dir | default('root_dir') }}/src/lcli"
+    owner: svc_geth
+    group: root
+    mode: "0750"
+  ignore_errors: yes
 
-#- name: Create symlink /usr/local/bin/deposit
-#  become: yes
-#  ansible.builtin.file:
-#    src: "{{ root_dir | default('root_dir') }}/src/deposit"
-#    dest: /usr/local/bin/deposit
-#    state: link
+- name: Create symlink /usr/local/bin/lcli
+  become: yes
+  ansible.builtin.file:
+    src: "{{ root_dir | default('root_dir') }}/src/lcli"
+    dest: /usr/local/bin/lcli
+    state: link
+  ignore_errors: yes
+
+- name: Add Ethereum PPA repository
+  become: yes
+  apt_repository:
+    repo: "ppa:ethereum/ethereum"
+    state: present
+
+- name: Install bootnode package
+  become: yes
+  apt:
+    name: bootnode
+    state: present
+    update_cache: yes
+    install_recommends: no
+    force_apt_get: yes
+    dpkg_options: 'force-confnew'
+    update_cache: yes
+    allow_unauthenticated: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
 
 ...

@@ -6,19 +6,19 @@ Type=simple
 User=root
 Restart=always
 ExecStart=/usr/local/bin/lighthouse bn \
-    --datadir "{{ root_dir | default(root_dir) }}/ethereum/node_1" \
-    --testnet-dir "{{ root_dir | default(root_dir) }}/ethereum/testnet" \
+    --datadir {{ root_dir | default(root_dir) }}/ethereum/node_1 \
+    --testnet-dir {{ root_dir | default(root_dir) }}/ethereum/testnet \
     --enable-private-discovery \
     --disable-peer-scoring \
     --staking \
-    --enr-address "{{ bootnode_ip | default(ansible_default_ipv4.address) }}" \
-    --enr-tcp-port "{{ port.port | default(port.port) }}" \
-    --enr-udp-port "{{ port.port | default(port.port) }}" \
-    --enr-quic-port "{{ port.quic | default(port.quic) }}" \
-    --http-address "{{ ansible_default_ipv4.address }}" \
-    --http-port "{{ port.http | default(port.http) }}" \
+    --enr-address {{ bootnode_ip | default(ansible_default_ipv4.address) }} \
+    --enr-tcp-port {{ port.port | default(port.port) }} \
+    --enr-udp-port {{ port.port | default(port.port) }} \
+    --enr-quic-port {{ port.quic | default(port.quic) }} \
+    --http-address {{ ansible_default_ipv4.address }} \
+    --http-port {{ port.http | default(port.http) }} \
     --disable-packet-filter \
     --target-peers 1 \
-    --execution-endpoint "http://{{ ansible_default_ipv4.address }}:{{ port.gethrpc | default(port.gethrpm) }}" \
-    --execution-jwt "{{ root_dir }}/ethereum/geth/jwtsecret" \
+    --execution-endpoint http://{{ ansible_default_ipv4.address }}:{{ port.gethrpc | default(port.gethrpm) }} \
+    --execution-jwt {{ root_dir }}/ethereum/geth/jwtsecret \
     --http-allow-sync-stalled

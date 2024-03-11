@@ -1,6 +1,45 @@
 ---
 
+- name: Create validators
+  become: yes
+  shell: |
+    /usr/local/bin/lcli \
+        generate-bootnode-enr \
+        --ip "{{ ansible_default_ipv4.address }}" \
+        --udp-port "{{ port.enr | default(port.enr) }}" \
+        --tcp-port "{{ port.enr | default(port.enr) }}" \
+        --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
+        --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
+  when: enr is not defined
+
+- name: Read ENR file content
+  become: yes
+  slurp:
+    src: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat"
+  register: enr_content
+  when: enr is not defined
+
+- name: Set ENR as fact
+  set_fact:
+    enr: "- {{ enr_content['content'] | b64decode | string }}"
+    cacheable: yes
+  when: enr is not defined
+
+- name: Read file into blob
+  become: yes
+  slurp:
+    src: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key"
+  register: key_blob
+  when: enr_key is not defined
+
+- name: Save blob as fact
+  set_fact:
+    enr_key: "{{ key_blob['content'] }}"
+    cacheable: yes
+  when: enr_key is not defined
+
 - name: Run bootnode command and set enode fact
+  become: yes
   command: "bootnode -nodekeyhex 02fd74636e96a8ffac8e7b01b0de8dea94d6bcf4989513b38cf59eb32163ff91 --nat=extip:{{ ansible_default_ipv4.address }} -writeaddress"
   register: bootnode_output
   ignore_errors: true

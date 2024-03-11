@@ -6,8 +6,8 @@ Type=simple
 User=root
 Restart=always
 ExecStart=/usr/local/bin/lighthouse boot_node \
-    --testnet-dir "{{ root_dir | default(root_dir) }}/ethereum/testnet" \
-    --port "{{ chainid | default(chainid) }}" \
-    --listen-address "{{ ansible_default_ipv4.address }}" \
+    --testnet-dir {{ root_dir | default(root_dir) }}/ethereum/testnet \
+    --port {{ chainid | default(chainid) }} \
+    --listen-address {{ ansible_default_ipv4.address }} \
     --disable-packet-filter \
-    --network-dir "{{ root_dir | default(root_dir) }}/ethereum/bootnode"
+    --network-dir {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr

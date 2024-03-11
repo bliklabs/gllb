@@ -9,16 +9,6 @@
     group: root
     mode: 0660
 
-#- name: Write keystore files to disk
-#  become: yes
-#  copy:
-#    content: "{{ item.value | to_nice_json }}"
-#    dest: "{{ item.key }}"
-#    owner: svc_geth
-#    group: root
-#    mode: "0660"
-#  loop: "{{ validator_keystore | dict2items }}"
-
 - name: Iterate over keystore variable and write keyfile content
   include_tasks: linux/common/write_keyfile.yml
   vars:
@@ -30,7 +20,7 @@
 - name: Change keystore ownership
   become: yes
   command: "chown -R svc_geth:root {{ root_dir }}/ethereum/keystore"
-    
+
 - name: Change permissions
   become: yes
   command: "chmod -R 770 {{ root_dir }}/ethereum/keystore"
