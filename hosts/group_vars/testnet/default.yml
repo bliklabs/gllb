@@ -1,4 +1,5 @@
 ---
 ansible_user: "ansible"
 ansible_become_method: "sudo"
+bootnode_ip: "192.168.0.102"
 ...

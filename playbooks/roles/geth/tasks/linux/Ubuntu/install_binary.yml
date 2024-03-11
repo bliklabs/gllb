@@ -30,34 +30,34 @@
     dest: /usr/local/bin/geth
     state: link
 
-- name: Copy staking_deposit_cli.tgz to root_dir/src/
-  become: yes
-  ansible.builtin.copy:
-    src: "files/linux/{{ ansible_architecture }}/Ubuntu/{{ ansible_distribution_version }}/staking_deposit_cli-{{ staking_deposit_cli_version | default('staking_deposit_cli_version') }}.tgz"
-    dest: "{{ root_dir | default('root_dir') }}/src/"
-    remote_src: false
+#- name: Copy staking_deposit_cli.tgz to root_dir/src/
+#  become: yes
+#  ansible.builtin.copy:
+#    src: "files/linux/{{ ansible_architecture }}/Ubuntu/{{ ansible_distribution_version }}/staking_deposit_cli-{{ staking_deposit_cli_version | default('staking_deposit_cli_version') }}.tgz"
+#    dest: "{{ root_dir | default('root_dir') }}/src/"
+#    remote_src: false
 
-- name: Extract staking_deposit_cli.tgz to root_dir/src/
-  become: yes
-  ansible.builtin.unarchive:
-    src: "{{ root_dir | default('root_dir') }}/src/staking_deposit_cli-{{ staking_deposit_cli_version | default('staking_deposit_cli_version') }}.tgz"
-    dest: "{{ root_dir | default('root_dir') }}/src"
-    remote_src: yes
-    creates: "{{ root_dir | default('root_dir') }}/src/deposit"
+#- name: Extract staking_deposit_cli.tgz to root_dir/src/
+#  become: yes
+#  ansible.builtin.unarchive:
+#    src: "{{ root_dir | default('root_dir') }}/src/staking_deposit_cli-{{ staking_deposit_cli_version | default('staking_deposit_cli_version') }}.tgz"
+#    dest: "{{ root_dir | default('root_dir') }}/src"
+#    remote_src: yes
+#    creates: "{{ root_dir | default('root_dir') }}/src/deposit"
 
-- name: Set file ownership and permissions for root_dir/src/deposit
-  become: yes
-  ansible.builtin.file:
-    path: "{{ root_dir | default('root_dir') }}/src/deposit"
-    owner: svc_geth
-    group: root
-    mode: "0750"
+#- name: Set file ownership and permissions for root_dir/src/deposit
+#  become: yes
+#  ansible.builtin.file:
+#    path: "{{ root_dir | default('root_dir') }}/src/deposit"
+#    owner: svc_geth
+#    group: root
+#    mode: "0750"
 
-- name: Create symlink /usr/local/bin/deposit
-  become: yes
-  ansible.builtin.file:
-    src: "{{ root_dir | default('root_dir') }}/src/deposit"
-    dest: /usr/local/bin/deposit
-    state: link
+#- name: Create symlink /usr/local/bin/deposit
+#  become: yes
+#  ansible.builtin.file:
+#    src: "{{ root_dir | default('root_dir') }}/src/deposit"
+#    dest: /usr/local/bin/deposit
+#    state: link
 
 ...

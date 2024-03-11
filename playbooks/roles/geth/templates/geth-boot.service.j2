@@ -1,0 +1,10 @@
+[Unit]
+Description=Geth-boot
+
+[Service]
+Type=simple
+User=svc_geth
+Restart=always
+ExecStart=/usr/bin/bootnode \
+    -nodekeyhex 02fd74636e96a8ffac8e7b01b0de8dea94d6bcf4989513b38cf59eb32163ff91 \
+    -nat=extip:{{ ansible_default_ipv4.address }}

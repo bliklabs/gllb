@@ -16,6 +16,9 @@
   when: is_ubuntu
 
 - name: Include enable lighthouse beacon
+  import_tasks: "linux/common/generate_testnet.yml"
+
+- name: Include enable lighthouse beacon
   import_tasks: "linux/common/create_lighthouse_svc.yml"
 
 ...

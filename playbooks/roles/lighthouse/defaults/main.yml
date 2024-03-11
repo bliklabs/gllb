@@ -1,68 +1,29 @@
 ---
 
 lighthouse_version: "5.0.0"
-staking_deposit_cli_version: "2.7.0"
 root_dir: "/opt/validator"
-geth_ipv4: "{{ ansible_default_ipv4.address }}"
+testnet_dir: "{{ root_dir }}/ethereum/testnet"
 execution_jwt: "{{ root_dir }}/ethereum/geth/jwtsecret"
 port:
   port: 14000
+  quic: 14001
   http: 15000
-  beaconhttp: 15000
   gethrpc: 8551
-json:
-  config:
-    config_name: "mainnet"
-    preset_base: "mainnet"
-    terminal_total_difficulty: "0"
-    terminal_block_hash: "0x0000000000000000000000000000000000000000000000000000000000000000"
-    terminal_block_hash_activation_epoch: "18446744073709551615"
-    safe_slots_to_import_optimistically: "128"
-    min_genesis_active_validator_count: "80"
-    min_genesis_time: "1709879730"
-    genesis_fork_version: "0x42424242"
-    genesis_delay: "0"
-    altair_fork_version: "0x01000000"
-    altair_fork_epoch: "0"
-    bellatrix_fork_version: "0x02000000"
-    bellatrix_fork_epoch: "0"
-    capella_fork_version: "0x03000000"
-    capella_fork_epoch: "1"
-    deneb_fork_version: "0x04000000"
-    deneb_fork_epoch: "2"
-    seconds_per_slot: "3"
-    seconds_per_eth1_block: "3"
-    min_validator_withdrawability_delay: "256"
-    shard_committee_period: "256"
-    eth1_follow_distance: "128"
-    subnets_per_node: "2"
-    inactivity_score_bias: "4"
-    inactivity_score_recovery_rate: "16"
-    ejection_balance: "16000000000"
-    min_per_epoch_churn_limit: "4"
-    max_per_epoch_activation_churn_limit: "8"
-    churn_limit_quotient: "65536"
-    proposer_score_boost: "40"
-    deposit_chain_id: "4242"
-    deposit_network_id: "4242"
-    deposit_contract_address: "0x4242424242424242424242424242424242424242"
-    gossip_max_size: "10485760"
-    max_request_blocks: "1024"
-    epochs_per_subnet_subscription: "256"
-    min_epochs_for_block_requests: "33024"
-    max_chunk_size: "10485760"
-    ttfb_timeout: "5"
-    resp_timeout: "10"
-    attestation_propagation_slot_range: "32"
-    maximum_gossip_clock_disparity_millis: "500"
-    message_domain_invalid_snappy: "0x00000000"
-    message_domain_valid_snappy: "0x01000000"
-    attestation_subnet_extra_bits: "0"
-    attestation_subnet_prefix_bits: "6"
-    attestation_subnet_shuffling_prefix_bits: "3"
-    max_request_blocks_deneb: "128"
-    max_request_blob_sidecars: "768"
-    min_epochs_for_blob_sidecars_requests: "4096"
-    blob_sidecar_subnet_count: "6"
-                                   
+mnemonic_phrase: "vast thought differ pull jewel broom cook wrist tribe word before omit"
+deposit_contract_address: "4242424242424242424242424242424242424242"
+genesis_fork_version: "0x42424242"
+validator_count: 10
+genesis_validator_count: 80
+genesis_delay: 0
+chainid: 1337
+altair_fork_epoch: 0
+bellatrix_fork_epoch: 0
+capella_fork_epoch: 1
+deneb_fork_epoch: 2
+ttd: 0
+spec_preset: mainnet
+seconds_per_slot: 3
+seconds_per_eth1_block: 3
+proposer_score_boost: 40
+                            
 ...

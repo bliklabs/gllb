@@ -1,5 +1,11 @@
 ---
 
+- name: Copy geth-boot.service template
+  become: yes
+  template:
+    src: geth-boot.service.j2
+    dest: /lib/systemd/system/geth-boot.service
+
 - name: Copy geth.service template
   become: yes
   template:
@@ -17,6 +23,13 @@
   become: true
   systemd:
     daemon_reload: true
+
+- name: Enable geth-boot.service
+  become: yes
+  systemd:
+    name: geth
+    enabled: yes
+    state: started
 
 - name: Enable geth.service
   become: yes

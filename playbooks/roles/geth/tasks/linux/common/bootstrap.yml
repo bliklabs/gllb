@@ -1,60 +1,20 @@
 ---
 
+- name: Run bootnode command and set enode fact
+  command: "bootnode -nodekeyhex 02fd74636e96a8ffac8e7b01b0de8dea94d6bcf4989513b38cf59eb32163ff91 --nat=extip:{{ ansible_default_ipv4.address }} -writeaddress"
+  register: bootnode_output
+  ignore_errors: true
+  when: genesis_config is not defined
+
+- set_fact:
+    enode: "enode://{{ bootnode_output.stdout }}@{{ ansible_default_ipv4.address }}:30301"
+    cacheable: yes
+  when: genesis_config is not defined
+
 - name: Run generate wallets
   command: "/usr/bin/env python3 {{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py {{ wallets.num_total | default(wallets.num_total) }} {{ wallets.num_signers | default(wallets.num_signers) }} {{ root_dir | default(root_dir) }}"
   become: yes
   when: genesis_config is not defined
-
-- name: Run deposit command
-  become: yes
-  command: /usr/local/bin/deposit --language english --non_interactive existing-mnemonic --num_validators 10 --mnemonic="abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about" --validator_start_index 1 --chain mainnet --keystore_password "thereisnospoon" --folder "{{ root_dir | default(root_dir) }}"/ethereum
-  when: genesis_config is not defined
-
-- name: Change ownership and permissions of a directory recursively
-  become: yes
-  file:
-    path: "{{ root_dir }}/ethereum/validator_keys"
-    recurse: yes
-    owner: svc_geth
-    group: root
-    mode: "770"
-
-- name: Find validator keystore files
-  become: yes
-  find:
-    paths: "{{ root_dir }}/ethereum/validator_keys"
-    patterns: "*.json"
-  register: keystore_files
-  when: genesis_config is not defined
-
-- name: Read the contents of validator keystore files
-  become: yes
-  slurp:
-    src: "{{ item.path }}"
-  register: keystore_file_content
-  loop: "{{ keystore_files.files }}"
-  when: genesis_config is not defined
-
-- name: Set fact for each validator keyfile content
-  become: yes
-  set_fact:
-    validator_keystore: "{{ validator_keystore | default({}) | combine({item.item.path: item.content | b64decode | from_json }) }}"
-    cacheable: true
-  loop: "{{ keystore_file_content.results }}"
-  when: genesis_config is not defined
-
-- debug:
-    var: validator_keystore
-  when: genesis_config is not defined
-
-#- name: Change ownership and permissions of a directory recursively
-#  become: yes
-#  file:
-#    path: "{{ root_dir }}/ethereum/validators"
-#    recurse: yes
-#    owner: svc_geth
-#    group: root
-#    mode: "770"
 
 - name: Read wallet json file
   become: yes

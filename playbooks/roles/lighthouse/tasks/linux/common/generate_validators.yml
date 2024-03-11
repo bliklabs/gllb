@@ -1,6 +1,0 @@
----
-
-#- name: Run deposit command
-#  command: "yes | /usr/local/bin/deposit --language english --non_interactive existing-mnemonic --num_validators 80 --mnemonic='abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about' --validator_start_index 1 --chain mainnet --keystore_password 'nopasswd' --folder {{ root_dir | default(root_dir) }}/ethereum/validators"
-
-...

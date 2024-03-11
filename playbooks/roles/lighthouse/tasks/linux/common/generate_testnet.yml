@@ -1,0 +1,74 @@
+---
+ 
+- name: Make HTTP request
+  uri:
+    url: "http://{{ ansible_default_ipv4.address }}:8552"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    body: '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x0", false],"id":1}'
+    return_content: yes
+  register: response
+
+- set_fact:
+    block_hash_result: "{{ response.json.result.hash | regex_replace('^0x', '') }}"
+
+- shell: date +%s
+  register: now_result
+
+- name: Set GENESIS_TIME variable 
+  shell: expr "{{ now_result.stdout }}" + "{{ genesis_delay | default(genesis_delay) }}"
+  register: genesis_time_result
+
+- name: Create testnet
+  become: yes
+  shell: |
+    /usr/local/bin/lcli new-testnet \ 
+      --spec "{{ spec_preset | default(spec_preset) }}" \ 
+      --deposit-contract-address "{{ deposit_contract_address | default(deposit_contract_address) }}" \ 
+      --testnet-dir "{{ testnet_dir | default(testnet_dir) }}" \
+      --min-genesis-active-validator-count "{{ genesis_validator_count | default(genesis_validator_count) }}" \
+      --min-genesis-time "{{ genesis_time_result.stdout }}" \
+      --genesis-delay "{{ genesis_delay | default(genesis_delay) }}" \ 
+      --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \ 
+      --altair-fork-epoch "{{ altair_fork_epoch | default(altair_fork_epoch) }}" \
+      --bellatrix-fork-epoch "{{ bellatrix_fork_epoch | default(bellatrix_fork_epoch) }}" \ 
+      --capella-fork-epoch "{{ capella_fork_epoch | default(capella_fork_epoch) }}" \
+      --deneb-fork-epoch "{{ deneb_fork_epoch | default(deneb_fork_epoch) }}" \
+      --ttd "{{ ttd | default(ttd) }}" \
+      --eth1-block-hash "{{ block_hash_result }}" \ 
+      --eth1-id "{{ chainid | default(chainid) }}" \
+      --eth1-follow-distance 128 \ 
+      --seconds-per-slot "{{ seconds_per_slot | default(seconds_per_slot) }}" \
+      --seconds-per-eth1-block "{{ seconds_per_eth1_block | default(seconds_per_eth1_block) }}" \
+      --proposer-score-boost "{{ proposer_score_boost | default(proposer_score_boost) }}" \
+      --validator-count "{{ genesis_validator_count | default(genesis_validator_count) }}" \
+      --interop-genesis-state \
+      --force
+
+- name: Create validators
+  become: yes
+  shell: |
+    /usr/local/bin/lcli insecure-validators \
+      --count "{{ genesis_validator_count | default(genesis_validator_count) }}" \
+      --base-dir "{{ root_dir | default(root_dir) }}"/ethereum \
+      --node-count 1
+
+- name: Create validators
+  become: yes
+  shell: |
+    /usr/local/bin/lcli \
+        generate-bootnode-enr \
+        --ip "{{ ansible_default_ipv4.address }}" \
+        --udp-port "{{ port.port | default(port.port) }}" \
+        --tcp-port "{{ port.port | default(port.port) }}" \
+        --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
+        --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootnode"
+
+- name: Create boot_enr.yaml file
+  become: yes
+  shell: 
+    cmd: |
+      echo "- $(cat {{ root_dir | default(root_dir) }}/ethereum/bootnode/enr.dat)" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml"
+
+...

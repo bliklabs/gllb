@@ -1,6 +1,6 @@
 ---
 
-- name: Converge clean all
+- name: Converge clean geth
   hosts: all
   tasks:
 
@@ -8,6 +8,16 @@
       include_role:
         name: geth
         tasks_from: linux/common/clean.yml
+
+- name: Converge clean lighthouse
+  hosts: all
+  tasks:
+
+    - name: Bootstrap clean
+      include_role:
+        name: lighthouse
+        tasks_from: linux/common/clean.yml
+
 
 - name: Single node bootstrap
   hosts: "{{ groups['all'][0] }}"

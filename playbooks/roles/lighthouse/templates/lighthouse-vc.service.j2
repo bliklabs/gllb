@@ -5,8 +5,9 @@ Description=Lighthouse validator
 Type=simple
 User=root
 Restart=always
-ExecStart=/usr/local/bin/lighthouse validator_client \
-    --datadir {{ root_dir | default(root_dir) }}/ethereum/lighthouse \
-    --testnet-dir {{ root_dir | default(root_dir) }}/ethereum/lighthouse/testnet \
-    --beacon-nodes http://{{ ansible_default_ipv4.address | default(ansible_default_ipv4.address) }}:{{ port.beaconhttp | default(port.beaconhttp) }} \
-    --init-slashing-protection
+ExecStart=/usr/local/bin/lighthouse vc \
+    --datadir "{{ root_dir | default(root_dir) }}/ethereum/node_1" \
+    --testnet-dir "{{ root_dir | default(root_dir) }}/ethereum/testnet" \
+    --init-slashing-protection \
+    --beacon-nodes http://"{{ ansible_default_ipv4.address }}:{{ port.http | default(port.http) }}" \
+    --suggested-fee-recipient "0x{{ gen_wallets[-1].address }}"

@@ -20,4 +20,5 @@ ExecStart=/usr/local/bin/geth \
     --nat=extip:{{ ansible_default_ipv4.address }} \
     --unlock "{% for wallet in gen_wallets %}0x{{ wallet.address }}{% if not loop.last %},{% endif %}{% endfor %}" \
     --password {{ root_dir }}/ethereum/passwords.txt \
-    --allow-insecure-unlock
+    --allow-insecure-unlock \
+    --bootnodes {{ enode }}

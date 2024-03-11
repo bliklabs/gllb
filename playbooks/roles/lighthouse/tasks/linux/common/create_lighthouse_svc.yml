@@ -1,24 +1,10 @@
 ---
 
-- name: Copy deploy_block.txt
+- name: Copy lighthouse.service template
   become: yes
   template:
-    src: deploy_block.txt.j2
-    dest: "{{ root_dir | default(root_dir) }}/ethereum/lighthouse/testnet/deploy_block.txt"
-    owner: svc_geth
-    group: root
-    mode: 0660
-
-- name: Copy config.yaml
-  become: yes
-  template:
-    src: config.yaml.j2
-    dest: "{{ root_dir | default(root_dir) }}/ethereum/lighthouse/testnet/config.yaml"
-    owner: svc_geth
-    group: root
-    mode: 0660
-  vars:
-    json_config: "{{ json.config }}"
+    src: lighthouse-boot.service.j2
+    dest: /lib/systemd/system/lighthouse-boot.service
 
 - name: Copy lighthouse.service template
   become: yes
@@ -37,6 +23,43 @@
   systemd:
     daemon_reload: true
 
+- name: Recursively change ownership and mode of /opt/validator directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/bootnode"
+    owner: svc_geth
+    group: root
+    mode: "0660"
+    recurse: yes
+    state: directory
+
+- name: Recursively change ownership and mode of /opt/validator directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/node_1"
+    owner: svc_geth
+    group: root
+    mode: "0660"
+    recurse: yes
+    state: directory
+
+- name: Recursively change ownership and mode of /opt/validator directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/testnet"
+    owner: svc_geth
+    group: root
+    mode: "0660"
+    recurse: yes
+    state: directory
+
+- name: Enable lighthouse-boot.service
+  become: yes
+  systemd:
+    name: lighthouse-boot
+    enabled: yes
+    state: started
+
 - name: Enable lighthouse.service
   become: yes
   systemd:
@@ -44,11 +67,11 @@
     enabled: yes
     state: started
 
-#- name: Enable lighthouse-vc.service
-#  become: yes
-#  systemd:
-#    name: lighthouse-vc
-#    enabled: yes
-#    state: started
+- name: Enable lighthouse-vc.service
+  become: yes
+  systemd:
+    name: lighthouse-vc
+    enabled: yes
+    state: started
 
 ...

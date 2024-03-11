@@ -1,0 +1,74 @@
+---
+
+- name: Stop lighthouse-boot daemon
+  become: yes
+  systemd:
+    name: lighthouse-boot
+    state: stopped
+    force: yes
+  ignore_errors: yes
+
+- name: Disable lighthouse-boot service
+  become: yes
+  systemd:
+    name: lighthouse-boot
+    enabled: no
+  ignore_errors: yes
+
+- name: Stop lighthouse daemon
+  become: yes
+  systemd:
+    name: lighthouse
+    state: stopped
+    force: yes
+  ignore_errors: yes
+
+- name: Disable lighthouse service
+  become: yes
+  systemd:
+    name: lighthouse
+    enabled: no
+  ignore_errors: yes
+
+- name: Stop lighthouse-vc daemon
+  become: yes
+  systemd:
+    name: lighthouse-vc
+    state: stopped
+    force: yes
+  ignore_errors: yes
+
+- name: Disable lighthouse-vc service
+  become: yes
+  systemd:
+    name: lighthouse-vc
+    enabled: no
+  ignore_errors: yes
+
+- name: Kill all lighthouse processes
+  become: yes
+  command: killall -9 geth
+  ignore_errors: yes
+
+- name: Delete rootdir/ethereum/bootnode directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/bootnode"
+    state: absent
+  ignore_errors: yes
+
+- name: Delete rootdir/ethereum/node_1 directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/node_1"
+    state: absent
+  ignore_errors: yes
+
+- name: Delete rootdir/ethereum/testnet directory
+  become: yes
+  file:
+    path: "{{ root_dir | default(root_dir) }}/ethereum/testnet"
+    state: absent
+  ignore_errors: yes
+
+...
