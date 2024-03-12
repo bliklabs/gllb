@@ -8,8 +8,8 @@ port:
   port: 9000
   quic: 9001
   http: 15000
+  vc_http: 16000
   gethrpc: 8551
-mnemonic_phrase: "vast thought differ pull jewel broom cook wrist tribe word before omit"
 deposit_contract_address: "4242424242424242424242424242424242424242"
 genesis_fork_version: "0x42424242"
 validator_count: 10

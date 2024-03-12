@@ -5,11 +5,12 @@
   shell: |
     /usr/local/bin/lcli generate-bootnode-enr \
         --ip {{ ansible_default_ipv4.address }} \
-        --udp-port {{ port.port | default(port.port) }} \
-        --tcp-port {{ port.port | default(port.port) }} \
+        --udp-port {{ chainid | default(chainid) }} \
+        --tcp-port {{ chainid | default(chainid) }} \
         --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
         --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
   ignore_errors: yes
+  register: command_output
 
 - name: Read ENR file content
   become: yes

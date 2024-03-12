@@ -59,56 +59,63 @@
 - name: Create boot enr
   become: yes
   shell: |
-    /usr/local/bin/lcli \
-        generate-bootnode-enr \
-        --ip "{{ ansible_default_ipv4.address }}" \
-        --udp-port "{{ port.port | default(port.port) }}" \
-        --tcp-port "{{ port.port | default(port.port) }}" \
+    /usr/local/bin/lcli generate-bootnode-enr \
+        --ip {{ ansible_default_ipv4.address }} \
+        --udp-port {{ chainid | default(chainid) }} \
+        --tcp-port {{ chainid | default(chainid) }} \
         --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
-        --output-dir "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
+        --output-dir {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr
   when: enr is not defined
+  ignore_errors: yes
+  register: command_output
 
-- name: Ensure directory exists
+- name: Ensure the directory /opt/validator/ethereum/bootstrap_enr exists
   become: yes
   file:
-    path: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
+    path: "/opt/validator/ethereum/bootstrap_enr"
     state: directory
     owner: svc_geth
     group: root
-    mode: "0660"
-  ignore_errors: yes
+    mode: '770'
 
 - name: Read ENR file content
   become: yes
   slurp:
     src: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat"
   register: enr_content
-  when: enr is not defined
+  when: command_output.rc == 0
+  ignore_errors: yes
 
 - name: Set enr as fact
   set_fact:
     enr: "{{ enr_content['content'] | b64decode | string }}"
     cacheable: yes
-  when: enr is not defined
+  when: command_output.rc == 0
+  ignore_errors: yes
 
 - name: Read key and encode
   become: yes
   shell: "cat {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key | base64"
   register: binary_content
-  when: enr_key is not defined
+  when: command_output.rc == 0
+  ignore_errors: yes
 
 - name: Save key to fact
   set_fact:
     enr_key: "{{ binary_content.stdout }}"
     cacheable: yes
-  when: enr_key is not defined
+  when: command_output.rc == 0
+  ignore_errors: yes
 
 - name: Create boot_enr.yaml file
   become: yes
-  shell:
-    cmd: |
-      echo "- {{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml";
-      echo "{{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat";
+  shell: echo "- {{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml";
+  when: enr is defined
+  ignore_errors: yes
+
+- name: Create enr.data.yaml file
+  become: yes
+  shell: echo -n "{{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat";
   when: enr is defined
   ignore_errors: yes
 
@@ -118,6 +125,7 @@
     content: "{{ enr_key | b64decode }}"
     dest: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key"
     mode: "0644"
+  when: enr_key is defined
 
 ...
 

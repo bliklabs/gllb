@@ -1,6 +1,6 @@
 ---
 
-- name: Converge clean all
+- name: Clean geth
   hosts: all
   tasks:
 
@@ -9,7 +9,16 @@
         name: geth
         tasks_from: linux/common/clean.yml
 
-- name: Single node bootstrap
+- name: Clean lighthouse
+  hosts: all
+  tasks:
+
+    - name: Bootstrap clean
+      include_role:
+        name: lighthouse
+        tasks_from: linux/common/clean.yml
+
+- name: Single node geth bootstrap
   hosts: "{{ groups['all'][0] }}"
   tasks:
     - name: Bootstrap node
@@ -27,12 +36,30 @@
       vars:
         bootstrap_node: "{{ groups['all'][0] }}"
 
-- name: Generate geth cluster
+- name: Install and config geth cluster
   hosts: all
   tasks:
     - name: Generate geth cluster
       include_role:
         name: geth
+
+- name: Single node lighthouse enr bootstrap
+  hosts: "{{ groups['all'][0] }}"
+  tasks:
+    - name: Bootstrap node
+      include_role:
+        name: lighthouse
+
+- name: Sync
+  hosts: all
+  tasks:
+
+    - name: Sync facts
+      include_role:
+        name: lighthouse
+        tasks_from: linux/common/sync.yml
+      vars:
+        bootstrap_node: "{{ groups['all'][0] }}"
 
 - name: Install and config lighthouse
   hosts: all
@@ -40,6 +67,5 @@
     - name: Install and config lighthouse
       include_role:
         name: lighthouse
-
 
 ...

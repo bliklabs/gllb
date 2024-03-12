@@ -8,6 +8,11 @@ Restart=always
 ExecStart=/usr/local/bin/lighthouse vc \
     --datadir {{ root_dir | default(root_dir) }}/ethereum/node_1 \
     --testnet-dir {{ root_dir | default(root_dir) }}/ethereum/testnet \
+    --http \
+    --http-address {{ ansible_default_ipv4.address }}\
+    --http-port {{ port.vc_http | default(port.vc_http) }} \
+    --http-allow-origin "*" \
     --init-slashing-protection \
     --beacon-nodes http://{{ ansible_default_ipv4.address }}:{{ port.http | default(port.http) }} \
-    --suggested-fee-recipient "0x{{ gen_wallets[-1].address }}"
+    --suggested-fee-recipient "0x{{ gen_wallets[-1].address | default('0000000000000000000000000000000000000001') }}" \
+    --unencrypted-http-transport

@@ -1,0 +1,21 @@
+upstream {{ item.server_name }}_nodes {
+{% if all_default_route_ips is defined %}
+{% for target in all_default_route_ips %}
+    server {{ target }}:{{ item.forward_port }};
+{% endfor %}
+{% else %}
+    server {{ ansible_default_ipv4.address }}:{{ item.forward_port }};
+{% endif %}
+}
+
+server {
+
+    listen {{ item.address }}:{{ item.listen | default('80') }};
+    location / {
+        proxy_pass http://{{ item.server_name }}_nodes;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
