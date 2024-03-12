@@ -98,7 +98,7 @@ To provision a VM cluster:
 5. Run playbook:
    ```
    # Full deployment
-   ansible-playbook -i hosts/hosts.ini playbooks/deploy_testnet.yml -l testnet --flush-cache
+   ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l testnet --flush-cache
 
    # Rebuilds:
      # Clean -
