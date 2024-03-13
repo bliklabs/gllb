@@ -3,10 +3,9 @@
 Converged geth + lighthouse | nginx deployed via ansible
 
 Roles for geth and lighthouse use local cache to dynamically generate wallets, bootnodes,
-enr, validators, testnet, and a slew of runtime configuration which provides default bootstrapping
-and stateful configuration post-hoc fact sync. No actual hostvars configuration is needed besides
-the nginx_vhosts options. All other configurations are pulled from vars, generated, 
-or synced at runtime.
+enr, validators, testnet, and a slew of runtime configuration. Roles support bootstrap 
+and sync_config modes. The only needed hostvars definitions are nginx_vhosts options. All
+other configurations are pulled from vars, generated, or synced at runtime.
 
 Each node runs the following systemd services:
   ```
