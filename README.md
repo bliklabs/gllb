@@ -144,7 +144,7 @@ To provision a VM cluster:
      ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean_lighthouse.yml --flush-cache    # optional
 
      # Sync_and_config
-     ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/sync_and_config.yml -e "bootstrap=< node_to_sync_with >"
+     ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/sync_and_config.yml -e "bootnode=< node_to_sync_with >"
      ```
    - Bootstrap, then sync_config: -- TEST:PASS
      ```
@@ -152,8 +152,8 @@ To provision a VM cluster:
      ansible-playbook -i hosts/hosts.ini playbooks/bootstrap.yml -l < boot_nodes_groupname > --flush-cache
 
      # Sync and config each respective cluster group
-     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[0] >"
-     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_2 >  -e "bootstrap_node: < boot_nodes_groupname[1] >"
+     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootnode=< boot_nodes_groupname[0] >"
+     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_2 >  -e "bootnode=< boot_nodes_groupname[1] >"
      ```
 
 
