@@ -1,0 +1,37 @@
+---
+
+- name: Sync facts from "{{ bootstrap_node }}"
+  hosts: all
+  tasks:
+
+    - name: Sync facts for geth configuration
+      include_role:
+        name: geth
+        tasks_from: linux/common/sync.yml
+      vars:
+        bootstrap_node: "{{ bootstrap_node }}"
+
+    - name: Sync facts for lighthouse configuration
+      include_role:
+        name: lighthouse
+        tasks_from: linux/common/sync.yml
+      vars:
+        bootstrap_node: "{{ bootstrap_node }}"
+
+- name: Install and config geth cluster
+  hosts: all
+  tasks:
+
+    - name: Generate geth cluster
+      include_role:
+        name: geth
+
+- name: Install and config lighthouse cluster
+  hosts: all
+  tasks:
+
+    - name: Generate lighthouse cluster
+      include_role:
+        name: lighthouse
+
+...
