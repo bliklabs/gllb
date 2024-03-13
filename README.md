@@ -67,7 +67,7 @@ To provision a VM cluster:
 3. Define the hosts you would like to bootstrap and cluster by group:
    ```
    > $ cat hosts/hosts.ini
-   # vms
+   # testnet vm nodes
    [testnet]
    vm01
    vm02
@@ -77,20 +77,23 @@ To provision a VM cluster:
    ubuntu01
    ubuntu02
 
-   # untested multi cluster builds
+   # Multicluster (n>=1) builder untested multi cluster builds
    [bootnodes]
    vm100
    vm200
 
-   [cluster1] # bootstrap_node == vm100
+   [cluster1]
    vm100
    vm101
    vm102
 
-   [cluster2] # bootstrap_node == vm200
-   vm200
-   vm201
-   vm202
+   [cluster1:vars]
+   bootnode=v100
+   
+   [cluster2]
+   vm200 bootnode=vm200
+   vm201 bootnode=vm200
+   vm202 bootnode=vm200
    ```
 
 4. Define the hostvars for your nginx server in testnet:
