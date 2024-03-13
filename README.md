@@ -1,6 +1,6 @@
 # validator_testnet -- gllb
 
-geth + lighthouse(bn|vc) + lb:nginx
+geth:boot|client + lighthouse:boot|bn|vc + lb:nginx
 
 Roles for geth and lighthouse use local cache to dynamically generate wallets, bootnodes,
 enr, validators, testnet, and a slew of runtime configurations. 
