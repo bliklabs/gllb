@@ -1,0 +1,12 @@
+---
+
+- name: Clean lighthouse
+  hosts: all
+  tasks:
+
+    - name: clean lighthouse
+      include_role:
+        name: lighthouse
+        tasks_from: linux/common/clean.yml
+
+...

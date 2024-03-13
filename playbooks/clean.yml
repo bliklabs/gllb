@@ -1,0 +1,17 @@
+---
+
+- name: Clean geth and lighthouse
+  hosts: all
+  tasks:
+
+    - name: Clean geth
+      include_role:
+        name: geth
+        tasks_from: linux/common/clean.yml
+
+    - name: Clean lighthouse
+      include_role:
+        name: lighthouse
+        tasks_from: linux/common/clean.yml
+
+...

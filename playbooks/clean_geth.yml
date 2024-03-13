@@ -1,0 +1,12 @@
+---
+
+- name: Clean geth
+  hosts: all
+  tasks:
+
+    - name: Clean geth
+       include_role:
+        name: geth
+        tasks_from: linux/common/clean.yml
+
+...
