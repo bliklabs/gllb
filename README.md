@@ -64,7 +64,7 @@ To provision a VM cluster:
 
 1. Copy your ciuser: "ansible" ssh private key:
    ```   
-   {$PROJECT_DIRECTORY}/.secret
+   cp /foo/bar/privkey < PROJECT_DIRECTORY >/.secret
    ```
 
 2. Load the configuration environment:
