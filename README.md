@@ -66,6 +66,21 @@ To provision a VM cluster:
    [multi_node_validator]
    ubuntu01
    ubuntu02
+
+   # untested multi cluster builds
+   [bootnodes]
+   vm100
+   vm200
+
+   [cluster1] bootstrap_node == vm01
+   vm100
+   vm101
+   vm102
+
+   [cluster2] bootstrap_node == vm02
+   vm200
+   vm201
+   vm202
    ```
 
 4. Define the hostvars for your nginx server in testnet:
