@@ -17,13 +17,13 @@
   loop_control:
     loop_var: item
 
-- name: Change keystore ownership
-  become: yes
-  command: "chown -R svc_geth:root {{ root_dir }}/ethereum/keystore"
+#- name: Change keystore ownership
+#  become: yes
+#  command: "chown -R svc_geth:root {{ root_dir }}/ethereum/keystore"
 
-- name: Change permissions
-  become: yes
-  command: "chmod -R 770 {{ root_dir }}/ethereum/keystore"
+#- name: Change permissions
+#  become: yes
+#  command: "chmod -R 770 {{ root_dir }}/ethereum/keystore"
 
 - name: Initialize genesis block
   become: yes

@@ -1,5 +1,11 @@
 ---
 
+- name: Set boot_hex fact
+  set_fact:
+    boot_hex: "{{ hostvars[bootstrap_node]['boot_hex'] }}"
+    cacheable: true
+  when: "'boot_hex' not in hostvars[inventory_hostname]"
+
 - name: Set boot enode fact
   set_fact:
     enode: "{{ hostvars[bootstrap_node]['enode'] }}"
