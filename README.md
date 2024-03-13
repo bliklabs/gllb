@@ -132,7 +132,7 @@ To provision a VM cluster:
     ```
 
 5. Run playbook:
-   - Full deployment - TEST:PASS < hostvars[nginx_vhosts|nginx_proxy_template="vhosts.j2"] > are required
+   - Full deployment - TEST:PASS
      ```
      ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l < groupname > --flush-cache
      ```
