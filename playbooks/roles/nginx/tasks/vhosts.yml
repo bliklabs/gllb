@@ -37,7 +37,7 @@
     group: "{{ root_group }}"
     mode: 0644
     remote_src: no
-  when: item.state|default('present') != 'absent'
+  when: item.state|default('present') != 'absent' and nginx_vhosts is defined
   with_items: "{{ nginx_vhosts }}"
   notify: reload nginx
 

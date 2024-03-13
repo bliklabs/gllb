@@ -104,7 +104,7 @@ To provision a VM cluster:
    vm202 bootnode=vm200
    ```
 
-4. Define < hostvars[nginx_vhosts] > for your node:
+4. Define < hostvars[nginx_vhosts | nginx_proxy_template="vhosts.j2"] > for your node:
    ```
    > $ cat vm02.yml 
    nginx_proxy_template: "vhost.j2"
@@ -132,7 +132,7 @@ To provision a VM cluster:
     ```
 
 5. Run playbook:
-   - Full deployment - TEST:PASS < hostvars[nginx_vhosts] > are required
+   - Full deployment - TEST:PASS < hostvars[nginx_vhosts|nginx_proxy_template="vhosts.j2"] > are required
      ```
      ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l < groupname > --flush-cache
      ```
