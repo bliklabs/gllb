@@ -15,10 +15,10 @@
   include_tasks: "linux/Ubuntu/main.yml"
   when: is_ubuntu
 
-- name: Include enable lighthouse beacon
+- name: Generate testnet
   import_tasks: "linux/common/generate_testnet.yml"
 
-- name: Include enable lighthouse beacon
+- name: Start services
   import_tasks: "linux/common/create_lighthouse_svc.yml"
 
 ...
