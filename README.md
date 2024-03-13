@@ -15,7 +15,7 @@ Playbooks support:
   - sync_config.yml
     - Synchronizes cluster facts and statefully configures specified peer(S)
   - clean(_geth|_lighthouse).yml
-    - removes, service, packaging, and configuration residue
+    - removes service, packaging, and configuration residue
   ```
 
 Each node runs the following systemd services:
