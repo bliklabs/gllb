@@ -10,15 +10,4 @@
     mode: "0700"
     remote_src: no
 
-- name: Copy add_remote_peers.service template
-  become: yes
-  template:
-    src: add_remote_peers.py.j2
-    dest: "{{ root_dir | default('root_dir') }}/tooling/add_remote_peers.py"
-    owner: root
-    group: root
-    mode: "0700"
-  when: all_default_route_ips is defined
-  ignore_errors: yes
-
 ...

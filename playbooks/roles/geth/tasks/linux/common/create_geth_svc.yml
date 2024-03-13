@@ -12,13 +12,6 @@
     src: geth.service.j2
     dest: /lib/systemd/system/geth.service
 
-- name: Copy add_remote_peers.service template
-  become: yes
-  template:
-    src: add_remote_peers.service.j2
-    dest: /lib/systemd/system/add_remote_peers.service
-  when: all_default_route_ips is defined
-
 - name: Reload daemon
   become: true
   systemd:
@@ -37,13 +30,5 @@
     name: geth
     enabled: yes
     state: started
-
-- name: Enable add_remote_peers.service
-  become: yes
-  systemd:
-    name: add_remote_peers
-    enabled: yes
-    state: started
-  when: all_default_route_ips is defined
 
 ...

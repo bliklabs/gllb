@@ -122,12 +122,12 @@ To provision a VM cluster:
    - Stateful rebuilds: -- untested
      ```
      # Clean -
-     ansible-playbook -l < hostname > playbooks/clean.yml --flush-cache
-     ansible-playbook -l < hostname > playbooks/clean_geth.yml --flush-cache          # optional
-     ansible-playbook -l < hostname > playbooks/clean_lighthouse.yml --flush-cache    # optional
+     ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean.yml --flush-cache
+     ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean_geth.yml --flush-cache          # optional
+     ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean_lighthouse.yml --flush-cache    # optional
 
      # Sync_and_config
-     ansible-playbook -l < hostname > playbooks/sync_and_config.yml -e "bootstrap_node: < hostname >"
+     ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/sync_and_config.yml -e "bootstrap=< node_to_sync_with >"
      ```
    - Bootstrap, then sync_config: -- untested
      ```

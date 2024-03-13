@@ -1,6 +1,6 @@
 ---
 
-- name: Sync facts from "{{ bootstrap_node }}"
+- name: Sync facts from bootstrap
   hosts: all
   tasks:
 
@@ -9,14 +9,14 @@
         name: geth
         tasks_from: linux/common/sync.yml
       vars:
-        bootstrap_node: "{{ bootstrap_node }}"
+        bootstrap_node: "{{ bootstrap }}"
 
     - name: Sync facts for lighthouse configuration
       include_role:
         name: lighthouse
         tasks_from: linux/common/sync.yml
       vars:
-        bootstrap_node: "{{ bootstrap_node }}"
+        bootstrap_node: "{{ bootstrap }}"
 
 - name: Install and config geth cluster
   hosts: all
