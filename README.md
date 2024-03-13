@@ -43,6 +43,12 @@ To install this project, follow these steps:
     ```
     cd validator_testnet
     ```
+3. Sync with main (optional but recommended if you have the v1.0.0-beta release)
+    ```
+    git remote add origin https://github.com/bliklabs/validator_testnet
+    git fetch origin main
+    git pull origin main
+    ```
 
 ## Usage
 
