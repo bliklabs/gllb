@@ -21,4 +21,4 @@ ExecStart=/usr/local/bin/geth \
     --unlock "{% for wallet in gen_wallets %}0x{{ wallet.address }}{% if not loop.last %},{% endif %}{% endfor %}" \
     --password {{ root_dir }}/ethereum/passwords.txt \
     --allow-insecure-unlock \
-    --bootnodes {{ boot_enode | default(enode) }}
+    --bootnodes {{ enode | default(enode) }}
