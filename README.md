@@ -3,8 +3,14 @@
 Converged geth + lighthouse | nginx deployed via ansible
 
 Roles for geth and lighthouse use local cache to dynamically generate wallets, bootnodes,
-enr, validators, testnet, and a slew of runtime configuration. Playbooks support and AOI
-bootstrap_and_deploy_testnet, clean, bootstrap, and sync_config modes. 
+enr, validators, testnet, and a slew of runtime configurations. 
+
+Playbooks support: 
+  - bootstrap_and_deploy_testnet.yml
+    - AIO buildout for 2 node cluster 
+  - clean(_geth|_lighthouse).yml
+  - bootstrap.yml
+  - sync_config.yml
 
 Each node runs the following systemd services:
   ```
