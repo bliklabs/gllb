@@ -23,9 +23,9 @@ Each node runs the following systemd services:
   geth-boot
   geth
   lighthouse-boot
-  lighthouse (i.e., beacon)
+  lighthouse ( i.e., beacon )
   lighthouse-vc
-  nginx
+  nginx ( only in AIO )
   ```
 
 On AIO run, each host offers api services on the default route service | nginx forwarding port ( required: hostvars[nginx_vhosts] ):
