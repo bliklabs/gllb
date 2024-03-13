@@ -96,7 +96,7 @@ To provision a VM cluster:
    vm102
 
    [cluster1:vars]
-   bootnode=v100
+   bootnode=vm100
    
    [cluster2]
    vm200 bootnode=vm200
