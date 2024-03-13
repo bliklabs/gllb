@@ -8,11 +8,11 @@ enr, validators, testnet, and a slew of runtime configurations.
 Playbooks support: 
   - bootstrap_and_deploy_testnet.yml
     - AIO buildout
-    - Chooses the first node in groupname as bootstrap_node
+    - Chooses the first node in < groupname > as bootnode
   - bootstrap.yml
-    - Configures dynamically generated bootnodes (n>=1) 
+    - Configures dynamically generated bootnode
   - sync_config.yml
-    - Synchronizes cluster facts and statefully configures specified peer nodes 
+    - Synchronizes cluster facts and statefully configures specified peer(S)
   - clean(_geth|_lighthouse).yml
     - removes, service, packaging, and configuration residue
 
