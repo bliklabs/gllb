@@ -7,10 +7,14 @@ enr, validators, testnet, and a slew of runtime configurations.
 
 Playbooks support: 
   - bootstrap_and_deploy_testnet.yml
-    - AIO buildout for 2 node cluster 
-  - clean(_geth|_lighthouse).yml
+    - AIO buildout
+    - Chooses the first node in groupname as bootstrap_node
   - bootstrap.yml
+    - Configures dynamically generated bootnodes (n>=1) 
   - sync_config.yml
+    - Synchronizes cluster facts and statefully configures specified peer nodes 
+  - clean(_geth|_lighthouse).yml
+    - removes, service, packaging, and configuration residue
 
 Each node runs the following systemd services:
   ```
