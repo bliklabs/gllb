@@ -72,12 +72,12 @@ To provision a VM cluster:
    vm100
    vm200
 
-   [cluster1] bootstrap_node == vm01
+   [cluster1] # bootstrap_node == vm100
    vm100
    vm101
    vm102
 
-   [cluster2] bootstrap_node == vm02
+   [cluster2] # bootstrap_node == vm200
    vm200
    vm201
    vm202
