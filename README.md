@@ -121,11 +121,11 @@ To provision a VM cluster:
     ```
 
 5. Run playbook:
-   - Full deployment - < hostvars[nginx_vhosts] > required
+   - Full deployment - TEST:PASS < hostvars[nginx_vhosts] > are required
      ```
      ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l < groupname > --flush-cache
      ```
-   - Stateful rebuilds: -- untested
+   - Stateful rebuilds: -- TEST:PASS
      ```
      # Clean -
      ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean.yml --flush-cache
@@ -135,7 +135,7 @@ To provision a VM cluster:
      # Sync_and_config
      ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/sync_and_config.yml -e "bootstrap=< node_to_sync_with >"
      ```
-   - Bootstrap, then sync_config: -- untested
+   - Bootstrap, then sync_config: -- TEST:PASS
      ```
      # Generate bootstrap nodes defined in groupname, where len(groupname) == 2
      ansible-playbook -i hosts/hosts.ini playbooks/bootstrap.yml -l < boot_nodes_groupname > --flush-cache
