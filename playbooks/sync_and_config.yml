@@ -34,4 +34,13 @@
       include_role:
         name: lighthouse
 
+- name: nginx
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Install and config nginx
+      include_role:
+        name: nginx
+
 ...

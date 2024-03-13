@@ -11,7 +11,7 @@ Playbooks support:
     - AIO buildout
     - Chooses the first node in < groupname > as bootnode
   - bootstrap.yml
-    - Configures dynamically generated bootnode
+    - Configures N>=1 dynamically generated bootnode
   - sync_config.yml
     - Synchronizes cluster facts and statefully configures specified peer(S)
   - clean(_geth|_lighthouse).yml
@@ -25,16 +25,17 @@ Each node runs the following systemd services:
   lighthouse-boot
   lighthouse ( i.e., beacon )
   lighthouse-vc
-  nginx ( only in AIO )
+  nginx
   ```
 
-On AIO run, each host offers api services on the default route service | nginx forwarding port ( required: hostvars[nginx_vhosts] ):
+Each host offers api services on the default route service | nginx forwarding port:
   ```
   geth-authrpc                  = 8551 | 65001
   geth-http                     = 8552 | 65002
   lighthouse_beacon_http        = 15000 | 65003
   lighthouse_vc_http            = 16000 | 65004
   ```
+
 
 ## Installation
 
@@ -55,6 +56,7 @@ To install this project, follow these steps:
     git fetch origin main
     git pull origin main
     ```
+
 
 ## Usage
 
@@ -83,7 +85,7 @@ To provision a VM cluster:
    ubuntu01
    ubuntu02
 
-   # Multicluster (n>=1) builder
+   # Multicluster
    [bootnodes]
    vm100
    vm200
@@ -102,7 +104,7 @@ To provision a VM cluster:
    vm202 bootnode=vm200
    ```
 
-4. Define the hostvars for your nginx server in testnet:
+4. Define < hostvars[nginx_vhosts] > for your node:
    ```
    > $ cat vm02.yml 
    nginx_proxy_template: "vhost.j2"
@@ -153,6 +155,7 @@ To provision a VM cluster:
      ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[0] >"
      ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_2 >  -e "bootstrap_node: < boot_nodes_groupname[1] >"
      ```
+
 
 ## Configuration
 
@@ -212,6 +215,7 @@ To provision a cluster via molecule and docker:
    ```
    molecule test
    ```
+
 
 ## Contributing
 
