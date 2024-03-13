@@ -60,6 +60,12 @@
     enabled: yes
     state: started
 
+- name: Restart lighthouse_boot.service if running
+  become: yes
+  systemd:
+    name: lighthouse-boot
+    state: restarted
+
 - name: Enable lighthouse.service
   become: yes
   systemd:
@@ -67,11 +73,23 @@
     enabled: yes
     state: started
 
+- name: Restart lighthouse.service if running
+  become: yes
+  systemd:
+    name: lighthouse
+    state: restarted
+
 - name: Enable lighthouse-vc.service
   become: yes
   systemd:
     name: lighthouse-vc
     enabled: yes
     state: started
+
+- name: Restart lighthouse_vc.service if running
+  become: yes
+  systemd:
+    name: lighthouse-vc
+    state: restarted
 
 ...

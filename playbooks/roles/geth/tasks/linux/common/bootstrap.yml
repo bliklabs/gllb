@@ -1,13 +1,26 @@
 ---
 
+- name: Generate boot_hex
+  become: yes
+  shell: echo -n $(openssl rand -hex 32)
+  register: boot_hex_output
+  when: genesis_config is not defined
+
+- name: Set boot_hex fact
+  set_fact:
+    boot_hex: "{{ boot_hex_output.stdout }}"
+    cacheable: yes
+  when: genesis_config is not defined
+
 - name: Run bootnode command and set enode fact
   become: yes
-  command: "bootnode -nodekeyhex 02fd74636e96a8ffac8e7b01b0de8dea94d6bcf4989513b38cf59eb32163ff91 --nat=extip:{{ ansible_default_ipv4.address }} -writeaddress"
+  shell: bootnode -nodekeyhex {{ boot_hex | default('02fd74636e96a8ffac8e7b01b0de8dea94d6bcf4989513b38cf59eb32163ff91') }} --nat=extip:{{ ansible_default_ipv4.address }} -writeaddress
   register: bootnode_output
   ignore_errors: true
   when: genesis_config is not defined
 
-- set_fact:
+- name: Set boot enode fact
+  set_fact:
     enode: "enode://{{ bootnode_output.stdout }}@{{ ansible_default_ipv4.address }}:30301"
     cacheable: yes
   when: genesis_config is not defined

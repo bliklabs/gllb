@@ -24,11 +24,23 @@
     enabled: yes
     state: started
 
+- name: Restart geth-boot.service if running
+  become: yes
+  systemd:
+    name: geth-boot
+    state: restarted
+
 - name: Enable geth.service
   become: yes
   systemd:
     name: geth
     enabled: yes
     state: started
+
+- name: Restart geth.service if running
+  become: yes
+  systemd:
+    name: geth
+    state: restarted
 
 ...

@@ -47,11 +47,22 @@
   apt:
     name: bootnode
     state: present
-    update_cache: yes
     install_recommends: no
     force_apt_get: yes
     dpkg_options: 'force-confnew'
     update_cache: yes
+    allow_unauthenticated: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
+- name: Install OpenSSL package
+  become: yes
+  apt:
+    name: openssl
+    state: present
+    install_recommends: no
+    force_apt_get: yes
+    dpkg_options: 'force-confnew'
     allow_unauthenticated: yes
   environment:
     DEBIAN_FRONTEND: noninteractive
