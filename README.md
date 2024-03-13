@@ -130,7 +130,7 @@ To provision a VM cluster:
      ```
    - Stateful rebuilds: -- TEST:PASS
      ```
-     # Clean -
+     # Clean
      ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean.yml --flush-cache
      ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean_geth.yml --flush-cache          # optional
      ansible-playbook -i hosts/hosts.ini -l < hostname > playbooks/clean_lighthouse.yml --flush-cache    # optional
