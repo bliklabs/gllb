@@ -1,4 +1,4 @@
-# gllb
+# validator_testnet -- gllb
 
 Converged geth + lighthouse | nginx deployed via ansible
 
