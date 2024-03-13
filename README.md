@@ -1,6 +1,6 @@
 # validator_testnet -- gllb
 
-Converged geth + lighthouse | nginx deployed via ansible
+geth + lighthouse(bc|vc) + lb:nginx
 
 Roles for geth and lighthouse use local cache to dynamically generate wallets, bootnodes,
 enr, validators, testnet, and a slew of runtime configurations. 
