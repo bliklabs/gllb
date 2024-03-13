@@ -3,9 +3,8 @@
 Converged geth + lighthouse | nginx deployed via ansible
 
 Roles for geth and lighthouse use local cache to dynamically generate wallets, bootnodes,
-enr, validators, testnet, and a slew of runtime configuration. Playbook support includes an 
-AIO bootstrap_and_deploy_testnet, bootstrap, sync_config, and clean modes. The only needed hostvars
-definitions are nginx_vhosts options. All other configurations are pulled from vars, generated, or synced at runtime.
+enr, validators, testnet, and a slew of runtime configuration. Playbooks support and AOI
+bootstrap_and_deploy_testnet, clean, bootstrap, and sync_config modes. 
 
 Each node runs the following systemd services:
   ```
@@ -112,12 +111,26 @@ To provision a VM cluster:
 5. Run playbook:
    ```
    # Full deployment
-   ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l testnet --flush-cache
+   ## Hostvars required for bootstrap_deploy_testnet: nginx_vhosts
+   ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l < groupname > --flush-cache
 
-   # Rebuilds:
-   ## clean 
-   ansible-playbook -i hosts/hosts.ini playbooks/clean.yml -l testnet --flush-cache
+   ############################
+   #### currently untested ####
+   ############################
+   # Stateful rebuilds:
+   ## Clean -
+   ansible-playbook -l < hostname > playbooks/clean.yml --flush-cache
+   ansible-playbook -l < hostname > playbooks/clean_geth.yml --flush-cache          # optional
+   ansible-playbook -l < hostname > playbooks/clean_lighthouse.yml --flush-cache    # optional
+   ## Sync_and_config
+   ansible-playbook -l < hostname > playbooks/sync_and_config.yml -e "bootstrap_node: < hostname >"
 
+   # Bootstrap, then sync_config:
+   ## Generate bootstrap nodes defined in groupname, where len(groupname) == 2
+   ansible-playbook -i hosts/hosts.ini playbooks/bootstrap.yml -l < boot_nodes_groupname > --flush-cache
+   ## Sync and config each respective cluster group
+   ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[0] >"
+   ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[1] >"
 
    ```
 
@@ -155,7 +168,6 @@ To provision a VM cluster:
    ANSIBLE_PYTHON_INTERPRETER='/usr/bin/python3'
    ANSIBLE_PLAYBOOK_DIR="${PROJECT_PATH}/playbooks"
    ANSIBLE_CACHE_PLUGIN="jsonfile"
-   ANSIBLE_CACHE_PLUGIN_CONNECTION="${PROJECT_PATH}/cache/"
 
    eval $(ssh-agent -s)
    ssh-add "${ANSIBLE_PRIVATE_KEY_FILE}"
