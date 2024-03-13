@@ -77,7 +77,7 @@ To provision a VM cluster:
    ubuntu01
    ubuntu02
 
-   # Multicluster (n>=1) builder untested multi cluster builds
+   # Multicluster (n>=1) builder
    [bootnodes]
    vm100
    vm200
