@@ -28,7 +28,7 @@ Each node runs the following systemd services:
   nginx
   ```
 
-Each host offers api services on the default route service | nginx forwarding port:
+On AIO run, each host offers api services on the default route service | nginx forwarding port ( required: hostvars[nginx_vhosts] ):
   ```
   geth-authrpc                  = 8551 | 65001
   geth-http                     = 8552 | 65002
