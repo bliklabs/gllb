@@ -109,7 +109,7 @@ To provision a VM cluster:
     ```
 
 5. Run playbook:
-   - Full deployment - hastvars[nginx_vhosts] required
+   - Full deployment - < hostvars[nginx_vhosts] > required
      ```
      ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l < groupname > --flush-cache
      ```
