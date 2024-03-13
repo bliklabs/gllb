@@ -142,7 +142,7 @@ To provision a VM cluster:
 
      # Sync and config each respective cluster group
      ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[0] >"
-     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[1] >"
+     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_2 >  -e "bootstrap_node: < boot_nodes_groupname[1] >"
      ```
 
 ## Configuration
