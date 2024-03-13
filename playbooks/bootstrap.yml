@@ -17,14 +17,14 @@
 - name: Install and config geth
   hosts: all
   tasks:
-    - name: Bootstrap node
+    - name: Bootstrap node geth
       include_role:
         name: geth
 
 - name: Install and config lighthouse
   hosts: all
   tasks:
-    - name: Install and config lighthouse
+    - name: Bootstrap node lighthouse
       include_role:
         name: lighthouse
 
