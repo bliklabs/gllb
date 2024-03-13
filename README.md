@@ -109,28 +109,29 @@ To provision a VM cluster:
     ```
 
 5. Run playbook:
-   Full deployment
-   - Hostvars required for bootstrap_deploy_testnet: nginx_vhosts
-   ```
-   ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l < groupname > --flush-cache
-   ```
-   Stateful rebuilds: -- untested
-   ```
-   # Clean -[](url)
-   ansible-playbook -l < hostname > playbooks/clean.yml --flush-cache
-   ansible-playbook -l < hostname > playbooks/clean_geth.yml --flush-cache          # optional
-   ansible-playbook -l < hostname > playbooks/clean_lighthouse.yml --flush-cache    # optional
-   # Sync_and_config
-   ansible-playbook -l < hostname > playbooks/sync_and_config.yml -e "bootstrap_node: < hostname >"
-   ```
-   Bootstrap, then sync_config: -- untested
-   ```
-   # Generate bootstrap nodes defined in groupname, where len(groupname) == 2
-   ansible-playbook -i hosts/hosts.ini playbooks/bootstrap.yml -l < boot_nodes_groupname > --flush-cache
-   # Sync and config each respective cluster group
-   ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[0] >"
-   ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[1] >"
-   ```
+   - Full deployment - hastvars[nginx_vhosts] required
+     ```
+     ansible-playbook -i hosts/hosts.ini playbooks/bootstrap_and_deploy_testnet.yml -l < groupname > --flush-cache
+     ```
+   - Stateful rebuilds: -- untested
+     ```
+     # Clean -
+     ansible-playbook -l < hostname > playbooks/clean.yml --flush-cache
+     ansible-playbook -l < hostname > playbooks/clean_geth.yml --flush-cache          # optional
+     ansible-playbook -l < hostname > playbooks/clean_lighthouse.yml --flush-cache    # optional
+
+     # Sync_and_config
+     ansible-playbook -l < hostname > playbooks/sync_and_config.yml -e "bootstrap_node: < hostname >"
+     ```
+   - Bootstrap, then sync_config: -- untested
+     ```
+     # Generate bootstrap nodes defined in groupname, where len(groupname) == 2
+     ansible-playbook -i hosts/hosts.ini playbooks/bootstrap.yml -l < boot_nodes_groupname > --flush-cache
+
+     # Sync and config each respective cluster group
+     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[0] >"
+     ansible-playbook -i hosts/hosts.ini playbooks/sync_and_config.yml -l < cluster_nodes_groupname_1 >  -e "bootstrap_node: < boot_nodes_groupname[1] >"
+     ```
 
 ## Configuration
 
