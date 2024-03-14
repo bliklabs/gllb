@@ -8,7 +8,7 @@ Roles for geth and lighthouse use local cache to dynamically generate:
   - wallets
   - bootnodes
   - enr
-  - valitestns
+  - validators
   - local testnet
   - cluster runtime configurations. 
 
