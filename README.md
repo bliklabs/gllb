@@ -2,8 +2,15 @@
 
 geth:boot|client + lighthouse:boot|bn|vc + lb:nginx
 
-Roles for geth and lighthouse use local cache to dynamically generate wallets, bootnodes,
-enr, validators, testnet, and a slew of runtime configurations. 
+Generates a proof of stake ethereum network.
+Includes an execution API for transactions and validations.
+Roles for geth and lighthouse use local cache to dynamically generate:
+  - wallets
+  - bootnodes
+  - enr
+  - valitestns
+  - local testnet
+  - cluster runtime configurations. 
 
 Playbooks support: 
   ```
