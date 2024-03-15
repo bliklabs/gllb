@@ -9,21 +9,13 @@
     group: root
     mode: 0660
 
-- name: Iterate over keystore variable and write keyfile content
+- name: Write keyfile content
   include_tasks: linux/common/write_keyfile.yml
   vars:
     keystore_item: "{{ item }}"
   loop: "{{ keystore | dict2items }}"
   loop_control:
     loop_var: item
-
-#- name: Change keystore ownership
-#  become: yes
-#  command: "chown -R svc_geth:root {{ root_dir }}/ethereum/keystore"
-
-#- name: Change permissions
-#  become: yes
-#  command: "chmod -R 770 {{ root_dir }}/ethereum/keystore"
 
 - name: Initialize genesis block
   become: yes
