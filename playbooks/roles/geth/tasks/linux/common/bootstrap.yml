@@ -74,8 +74,6 @@
   template:
     src: genesis.json.j2
     dest: "{{ root_dir }}/genesis/genesis.json"
-  vars:
-    concatenate_string: ""
   when: genesis_config is not defined
 
 - name: Read genesis JSON file
