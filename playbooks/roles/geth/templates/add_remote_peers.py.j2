@@ -5,6 +5,7 @@ import requests
 import time
 import argparse
 
+local_ip = "{{ ansible_default_ipv4.address }}"
 
 def get_enode_url(ip, port):
     url = f"http://{ip}:{port}"
@@ -43,7 +44,6 @@ def add_peer(peer_enode, port):
 
 
 def main(seconds):
-    local_ip = "{{ ansible_default_ipv4.address }}"
     port = "{{ port.http | default(port.http) }}"
     default_ips = [ {% for ip in all_default_route_ips %}"{{ ip }}"{% if not loop.last %}, {% endif %}{% endfor %} ]
     while True:
