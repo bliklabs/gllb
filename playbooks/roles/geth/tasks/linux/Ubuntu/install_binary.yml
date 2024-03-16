@@ -30,11 +30,21 @@
     dest: /usr/local/bin/geth
     state: link
 
-- name: Ensure dirmngr is installed (gnupg dependency).
+- name: Install dirmngr and openssl dependancies
   become: yes
   apt:
-    name: dirmngr
+    name:
+      - dirmngr
+      - gpg-agent
+      - openssl
     state: present
+    install_recommends: yes
+    force_apt_get: yes
+    dpkg_options: 'force-confnew'
+    update_cache: yes
+    allow_unauthenticated: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
 
 - name: Add Ethereum PPA repository
   become: yes
@@ -51,18 +61,6 @@
     force_apt_get: yes
     dpkg_options: 'force-confnew'
     update_cache: yes
-    allow_unauthenticated: yes
-  environment:
-    DEBIAN_FRONTEND: noninteractive
-
-- name: Install OpenSSL package
-  become: yes
-  apt:
-    name: openssl
-    state: present
-    install_recommends: no
-    force_apt_get: yes
-    dpkg_options: 'force-confnew'
     allow_unauthenticated: yes
   environment:
     DEBIAN_FRONTEND: noninteractive
