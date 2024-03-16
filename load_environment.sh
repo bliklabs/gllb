@@ -10,7 +10,6 @@ ANSIBLE_GALAXY_CACHE_DIR="${PROJECT_PATH}/var"
 ANSIBLE_LOG_PATH="${PROJECT_PATH}/var/ansible.log"
 ANSIBLE_PYTHON_INTERPRETER='/usr/bin/env python3'
 ANSIBLE_PLAYBOOK_DIR="${PROJECT_PATH}/playbooks"
-ANSIBLE_SSH_USER="root"
 
 eval $(ssh-agent -s)
 ssh-add "${ANSIBLE_PRIVATE_KEY_FILE}"
