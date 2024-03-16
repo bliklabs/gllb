@@ -12,7 +12,7 @@ ExecStart=/usr/local/bin/lighthouse bn \
     --enable-private-discovery \
     --disable-peer-scoring \
     --staking \
-    --enr-address {{ bootnode_ip | default(ansible_default_ipv4.address) }} \
+    --enr-address {{ ansible_default_ipv4 | default(ansible_default_ipv4.address) }} \
     --enr-tcp-port {{ port.port | default(port.port) }} \
     --enr-udp-port {{ port.port | default(port.port) }} \
     --enr-quic-port {{ port.quic | default(port.quic) }} \
