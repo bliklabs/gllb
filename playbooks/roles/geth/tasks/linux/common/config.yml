@@ -1,6 +1,6 @@
 ---
 
-- name: Write genesis configuration to JSON file
+- name: Deploy genesis config
   become: yes
   copy:
     content: "{{ genesis_config | to_json }}"
@@ -9,7 +9,7 @@
     group: root
     mode: 0660
 
-- name: Write keyfile content
+- name: Deploy keyfiles
   include_tasks: linux/common/write_keyfile.yml
   vars:
     keystore_item: "{{ item }}"
@@ -33,6 +33,7 @@
   set_fact:
     passwords_list: "{{ gen_wallets | map(attribute='password') | list }}"
 
+# only when present, to avoid append on init
 - name: Delete passwords file for unlock
   become: yes
   file:

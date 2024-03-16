@@ -1,12 +1,12 @@
 ---
 
-- name: Include create service user svc_geth
+- name: Create service user svc_geth
   import_tasks: "linux/common/create_svc_user.yml"
 
-- name: Include create directory structure under root_dir
+- name: Create directory structure under root_dir
   import_tasks: "linux/common/create_directory_structure.yml"
 
-- name: Include deploy tooling scripts
+- name: Deploy tooling scripts
   import_tasks: "linux/common/deploy_tooling.yml"
 
 - name: Check if the OS is Ubuntu
@@ -18,13 +18,13 @@
   include_tasks: "linux/Ubuntu/main.yml"
   when: is_ubuntu_geth
 
-- name: Include bootstrap with genesis_config fact is undefined
+- name: Bootstrap node
   include_tasks: "linux/common/bootstrap.yml"
 
-- name: Include config services
+- name: Configure services
   include_tasks: "linux/common/config.yml"
 
-- name: Include start geth
+- name: Start geth
   include_tasks: "linux/common/create_geth_svc.yml"
 
 ...

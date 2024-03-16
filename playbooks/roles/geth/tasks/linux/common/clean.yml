@@ -1,5 +1,20 @@
 ---
 
+- name: Stop add_remote_peers
+  become: yes
+  systemd:
+    name: add_remote_peers
+    state: stopped
+    force: yes
+  ignore_errors: yes
+
+- name: Disable add_remote_peers service
+  become: yes
+  systemd:
+    name: add_remote_peers
+    enabled: no
+  ignore_errors: yes
+
 - name: Stop geth daemon
   become: yes
   systemd:
