@@ -1,6 +1,6 @@
 ---
 
-- name: Write genesis configuration to JSON file
+- name: Deploy genesis config
   become: yes
   copy:
     content: "{{ genesis_config | to_json }}"
@@ -9,7 +9,7 @@
     group: root
     mode: 0660
 
-- name: Write keyfile content
+- name: Deploy keyfiles
   include_tasks: linux/common/write_keyfile.yml
   vars:
     keystore_item: "{{ item }}"
@@ -17,15 +17,23 @@
   loop_control:
     loop_var: item
 
+- name: Check if geth directory exists
+  become: yes
+  stat:
+    path: "{{ root_dir }}/ethereum/geth"
+  register: ethereum_dir
+
 - name: Initialize genesis block
   become: yes
   command: "geth --datadir {{ root_dir }}/ethereum init {{ root_dir }}/genesis/genesis.json"
   ignore_errors: yes
+  when: not ethereum_dir.stat.exists
 
 - name: Create list of wallet passwords
   set_fact:
     passwords_list: "{{ gen_wallets | map(attribute='password') | list }}"
 
+# only when present, to avoid append on init
 - name: Delete passwords file for unlock
   become: yes
   file:
@@ -43,14 +51,5 @@
     owner: svc_geth
     group: root
   loop: "{{ passwords_list }}"
-
-- name: Change ownership and permissions of a directory recursively
-  become: yes
-  file:
-    path: "{{ root_dir }}/ethereum"
-    recurse: yes
-    owner: svc_geth
-    group: root
-    mode: "770"
 
 ...

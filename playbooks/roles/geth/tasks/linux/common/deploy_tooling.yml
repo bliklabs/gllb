@@ -10,4 +10,14 @@
     mode: "0700"
     remote_src: no
 
+- name: Copy add_remote_peers.py template
+  become: yes
+  template:
+    src: add_remote_peers.py.j2
+    dest: "{{ root_dir | default('root_dir') }}/tooling/add_remote_peers.py"
+    owner: svc_geth
+    group: root
+    mode: "770"
+  when: all_default_route_ips is defined
+
 ...

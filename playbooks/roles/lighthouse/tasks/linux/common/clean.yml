@@ -45,11 +45,6 @@
     enabled: no
   ignore_errors: yes
 
-- name: Kill all lighthouse processes
-  become: yes
-  command: killall -9 geth
-  ignore_errors: yes
-
 - name: Delete rootdir/ethereum/bootstrap_enr directory
   become: yes
   file:

@@ -6,13 +6,13 @@
   register: boot_hex_output
   when: genesis_config is not defined
 
-- name: Set boot_hex fact
+- name: Set boot_hex as fact
   set_fact:
     boot_hex: "{{ boot_hex_output.stdout }}"
     cacheable: yes
   when: genesis_config is not defined
 
-- name: Run bootnode command and set enode fact
+- name: Run bootnode command to discover enode
   become: yes
   shell: bootnode -nodekeyhex {{ boot_hex | default('02fd74636e96a8ffac8e7b01b0de8dea94d6bcf4989513b38cf59eb32163ff91') }} --nat=extip:{{ ansible_default_ipv4.address }} -writeaddress
   register: bootnode_output
@@ -25,12 +25,12 @@
     cacheable: yes
   when: genesis_config is not defined
 
-- name: Run generate wallets
+- name: Generate wallets
   command: "/usr/bin/env python3 {{ root_dir | default('root_dir') }}/tooling/bootstrap_wallet.py {{ wallets.num_total | default(wallets.num_total) }} {{ wallets.num_signers | default(wallets.num_signers) }} {{ root_dir | default(root_dir) }}"
   become: yes
   when: genesis_config is not defined
 
-- name: Read wallet json file
+- name: Read json output from general wallets tooling
   become: yes
   slurp:
     src: "{{ root_dir }}/privs/accounts.json"
@@ -44,7 +44,7 @@
     cacheable: true
   when: genesis_config is not defined
 
-- name: Read keyfile and store contents as fact
+- name: Read keyfile locations
   become: yes
   slurp:
     src: "{{ item.keyfile_path }}"
@@ -52,7 +52,7 @@
   loop: "{{ gen_wallets }}"
   when: genesis_config is not defined
 
-- name: Set fact for each keyfile content
+- name: Set fact for each keyfile
   set_fact:
     keystore:
       "{{ keystore | default({}) | combine({item.item.address: item.content | b64decode | string}) }}"
@@ -69,14 +69,14 @@
   loop: "{{ gen_wallets }}"
   when: item.type == 'signer' and genesis_config is not defined
 
-- name: Generate genesis JSON
+- name: Generate genesis.json
   become: yes
   template:
     src: genesis.json.j2
     dest: "{{ root_dir }}/genesis/genesis.json"
   when: genesis_config is not defined
 
-- name: Read genesis JSON file
+- name: Read genesis.json
   become: yes
   slurp:
     src: "{{ root_dir }}/genesis/genesis.json"

@@ -12,35 +12,44 @@
     src: geth.service.j2
     dest: /lib/systemd/system/geth.service
 
-- name: Reload daemon
+- name: Copy add_remote_peers.service template
+  become: yes
+  template:
+    src: add_remote_peers.service.j2
+    dest: /lib/systemd/system/add_remote_peers.service
+  when: all_default_route_ips is defined
+
+- name: Reload systemd daemon
   become: true
   systemd:
     daemon_reload: true
 
-- name: Enable geth-boot.service
+- name: Change ownership of root_dir/ethereum
   become: yes
-  systemd:
-    name: geth-boot
-    enabled: yes
-    state: started
+  file:
+    path: "{{ root_dir }}/ethereum"
+    recurse: yes
+    owner: svc_geth
+    group: root
+    mode: "770"
 
-- name: Restart geth-boot.service if running
+- name: Start geth-boot.service
   become: yes
   systemd:
     name: geth-boot
     state: restarted
 
-- name: Enable geth.service
-  become: yes
-  systemd:
-    name: geth
-    enabled: yes
-    state: started
-
-- name: Restart geth.service if running
+- name: Start geth.service
   become: yes
   systemd:
     name: geth
     state: restarted
+
+- name: Start add_remote_peers.service
+  become: yes
+  systemd:
+    name: add_remote_peers
+    state: restarted
+  when: all_default_route_ips is defined
 
 ...

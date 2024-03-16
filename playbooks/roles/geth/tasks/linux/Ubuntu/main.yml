@@ -1,6 +1,6 @@
 ---
 
-- name: Include geth binary install
+- name: Geth binary install
   import_tasks: install_binary.yml
 
 ...

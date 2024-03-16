@@ -6,6 +6,7 @@ Type=simple
 User=root
 Restart=always
 ExecStart=/usr/local/bin/lighthouse bn \
+    --subscribe-all-subnets \
     --datadir {{ root_dir | default(root_dir) }}/ethereum/node_1 \
     --testnet-dir {{ root_dir | default(root_dir) }}/ethereum/testnet \
     --enable-private-discovery \
