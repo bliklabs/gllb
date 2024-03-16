@@ -181,7 +181,8 @@ To provision a VM cluster:
    [defaults]
    fact_caching = jsonfile
    fact_caching_connection = cache/
-                                                                                          
+   remote_user = ansible
+                                                                                  
    > $ cat load_environment.sh
    #!/bin/bash
 
