@@ -6,11 +6,6 @@ import time
 import argparse
 
 
-port = "{{ port.http | default(port.http) }}"
-local_ip = "{{ ansible_default_ipv4.address }}"
-default_ips = [ {% for ip in all_default_route_ips %}"{{ ip }}"{% if not loop.last %}, {% endif %}{% endfor %} ]
-
-
 def get_enode_url(ip, port):
     url = f"http://{ip}:{port}"
     data = {
@@ -30,7 +25,7 @@ def get_enode_url(ip, port):
         return None
 
 
-def add_peer(peer_enode):
+def add_peer(peer_enode, port):
     geth_url = f"http://{local_ip}:{port}"
     data = {
         "jsonrpc": "2.0",
@@ -62,7 +57,7 @@ def main(seconds):
         # add remote peers to local
         for enode in remote_enodes:
             print(f"Adding peer: {enode}")
-            add_peer(enode)
+            add_peer(enode, port)
         # poll every n seconds
         time.sleep(seconds)
 
