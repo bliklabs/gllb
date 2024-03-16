@@ -3,7 +3,7 @@
 geth:boot|client + lighthouse:boot|bn|vc + lb:nginx
 
 Generates a proof of stake ethereum network.
-Includes an execution API for transactions and validations.
+Includes APIs for transactions and validations.
 Roles for geth and lighthouse use local cache to dynamically generate:
   - wallets
   - bootnodes / enr / one-off peer sync tooling
