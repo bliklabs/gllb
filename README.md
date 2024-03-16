@@ -6,8 +6,7 @@ Generates a proof of stake ethereum network.
 Includes an execution API for transactions and validations.
 Roles for geth and lighthouse use local cache to dynamically generate:
   - wallets
-  - bootnodes
-  - enr
+  - bootnodes / enr / one-off peer sync tooling
   - validators
   - local testnet
   - cluster runtime configurations. 
@@ -27,6 +26,7 @@ Playbooks support:
 
 Each node runs the following systemd services:
   ```
+  add_remote_peers
   geth-boot
   geth
   lighthouse-boot
@@ -111,9 +111,9 @@ To provision a VM cluster:
    vm202 bootstrap=vm200
    ```
 
-4. Define < hostvars[nginx_vhosts | nginx_proxy_template="vhosts.j2"] > for your node:
+4. Define nginx settings for your node:
    ```
-   > $ cat vm02.yml 
+   > $ cat group_vars/default.yml 
    nginx_proxy_template: "vhost.j2"
    nginx_vhosts:
      - address: "{{ ansible_default_ipv4.address }}"
@@ -190,13 +190,11 @@ To provision a VM cluster:
    PROJECT_END_STATE="${PROJECT_PATH}/hosts"
    ANSIBLE_INVENTORY="${PROJECT_END_STATE}/hosts.ini"
    ANSIBLE_PRIVATE_KEY_FILE="${PROJECT_PATH}/.secret"
-   ANSIBLE_SSH_ARGS="-o StrictHostKeyChecking=no -o ForwardAgent=yes"
-   ANSIBLE_ROLES_PATH="${PROJECT_PATH}/roles"
+   ANSIBLE_SSH_ARGS="-o StrictHostKeyChecking=no -o ForwardAgent=yes -o UserKnownHostsFile=/dev/null"
    ANSIBLE_GALAXY_CACHE_DIR="${PROJECT_PATH}/var"
    ANSIBLE_LOG_PATH="${PROJECT_PATH}/var/ansible.log"
-   ANSIBLE_PYTHON_INTERPRETER='/usr/bin/python3'
+   ANSIBLE_PYTHON_INTERPRETER='/usr/bin/env python3'
    ANSIBLE_PLAYBOOK_DIR="${PROJECT_PATH}/playbooks"
-   ANSIBLE_CACHE_PLUGIN="jsonfile"
 
    eval $(ssh-agent -s)
    ssh-add "${ANSIBLE_PRIVATE_KEY_FILE}"
