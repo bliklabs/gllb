@@ -1,9 +1,9 @@
 ---
 
-- name: Include create service user svc_geth
+- name: Create service user svc_geth
   import_tasks: "linux/common/create_svc_user.yml"
 
-- name: Include create directory structure under root_dir
+- name: C reate directory structure for lighthouse
   import_tasks: "linux/common/create_directory_structure.yml"
 
 - name: Check if the OS is Ubuntu
@@ -11,14 +11,17 @@
     is_ubuntu: "{{ ansible_distribution == 'Ubuntu' }}"
   when: ansible_distribution == 'Ubuntu'
 
-- name: Include Ubuntu tasks
+- name: Include Ubuntu tasks for lighthouse
   include_tasks: "linux/Ubuntu/main.yml"
   when: is_ubuntu
 
-- name: Generate testnet
-  import_tasks: "linux/common/generate_testnet.yml"
+- name: Bootstrap lighthouse enr
+  include_tasks: "linux/common/bootstrap.yml"
 
-- name: Start services
-  import_tasks: "linux/common/create_lighthouse_svc.yml"
+- name: Generate lighthouse testnet
+  include_tasks: "linux/common/generate_testnet.yml"
+
+- name: Start lighthouse services
+  include_tasks: "linux/common/create_lighthouse_svc.yml"
 
 ...

@@ -1,6 +1,6 @@
 ---
 
-- name: Make HTTP request
+- name: Request block 0 hash from geth api
   uri:
     url: "http://{{ ansible_default_ipv4.address }}:8552"
     method: POST
@@ -10,10 +10,12 @@
     return_content: yes
   register: response
 
-- set_fact:
+- name: Set block 0 hash as fact
+  set_fact:
     block_hash_result: "{{ response.json.result.hash | regex_replace('^0x', '') }}"
 
-- shell: date +%s
+- name: Get time
+  shell: date +%s
   register: now_result
 
 - name: Set GENESIS_TIME variable
@@ -47,7 +49,13 @@
       --force
   ignore_errors: yes
 
-- name: Create validators
+- name: Check if node_1 directory and validators already exist
+  become: yes
+  stat:
+    path: "{{ root_dir }}/ethereum/node_1"
+  register: node1_dir
+
+- name: Create validators if node_1 directory not found
   become: yes
   shell: |
     /usr/local/bin/lcli insecure-validators \
@@ -55,21 +63,9 @@
       --base-dir "{{ root_dir | default(root_dir) }}"/ethereum \
       --node-count 1
   ignore_errors: yes
+  when: not node1_dir.stat.exists
 
-- name: Create boot enr
-  become: yes
-  shell: |
-    /usr/local/bin/lcli generate-bootnode-enr \
-        --ip {{ ansible_default_ipv4.address }} \
-        --udp-port {{ chainid | default(chainid) }} \
-        --tcp-port {{ chainid | default(chainid) }} \
-        --genesis-fork-version "{{ genesis_fork_version | default(genesis_fork_version) }}" \
-        --output-dir {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr
-  when: enr is not defined
-  ignore_errors: yes
-  register: command_output
-
-- name: Ensure the directory /opt/validator/ethereum/bootstrap_enr exists
+- name: Ensure the bootstrap_enr directory exists
   become: yes
   file:
     path: "/opt/validator/ethereum/bootstrap_enr"
@@ -78,48 +74,19 @@
     group: root
     mode: '770'
 
-- name: Read ENR file content
-  become: yes
-  slurp:
-    src: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat"
-  register: enr_content
-  when: command_output.rc == 0
-  ignore_errors: yes
-
-- name: Set enr as fact
-  set_fact:
-    enr: "{{ enr_content['content'] | b64decode | string }}"
-    cacheable: yes
-  when: command_output.rc == 0
-  ignore_errors: yes
-
-- name: Read key and encode
-  become: yes
-  shell: "cat {{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/key | base64"
-  register: binary_content
-  when: command_output.rc == 0
-  ignore_errors: yes
-
-- name: Save key to fact
-  set_fact:
-    enr_key: "{{ binary_content.stdout }}"
-    cacheable: yes
-  when: command_output.rc == 0
-  ignore_errors: yes
-
-- name: Create boot_enr.yaml file
+- name: Deploy boot_enr.yaml file svc
   become: yes
   shell: echo "- {{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/testnet/boot_enr.yaml";
   when: enr is defined
   ignore_errors: yes
 
-- name: Create enr.data.yaml file
+- name: Deploy enr.data.yaml file boot svc
   become: yes
   shell: echo -n "{{ enr }}" > "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr/enr.dat";
   when: enr is defined
   ignore_errors: yes
 
-- name: Write decoded binary data to a file
+- name: Deploy key file for boot svc
   become: yes
   copy:
     content: "{{ enr_key | b64decode }}"

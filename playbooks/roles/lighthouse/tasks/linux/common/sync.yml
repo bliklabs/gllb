@@ -1,12 +1,12 @@
 ---
 
-- name: Set boot enr fact
+- name: Set lighthouse boot enr fact
   set_fact:
     enr: "{{ hostvars[bootstrap_node]['enr'] }}"
     cacheable: true
   when: "'enr' not in hostvars[inventory_hostname]"
 
-- name: Set boot enr_key fact
+- name: Set lighthouse boot enr_key fact
   set_fact:
     enr_key: "{{ hostvars[bootstrap_node]['enr_key'] }}"
     cacheable: true

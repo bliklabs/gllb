@@ -15,11 +15,6 @@
     enabled: no
   ignore_errors: yes
 
-- name: Kill all geth processes
-  become: yes
-  command: killall -9 geth
-  ignore_errors: yes
-
 - name: Delete rootdir/ethereum/geth directory
   become: yes
   file:

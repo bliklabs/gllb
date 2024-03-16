@@ -18,7 +18,7 @@
     src: lighthouse-vc.service.j2
     dest: /lib/systemd/system/lighthouse-vc.service
 
-- name: Reload daemon
+- name: Reload systemd daemon
   become: true
   systemd:
     daemon_reload: true
@@ -26,70 +26,32 @@
 - name: Recursively change ownership and mode of /opt/validator directory
   become: yes
   file:
-    path: "{{ root_dir | default(root_dir) }}/ethereum/bootstrap_enr"
+    path: "{{ root_dir | default(root_dir) }}"
     owner: svc_geth
     group: root
-    mode: "0660"
+    mode: "770"
     recurse: yes
     state: directory
 
-- name: Recursively change ownership and mode of /opt/validator directory
-  become: yes
-  file:
-    path: "{{ root_dir | default(root_dir) }}/ethereum/node_1"
-    owner: svc_geth
-    group: root
-    mode: "0660"
-    recurse: yes
-    state: directory
-
-- name: Recursively change ownership and mode of /opt/validator directory
-  become: yes
-  file:
-    path: "{{ root_dir | default(root_dir) }}/ethereum/testnet"
-    owner: svc_geth
-    group: root
-    mode: "0660"
-    recurse: yes
-    state: directory
-
-- name: Enable lighthouse-boot.service
+- name: Start lighthouse_boot.service
   become: yes
   systemd:
     name: lighthouse-boot
     enabled: yes
-    state: started
-
-- name: Restart lighthouse_boot.service if running
-  become: yes
-  systemd:
-    name: lighthouse-boot
     state: restarted
 
-- name: Enable lighthouse.service
+- name: Start lighthouse.service
   become: yes
   systemd:
     name: lighthouse
     enabled: yes
-    state: started
-
-- name: Restart lighthouse.service if running
-  become: yes
-  systemd:
-    name: lighthouse
     state: restarted
 
-- name: Enable lighthouse-vc.service
+- name: Start lighthouse_vc.service
   become: yes
   systemd:
     name: lighthouse-vc
     enabled: yes
-    state: started
-
-- name: Restart lighthouse_vc.service if running
-  become: yes
-  systemd:
-    name: lighthouse-vc
     state: restarted
 
 ...
