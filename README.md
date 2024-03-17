@@ -228,6 +228,7 @@ To provision a cluster via molecule and docker:
 ## Notes
 - todo: systemd handlers for geth and lighthouse
 - todo: changelog
+- todo: async add peer improvement, timeouts, and better error handling
 
 
 ## Contributing
