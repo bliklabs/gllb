@@ -65,6 +65,7 @@
   ignore_errors: yes
   when: not node1_dir.stat.exists
 
+# try copy instead
 - name: Ensure the bootstrap_enr directory exists
   become: yes
   file:
