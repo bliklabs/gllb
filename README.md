@@ -1,4 +1,4 @@
-# validator_testnet -- gllb
+# gllb
 
 geth:boot|client + lighthouse:boot|bn|vc + lb:nginx
 
