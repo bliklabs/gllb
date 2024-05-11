@@ -52,16 +52,16 @@ To install this project, follow these steps:
 
 1. Clone the repository:
     ```
-    git clone https://github.com/bliklabs/validator_testnet
+    git clone https://github.com/bliklabs/gllb
     ```
 
 2. Navigate to the project directory:
     ```
-    cd validator_testnet
+    cd gllb
     ```
 3. Sync with main (required if your version is older than the latest release)
     ```
-    git remote add origin https://github.com/bliklabs/validator_testnet
+    git remote add origin https://github.com/bliklabs/gllb
     git fetch origin main
     git pull origin main
     ```
